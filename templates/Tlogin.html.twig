@@ -4,6 +4,9 @@
 	<div class="box">
 		<form autocomplete="off">
 			<h2>Sign in</h2>
+			<div class="box-img">
+				<img class="img" src="{{asset('images/koky-high-resolution-logo-color-on-transparent-background.png')}}" alt="">
+			</div>
 			<div class="inputBox">
 				<input type="text" required="required">
 				<span>Username</span>
@@ -13,17 +16,21 @@
 				<input type="password" required="required">
 				<span>Password</span>
 				<i></i>
+			</div>
 			<div class="links">
 				<a href="#">Forgot Password ?</a>
-				<a href="{{path('register')}}">Signup</a>
+				<a href="#">Signup</a>
 			</div>
 			<input type="submit" value="Login">
 		</form>
 	</div>
 </body>
-
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+	:root{
+		--form-height:520px;
+	}
 
 	* {
 		margin: 0;
@@ -41,10 +48,22 @@
 		background: #23242a;
 	}
 
+	.box-img{
+		display: flex;
+		justify-content: center;
+	}
+
+	.img{
+		width: 100px;
+		height: 100px;
+		margin-top: 10px;
+		
+	}
+
 	.box {
 		position: relative;
 		width: 380px;
-		height: 420px;
+		height: var(--form-height);
 		background: #1c1c1c;
 		border-radius: 8px;
 		overflow: hidden;
@@ -57,9 +76,9 @@
 		top: -50%;
 		left: -50%;
 		width: 380px;
-		height: 420px;
+		height: var(--form-height);
 		transform-origin: bottom right;
-		background: linear-gradient(0deg, transparent, #45f3ff, #45f3ff);
+		background: linear-gradient(0deg, transparent, #8abe53, #8abe53);
 		animation: animate 6s linear infinite;
 	}
 
@@ -70,9 +89,9 @@
 		top: -50%;
 		left: -50%;
 		width: 380px;
-		height: 420px;
+		height: var(--form-height);
 		transform-origin: bottom right;
-		background: linear-gradient(0deg, transparent, #45f3ff, #45f3ff);
+		background: linear-gradient(0deg, transparent, #8abe53, #8abe53);
 		animation: animate 6s linear infinite;
 		animation-delay: -3s;
 	}
@@ -99,7 +118,7 @@
 	}
 
 	h2 {
-		color: #45f3ff;
+		color: #8abe53;
 		font-weight: 500;
 		text-align: center;
 		letter-spacing: 0.1em;
@@ -139,7 +158,7 @@
 
 	.inputBox input:valid~span,
 	.inputBox input:focus~span {
-		color: #45f3ff;
+		color: #8abe53;
 		transform: translateX(0px) translateY(-34px);
 		font-size: 0.75em;
 	}
@@ -150,7 +169,7 @@
 		bottom: 0;
 		width: 100%;
 		height: 2px;
-		background: #45f3ff;
+		background: #8abe53;
 		border-radius: 4px;
 		overflow: hidden;
 		transition: 0.5s;
@@ -177,14 +196,14 @@
 
 	.links a:hover,
 	.links a:nth-child(2) {
-		color: #45f3ff;
+		color: #8abe53;
 	}
 
 	input[type="submit"] {
 		border: none;
 		outline: none;
 		padding: 11px 25px;
-		background: #45f3ff;
+		background: #8abe53;
 		cursor: pointer;
 		border-radius: 4px;
 		font-weight: 600;
