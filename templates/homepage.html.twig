@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<body>
+    <section>
+        <div class="box">
+            <div class="box-header">
+                <div class="box-avata">
+                    <div class="avata">
+                        <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
+                            alt="">
+                        <div class="sub-avata"></div>
+                    </div>
+                </div>
+                <div class="box-title">
+                    <div class="u-tus">
+                        <a href="">
+                            <h5>Hello World</h5>
+                        </a>
+                    </div>
+                    <div class="u-title">
+                        <label for="">123</label>
+                    </div>
+                </div>
+                <div class="box-view">
+                    <span>
+                        <i class="fa-solid fa-bars"></i>
+                    </span>
+                </div>
+                <div class="box-close">
+                    <div>
+                        <span>
+                            <i class="fa-solid fa-xmark"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="box-content">
+                <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their stature, gait and ability to dive through the air are all similar. However, where Draconis obscurum scaled cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
+                <img src="Managarmr_PaintRegion5.webp" alt="">
+            </div>
+            <div class="box-footer">
+                <div class="box-infor">
+                    <div class="countview"><a href="">123</a></div>
+                    <div class="infor-right">
+                        <div class="countcomment"><a href="">123</a></div>
+                        <div class="countshare"><a href="">123</a></div>
+                    </div>
+                </div>
+                <div class="box-action">
+                    <div class="sub-box-action">1</div>
+                    <div class="sub-box-action">2</div>
+                    <div class="sub-box-action">3</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+    .box{
+    width: 500px;
+    min-height: 180px;
+    border-radius: 6px;
+    border: 1px #999 solid;
+    height: auto;
+    box-sizing: border-box;
+}
+.box-header{
+    height: 50px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 5px 0 5px 0;
+    position: relative;
+}
+.box-avata{
+    height: 36px;
+    width: 36px;
+    position: absolute;
+    left: 12px;
+}
+.avata{
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    position: relative;
+}
+.avata > img{
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+.box-title{
+    height: 46px;
+    width: 350px;
+    position: absolute;
+    left: 11%;
+    bottom: 25px;
+}
+.u-title label{
+    margin: 0;
+    font-size: 14px;
+    color: #999;
+}
+.u-tus{
+    width: 100%;
+    height: 50%;
+    background-color: white;
+}
+.u-tus a h5{
+    color: black;
+}
+.u-tus a{
+    text-decoration: none;
+}
+.u-title{
+    background-color: white;
+    width: 100%;
+    height: 50%;
+}
+.box-view{
+    /* background-color: yellow; */
+    height: 36px;
+    width: 36px;
+    position: absolute;
+    right: 11%;
+    display: flex;
+    justify-content: center; 
+}
+.box-view span{
+   margin: auto;
+}
+.box-close{
+    /* background-color: pink; */
+    height: 36px;
+    width: 36px;
+    position: absolute;
+    right: 12px;
+    display: flex;
+    align-items: center;
+}
+.box-content{
+    background-color: white;
+    width: 100%;
+    height: auto;
+}
+.box-content img{
+    max-width: 100%;
+}
+.box-footer{
+    height: 60px;
+    width: 100%;
+}   
+.box-infor{
+    height: 30px;
+    width: 100%;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    display: flex;
+    justify-content: space-between;
+}
+.box-footer a{
+    text-decoration: none;
+    color: #999;
+}
+.countview{
+    margin-left: 28px;
+}
+.infor-right{
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    margin-right: 28px;
+}
+.box-action{
+    display: flex;
+    justify-content: space-around;
+}
+.sub-box-action{
+    width: 100px;
+    text-align: center;
+}
+</style>
+</body>
+{% endblock %}

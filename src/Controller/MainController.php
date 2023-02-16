@@ -33,4 +33,11 @@ class MainController extends AbstractController
     {
         return $this->render('Tregister.html.twig', []);
     }
+    /**
+     * @Route("/page", name="pgae")
+     */
+    public function page(): Response
+    {
+        return $this->render('homepage.html.twig', []);
+    }
 }
