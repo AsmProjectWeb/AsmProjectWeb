@@ -18,7 +18,7 @@
                         </a>
                     </div>
                     <div class="u-title">
-                        <label for="">123</label>
+                        <a href=""><label for="">123</label></a>
                     </div>
                 </div>
                 <div class="box-view">
@@ -35,21 +35,47 @@
                 </div>
             </div>
             <div class="box-content">
-                <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their stature, gait and ability to dive through the air are all similar. However, where Draconis obscurum scaled cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
+                <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their stature,
+                    gait and ability to dive through the air are all similar. However, where Draconis obscurum scaled
+                    cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
                 <img src="Managarmr_PaintRegion5.webp" alt="">
             </div>
             <div class="box-footer">
                 <div class="box-infor">
-                    <div class="countview"><a href="">123</a></div>
+                    <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
                     <div class="infor-right">
-                        <div class="countcomment"><a href="">123</a></div>
-                        <div class="countshare"><a href="">123</a></div>
+                        <div class="countcomment">
+                            <a href="">
+                                <i class="fa-solid fa-comment"></i>&#160 0
+                            </a>
+                        </div>
+                        <div class="countshare">
+                            <a href="">
+                                <i class="fa-solid fa-share-from-square"></i>&#160 0
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="box-action">
-                    <div class="sub-box-action">1</div>
-                    <div class="sub-box-action">2</div>
-                    <div class="sub-box-action">3</div>
+                    <div class="sub-box-action" id="sub-box-action-1">
+                        <a href="">
+                            <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
+                            <i class="icon-hide fa-solid fa-heart"></i>
+                        </a>
+                        <a href="" class=""></a>
+                    </div>
+                    <div class="sub-box-action">
+                        <a href="" >
+                            <i class="icon-none fa-regular fa-comment"></i>
+                            <i class="icon-hide fa-solid fa-comment"></i>
+                        </a>
+                    </div>
+                    <div class="sub-box-action">
+                        <a href="">
+                            <i class="icon-none fa-regular fa-share-from-square"></i>
+                            <i class="icon-hide fa-solid fa-share-from-square"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,7 +83,7 @@
     <style>
     .box{
     width: 500px;
-    min-height: 180px;
+    min-height: 390px;
     border-radius: 6px;
     border: 1px #999 solid;
     height: auto;
@@ -65,13 +91,16 @@
 }
 .box-header{
     height: 50px;
+    /* background-color: red; */
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding: 5px 0 5px 0;
     position: relative;
+    /* border: 1px solid black; */
 }
 .box-avata{
+    /* background-color: blue; */
     height: 36px;
     width: 36px;
     position: absolute;
@@ -89,16 +118,21 @@
     border-radius: 50%;
 }
 .box-title{
+    background-color: green;
     height: 46px;
     width: 350px;
     position: absolute;
     left: 11%;
-    bottom: 25px;
+    bottom: 0;
 }
 .u-title label{
     margin: 0;
     font-size: 14px;
     color: #999;
+}
+.u-title label:hover{
+    text-decoration: underline;
+    color: #333;
 }
 .u-tus{
     width: 100%;
@@ -107,6 +141,9 @@
 }
 .u-tus a h5{
     color: black;
+}
+.u-tus a h5:hover{
+    text-decoration: underline;
 }
 .u-tus a{
     text-decoration: none;
@@ -138,6 +175,7 @@
     align-items: center;
 }
 .box-content{
+    padding-top: 12px;
     background-color: white;
     width: 100%;
     height: auto;
@@ -161,6 +199,10 @@
     text-decoration: none;
     color: #999;
 }
+.box-infor a:hover{
+    text-decoration: underline;
+    color: #333;
+}
 .countview{
     margin-left: 28px;
 }
@@ -177,6 +219,19 @@
 .sub-box-action{
     width: 100px;
     text-align: center;
+    height: 29px;
+    border-radius: 6px;
+}
+.icon-hide
+{
+    display: none;
+}
+.box-footer .box-action .sub-box-action a:hover .icon-none , .box-footer .box-action .sub-box-action .icon-hide{
+    display: none;
+}
+.box-footer .box-action .sub-box-action:hover a:hover .icon-hide , .sub-box-action:hover{
+    display: inline;
+    background-color: #eee7e7;
 }
 </style>
 </body>
