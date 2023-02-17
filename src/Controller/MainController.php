@@ -40,4 +40,11 @@ class MainController extends AbstractController
     {
         return $this->render('homepage.html.twig', []);
     }
+    /**
+     * @Route("/header", name="header")
+     */
+    public function header(): Response
+    {
+        return $this->render('header.html.twig', []);
+    }
 }
