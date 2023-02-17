@@ -75,14 +75,6 @@ CREATE TABLE `friends` (
 
 -- --------------------------------------------------------
 
---
--- Cấu trúc bảng cho bảng `from_user_id`
---
-
-CREATE TABLE `from_user_id` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- --------------------------------------------------------
 
 --
