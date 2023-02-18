@@ -1,61 +1,73 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
 {% block body %}
 <body>
-	<div class="box">
+<div class="box">
+<form method="post" autocomplete="off">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+    {# <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+    <label for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required> #}
+
 		{# <form autocomplete="off"> #}
-		{{ form_start(form,{'attr':{'autocomplete':'off'}}) }}
+		{# {{ form_start(form,{'attr':{'autocomplete':'off'}}) }} #}
 			<h2>Sign in</h2>
 			<div class="box-img">
 				<img class="img" src="{{asset('images/koky-high-resolution-logo-color-on-transparent-background.png')}}" alt="">
 			</div>
 			<div class="inputBox">
-				{# <input type="text" required="required"> #}
-				{{ form_widget(form.username) }}
+				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
+				{# {{ form_widget(form.email) }} #}
 				<span>Username</span>
 				<i></i>
 			</div>
 			<div class="inputBox">
-				{# <input type="password" required="required"> #}
-				{{ form_widget(form.password) }}
+				<input type="password" name="password" id="inputPassword" required>
+				{# {{ form_widget(form.password) }} #}
 				<span>Password</span>
 				<i></i>
 			</div>
-            <div class="inputBox">
-				{# <input type="email" required="required"> #}
-				{{ form_widget(form.email) }}
-				<span>Email</span>
-				<i></i>
-            </div>
-            <div class="inputBox">
-				{# <input type="phone" required="required"> #}
-				{{ form_widget(form.phone) }}
-				<span>Phone</span>
-				<i></i>
-			</div>
-            <div class="inputBox">
-				<input 
-					{# type="text"
-					onfocus="(this.type='date')"
-					onblur="(this.type='text')"
-					required="required"> #}
-				{{ form_widget(form.birthday, {'attr':{
-					'type': 'text',
-        			'onfocus': "this.type='date'",
-        			'onblur': "this.type='text'",}}) }}
-				<span>Birthday</span>
-				<i></i>
-			</div>
-			<div class="mt-5">
-				{{ form_widget(form.gender,{ 'attr': {'class': 'choices',}}) }}
-            </div>
 			<div class="links">
 				<a href="#">Forgot Password ?</a>
-				<a href="{{path('login')}}">Signup</a>
+				<a href="#">Signup</a>
 			</div>
-			<input type="submit" value="Login">
-		{{ form_end(form) }}
+            <input type="submit" value="Login">
 		{# </form> #}
+		{# {{ form_end(form) }} #}
 	</div>
+
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+    {# <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button> #}
+</form>
 </body>
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');

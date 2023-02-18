@@ -3,20 +3,20 @@
 <body>
 	<div class="box">
 		{# <form autocomplete="off"> #}
-		{{ form_start(form,{'attr':{'autocomplete':'off'}}) }}
+		{# {{ form_start(form,{'attr':{'autocomplete':'off'}}) }} #}
 			<h2>Sign in</h2>
 			<div class="box-img">
 				<img class="img" src="{{asset('images/koky-high-resolution-logo-color-on-transparent-background.png')}}" alt="">
 			</div>
 			<div class="inputBox">
-				{# <input type="text" required="required"> #}
-				{{ form_widget(form.email) }}
+				<input type="text" required="required">
+				{# {{ form_widget(form.email) }} #}
 				<span>Username</span>
 				<i></i>
 			</div>
 			<div class="inputBox">
-				{# <input type="password" required="required"> #}
-				{{ form_widget(form.password) }}
+				<input type="password" required="required">
+				{# {{ form_widget(form.password) }} #}
 				<span>Password</span>
 				<i></i>
 			</div>
@@ -26,7 +26,7 @@
 			</div>
 			<input type="submit" value="Login">
 		{# </form> #}
-		{{ form_end(form) }}
+		{# {{ form_end(form) }} #}
 	</div>
 </body>
 <style>

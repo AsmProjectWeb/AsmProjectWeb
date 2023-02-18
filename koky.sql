@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 16, 2023 lúc 09:09 AM
--- Phiên bản máy phục vụ: 10.4.27-MariaDB
--- Phiên bản PHP: 7.4.33
+-- Host: 127.0.0.1
+-- Generation Time: Feb 18, 2023 at 11:23 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `koky`
+-- Database: `koky`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `comment`
+-- Table structure for table `comment`
 --
 
 CREATE TABLE `comment` (
@@ -38,7 +38,7 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `doctrine_migration_versions`
+-- Table structure for table `doctrine_migration_versions`
 --
 
 CREATE TABLE `doctrine_migration_versions` (
@@ -48,7 +48,7 @@ CREATE TABLE `doctrine_migration_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `doctrine_migration_versions`
+-- Dumping data for table `doctrine_migration_versions`
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
@@ -59,12 +59,14 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230216073658', '2023-02-16 08:37:07', 51),
 ('DoctrineMigrations\\Version20230216080000', '2023-02-16 09:00:11', 63),
 ('DoctrineMigrations\\Version20230216080257', '2023-02-16 09:07:01', 787),
-('DoctrineMigrations\\Version20230216080752', '2023-02-16 09:07:58', 49);
+('DoctrineMigrations\\Version20230216080752', '2023-02-16 09:07:58', 49),
+('DoctrineMigrations\\Version20230217175816', '2023-02-17 18:58:32', 652),
+('DoctrineMigrations\\Version20230218213635', '2023-02-18 22:36:43', 615);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `friends`
+-- Table structure for table `friends`
 --
 
 CREATE TABLE `friends` (
@@ -75,10 +77,8 @@ CREATE TABLE `friends` (
 
 -- --------------------------------------------------------
 
--- --------------------------------------------------------
-
 --
--- Cấu trúc bảng cho bảng `groups`
+-- Table structure for table `groups`
 --
 
 CREATE TABLE `groups` (
@@ -92,7 +92,7 @@ CREATE TABLE `groups` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `group_members`
+-- Table structure for table `group_members`
 --
 
 CREATE TABLE `group_members` (
@@ -104,7 +104,7 @@ CREATE TABLE `group_members` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `message`
+-- Table structure for table `message`
 --
 
 CREATE TABLE `message` (
@@ -118,7 +118,7 @@ CREATE TABLE `message` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `messenger_messages`
+-- Table structure for table `messenger_messages`
 --
 
 CREATE TABLE `messenger_messages` (
@@ -134,7 +134,7 @@ CREATE TABLE `messenger_messages` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post`
+-- Table structure for table `post`
 --
 
 CREATE TABLE `post` (
@@ -149,7 +149,7 @@ CREATE TABLE `post` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post_liked`
+-- Table structure for table `post_liked`
 --
 
 CREATE TABLE `post_liked` (
@@ -159,54 +159,75 @@ CREATE TABLE `post_liked` (
   `isliked` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
 --
--- Chỉ mục cho các bảng đã đổ
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `email` varchar(180) NOT NULL,
+  `roles` longtext NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `birthday` date NOT NULL,
+  `hometown` varchar(255) DEFAULT NULL,
+  `gender` tinyint(1) NOT NULL,
+  `job` varchar(255) DEFAULT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `email`, `roles`, `password`, `phone`, `username`, `birthday`, `hometown`, `gender`, `job`, `status`) VALUES
+(1, 'k@gmail.com', '[\"R0LE_USER\"]', '$2y$13$vZVcz2le9Z6UYBiKBH3rZe1I8jFBVKwzxb909BejWBJgUhGs1h8gm', '987654321', 'Khoa', '2003-12-06', 'Updating', 1, 'Updating', 'Unknown');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `comment`
+-- Indexes for table `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `doctrine_migration_versions`
+-- Indexes for table `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
--- Chỉ mục cho bảng `friends`
+-- Indexes for table `friends`
 --
 ALTER TABLE `friends`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `from_user_id`
---
-ALTER TABLE `from_user_id`
-  ADD PRIMARY KEY (`id`);
-
---
--- Chỉ mục cho bảng `groups`
+-- Indexes for table `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `group_members`
+-- Indexes for table `group_members`
 --
 ALTER TABLE `group_members`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `message`
+-- Indexes for table `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `messenger_messages`
+-- Indexes for table `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
   ADD PRIMARY KEY (`id`),
@@ -215,74 +236,81 @@ ALTER TABLE `messenger_messages`
   ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
--- Chỉ mục cho bảng `post`
+-- Indexes for table `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `post_liked`
+-- Indexes for table `post_liked`
 --
 ALTER TABLE `post_liked`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `comment`
+-- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `friends`
+-- AUTO_INCREMENT for table `friends`
 --
 ALTER TABLE `friends`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `from_user_id`
---
-ALTER TABLE `from_user_id`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `groups`
+-- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `group_members`
+-- AUTO_INCREMENT for table `group_members`
 --
 ALTER TABLE `group_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `message`
+-- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `messenger_messages`
+-- AUTO_INCREMENT for table `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `post`
+-- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `post_liked`
+-- AUTO_INCREMENT for table `post_liked`
 --
 ALTER TABLE `post_liked`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

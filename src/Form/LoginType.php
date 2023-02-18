@@ -6,7 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface as FormFormBuilderInterface;
 
-class Login extends AbstractType
+class LoginType extends AbstractType
 {
     public function buildForm(FormFormBuilderInterface $builder, array $options)
     {

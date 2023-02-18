@@ -3,6 +3,7 @@
     {% include 'header.html.twig' %}
 {% endblock %}
 {% block body %}
+{% if app.user != null %}
 <body>
     <div class="containerall">
         <div class="left">
@@ -458,4 +459,9 @@
 }
 </style>
 </body>
+{% endif %}
+      {% if app.user == null %}
+      <a href="{{ path('app_login') }}" class="btn btn-info">
+        You need to login to see the list 😜😜 >></a>
+      {% endif %}
 {% endblock %}
