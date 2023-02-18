@@ -2,18 +2,21 @@
 {% block body %}
 <body>
 	<div class="box">
-		<form autocomplete="off">
+		{# <form autocomplete="off"> #}
+		{{ form_start(form,{'attr':{'autocomplete':'off'}}) }}
 			<h2>Sign in</h2>
 			<div class="box-img">
 				<img class="img" src="{{asset('images/koky-high-resolution-logo-color-on-transparent-background.png')}}" alt="">
 			</div>
 			<div class="inputBox">
-				<input type="text" required="required">
+				{# <input type="text" required="required"> #}
+				{{ form_widget(form.email) }}
 				<span>Username</span>
 				<i></i>
 			</div>
 			<div class="inputBox">
-				<input type="password" required="required">
+				{# <input type="password" required="required"> #}
+				{{ form_widget(form.password) }}
 				<span>Password</span>
 				<i></i>
 			</div>
@@ -22,7 +25,8 @@
 				<a href="#">Signup</a>
 			</div>
 			<input type="submit" value="Login">
-		</form>
+		{# </form> #}
+		{{ form_end(form) }}
 	</div>
 </body>
 <style>
@@ -147,6 +151,7 @@
 
 	.inputBox span {
 		position: absolute;
+		top:0;
 		left: 0;
 		padding: 20px 0px 10px;
 		pointer-events: none;

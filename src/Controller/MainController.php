@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Form\Login;
+use App\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,17 +24,41 @@ class MainController extends AbstractController
     /**
      * @Route("/login", name="login")
      */
-    public function loginAction(): Response
+    public function loginAction(Request $request): Response
     {
-        return $this->render('Tlogin.html.twig', []);
+        $form = $this->createForm(Login::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            return $this->json($data);
+            // Do something with the form data
+        }
+
+        return $this->render('Tlogin.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
      * @Route("/register", name="register")
      */
-    public function registerAction(): Response
+    public function registerAction(Request $request): Response
     {
-        return $this->render('Tregister.html.twig', []);
+        $form = $this->createForm(RegisterType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            return $this->json($data);
+            // Do something with the form data
+        }
+
+        return $this->render('Tregister.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
     /**
      * @Route("/page", name="pgae")
