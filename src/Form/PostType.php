@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Post;
+use Doctrine\DBAL\Types\TextType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class PostType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+            ->add('owner',HiddenType::class)
+            ->add('subowner',HiddenType::class)
+            ->add('content', TextareaType::class, [
+                'label' => 'Write something',
+                'attr' => [
+                    'rows' => 3,
+                ],
+            'required'=>true])
+            ->add('image',FileType::class,[
+                'label' => 'Image',
+                'required' => false,
+                'mapped' => false])
+            ->add('date',DateTimeType::class,[
+                'data' => new \DateTime(),
+                'mapped' => false,
+            ])
+            ->add('status',ChoiceType::class,[
+                'choices' => [
+                    'Public' => 1,
+                    'Private' => 2,
+                    'Only Me' => 3,
+                ],
+                'data' => 1,
+                'required' => true,
+            ])
+
+            // ->add('name')
+            // ->add('price')
+            // ->add('created',DateType::class,[
+            //     'widget' => 'single_text',
+            //     'required'=> false
+            // ])
+            // ->add('quantity')
+            // ->add('file',FileType::class, [
+            //     'label' => 'Product Image',
+            //     'required' => false,
+            //     'mapped' => false]
+            // )
+            // ->add('image',HiddenType::class,[
+            //     'required'=>false
+            // ])
+            // ->add('save',SubmitType::class,[
+            //     'label'=>"Confirm"
+            // ])
+            // ;
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Post::class,
+        ]);
+    }
+}

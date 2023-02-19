@@ -42,6 +42,11 @@ class Post
      */
     private $date;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,7 +69,7 @@ class Post
         return $this->subowner;
     }
 
-    public function setSubowner(?string $subowner): self
+    public function setSubowner(?string $subowner = null): self
     {
         $this->subowner = $subowner;
 
@@ -88,7 +93,7 @@ class Post
         return $this->image;
     }
 
-    public function setImage(?string $image): self
+    public function setImage(?string $image = null): self
     {
         $this->image = $image;
 
@@ -103,6 +108,18 @@ class Post
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

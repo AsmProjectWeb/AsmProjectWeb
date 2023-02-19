@@ -2,13 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\User;
 use App\Form\LoginType;
+use App\Form\PostType;
 use App\Form\RegisterType;
+use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class MainController extends AbstractController
 {
@@ -61,13 +66,62 @@ class MainController extends AbstractController
     //         'form' => $form->createView(),
     //     ]);
     // }
+
+    // /**
+    //  * @Route("/page", name="page")
+    //  */
+    // public function page(): Response
+    // {
+    //     return $this->render('homepage.html.twig', []);
+    // }
+
+    private PostRepository $repo;
+    public function __construct(PostRepository $repo)
+    {
+      $this->repo = $repo;
+    }
+
     /**
      * @Route("/page", name="page")
      */
-    public function page(): Response
+    public function page(Request $req, SluggerInterface $slugger): Response
     {
-        return $this->render('homepage.html.twig', []);
+        $p = new Post();
+        $form = $this -> createForm(PostType::class, $p);
+
+        $form->handleRequest($req);
+        if($form->isSubmitted() && $form->isValid()){
+            if($p->getDate()===null){
+                $p->setDate(new \DateTime());
+            }
+            $imgFile = $form->get('image')->getData();
+            if ($imgFile) {
+                $newFilename = $this->uploadImage($imgFile,$slugger);
+                $p->setImage($newFilename);
+            }
+            $this->repo->add($p,true);
+            return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->render("homepage.html.twig",[
+            'form' => $form->createView()
+        ]);
     }
+
+    public function uploadImage($imgFile, SluggerInterface $slugger): ?string{
+        $originalFilename = pathinfo($imgFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = $slugger->slug($originalFilename);
+        $newFilename = $safeFilename.'-'.uniqid().'.'.$imgFile->guessExtension();
+        try {
+            $imgFile->move(
+                $this->getParameter('image_dir'),
+                $newFilename
+            );
+        } catch (FileException $e) {
+            echo $e;
+        }
+        return $newFilename;
+    }
+
     /**
      * @Route("/header", name="header")
      */

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2023 at 11:23 PM
+-- Generation Time: Feb 19, 2023 at 10:49 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -61,7 +61,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230216080257', '2023-02-16 09:07:01', 787),
 ('DoctrineMigrations\\Version20230216080752', '2023-02-16 09:07:58', 49),
 ('DoctrineMigrations\\Version20230217175816', '2023-02-17 18:58:32', 652),
-('DoctrineMigrations\\Version20230218213635', '2023-02-18 22:36:43', 615);
+('DoctrineMigrations\\Version20230218213635', '2023-02-18 22:36:43', 615),
+('DoctrineMigrations\\Version20230219203956', '2023-02-19 21:40:03', 63);
 
 -- --------------------------------------------------------
 
@@ -143,8 +144,16 @@ CREATE TABLE `post` (
   `subowner` varchar(255) DEFAULT NULL,
   `content` longtext NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `date` datetime NOT NULL
+  `date` datetime NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `post`
+--
+
+INSERT INTO `post` (`id`, `owner`, `subowner`, `content`, `image`, `date`, `status`) VALUES
+(1, 'Khoa', NULL, 'First Post', 'ark-poster-63f29897b0ac2.jpg', '2023-02-19 22:45:59', 1);
 
 -- --------------------------------------------------------
 
@@ -298,7 +307,7 @@ ALTER TABLE `messenger_messages`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `post_liked`

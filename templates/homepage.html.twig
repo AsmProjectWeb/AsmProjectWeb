@@ -332,7 +332,8 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form class="container border rounded" style="width: 500px; box-shadow: 2px 2px #8ABE53;">
+                {# <form class="container border rounded form-up"> #}
+                {{ form_start(form,{'attr': {'class': 'container border rounded form-up'}}) }}
                     <div class="post-header border-bottom text-center">
                         <h2>Make post</h2>
                     </div>
@@ -345,35 +346,38 @@
                             <div>
                                 <div>
                                     <h5>Name</h5>
+                                    {{ form_widget(form.owner, {'attr': {'value': app.user.username}}) }}
                                 </div>
                                 <div>
-                                    <select class="form-select bg-light"
-                                        style="height: 30px !important; font-size: 12px;"
-                                        aria-label="Default select example">
-                                        <option selected>Public</option>
+                                    {{ form_widget(form.status, {'attr': {'class': 'form-select bg-light select-opnion','aria-label': 'Default select example'}}) }}
+                                    {# <select class="form-select bg-light select-opnion" aria-label="Default select example">
+                                        <option value="1"selected>Public</option>
                                         <option value="2">Private</option>
-                                    </select>
+                                        <option value="3">Only Me</option>
+                                    </select> #}
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            {# <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> #}
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                         </div>
+                        {{ form_widget(form.date, {'attr': {'hidden': 'hidden', 'value': form.vars.value.date|date('Y-m-d H:i:s')}}) }}
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupFile01">
                                 <i class="fa-solid fa-image"></i>
                             </label>
-                            <input type="file" class="form-control" id="inputGroupFile01">
+                            {# <input type="file" class="form-control" id="inputGroupFile01"> #}
+                            {{ form_widget(form.image, {'attr': {'class': 'form-control', 'id': 'inputGroupFile01'}}) }}
                         </div>
                     </div>
                     <div class="col-12 d-flex">
-                        <button type="submit "
-                            style="background-color: #8ABE53; font-weight: 700; width: 100%; transition: all 0.4s ease; "
-                            class="btn btn-success mb-2">
+                        <button type="submit" class="btn btn-success mb-2 post-button">
                             Post
                         </button>
                     </div>
-                </form>
+                {# </form> #}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
@@ -396,6 +400,21 @@ body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+.form-up{
+    width: 500px; 
+    box-shadow: 2px 2px #8ABE53;
+}
+.select-opnion{
+    height: 30px !important; 
+    font-size: 12px;
+}
+
+.post-button{
+    background-color: #8ABE53; 
+    font-weight: 700; 
+    width: 100%; 
+    transition: all 0.4s ease; 
 }
 .box{
     width: 500px;
