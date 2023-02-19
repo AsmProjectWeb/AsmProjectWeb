@@ -4,7 +4,7 @@
     <body>
     <div class="profilecard">
         <div class="image">
-            <img src="avt.jpg" alt="" class="profileimg">
+            <img src="{{ asset('images/koky-logo.png') }}"alt="" class="profileimg">
         </div>
         <div class="textdata">
             <span class="name">Nguyễn Phước Lộc</span>
@@ -42,8 +42,8 @@
             </div>
         </div>
     </div>
-    <div class="body-profile">
-        <div class="box-1-profile-body">
+    <div class="body-profile container">
+        <div class="box-1-profile-body row">
             <div class="information">
                 <h3> &nbsp Introduction</h3>
                 <div class="infor">
@@ -75,22 +75,22 @@
                 <h3> &nbsp Featured photo</h3>
                 <div class="container-img">
                     <div>
-                        <img src="123.jpg" alt="">
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
                     </div>
                     <div>
-                        <img src="123.jpg" alt="">
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
                     </div>
                     <div>
-                        <img src="123.jpg" alt="">
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
                     </div>
                     <div>
-                        <img src="123.jpg" alt="">
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
                     </div>
                     <div>
-                        <img src="123.jpg" alt="">
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
                     </div>
                     <div>
-                        <img src="123.jpg" alt="">
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -99,44 +99,44 @@
                 <div class="container-img">
                     <div>
                         <a href="">
-                            <img src="avt.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                             <p>alo</p>
                         </a>
                     </div>
                     <div>
                         <a href="">
-                            <img src="avt.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                             <p>alo</p>
                         </a>
                     </div>
                     <div>
                         <a href="">
-                            <img src="avt.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                             <p>alo</p>
                         </a>
                     </div>
                     <div>
                         <a href="">
-                            <img src="avt.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                             <p>alo</p>
                         </a>
                     </div>
                     <div>
                         <a href="">
-                            <img src="avt.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                             <p>alo</p>
                         </a>
                     </div>
                     <div>
                         <a href="">
-                            <img src="avt.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                             <p>alo</p>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="box-2-profile-body">
+        <div class="box-2-profile-body row">
             <div class="containerall">
                 <div class="middle">
                     <div class="row box">
@@ -180,7 +180,7 @@
                                 scaled
                                 cavern walls to gain the high ground, Draconis auragelus takes a more bombastic
                                 approach.</p>
-                            <img src="123.jpg" alt="">
+                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                         </div>
                         <div class="box-footer">
                             <div class="box-infor">
@@ -437,7 +437,7 @@
     justify-content: space-between;
 }
 .box-1-profile-body{
-    width: 350px;
+    width: 40%;
     height: 680px;
     border-radius: 6px;
     position: sticky;
@@ -490,11 +490,10 @@
     border-radius: 6px;
 }
 .box-2-profile-body{
-    width: 473px;
+    width: 55%;
     height: 100%;
 }
 .box{
-    min-width: 473px;
     min-height: 145px;
     border-radius: 6px;
     border: 1px #999 solid;
@@ -592,18 +591,20 @@
     background-color: white;
     width: 100%;
     height: auto;
-    text-align: justify;
+    text-align: center;
 }
 .box-content p{
     padding: 8px;
+    text-align: justify;
 }
 .box-content img{
     max-width: 97%;
     min-width: 97%;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 6px;
     border-radius: 10px;
+    vertical-align: middle;
 }
 .box-footer{
     height: 60px;
@@ -659,7 +660,7 @@
 }
 .containerall{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
     width: 100%;
     margin-top: 20px;
