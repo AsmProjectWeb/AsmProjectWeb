@@ -70,7 +70,7 @@
                     <img src="ark.jfif" class="rounded-circle" alt="" style="width: 40px; height: 40px;">
                 </div>
                 <a href="#" style="height: 60%; margin: auto; width: 80%;">
-                    <button  class="rounded-pill" style=" margin: auto; width: 100%; height: 100%; border: 1px solid #ccc;" >
+                    <button  class="rounded-pill" style=" margin: auto; width: 100%; height: 100%; border: 1px solid #ccc;"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                         <span>What are you thinking?</span>
                     </button>
                 </a>
@@ -329,7 +329,66 @@
             </ul>
         </div>
     </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="container border rounded" style="width: 500px; box-shadow: 2px 2px #8ABE53;">
+                    <div class="post-header border-bottom text-center">
+                        <h2>Make post</h2>
+                    </div>
+                    <div class="post-body">
+                        <div class="d-flex mt-1" style="height: 80px;">
+                            <div class="">
+                                <img src="ark.jfif" class="rounded-circle border-dark" alt=""
+                                    style="width: 60px; height: 60px;">&nbsp &nbsp
+                            </div>
+                            <div>
+                                <div>
+                                    <h5>Name</h5>
+                                </div>
+                                <div>
+                                    <select class="form-select bg-light"
+                                        style="height: 30px !important; font-size: 12px;"
+                                        aria-label="Default select example">
+                                        <option selected>Public</option>
+                                        <option value="2">Private</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">
+                                <i class="fa-solid fa-image"></i>
+                            </label>
+                            <input type="file" class="form-control" id="inputGroupFile01">
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex">
+                        <button type="submit "
+                            style="background-color: #8ABE53; font-weight: 700; width: 100%; transition: all 0.4s ease; "
+                            class="btn btn-success mb-2">
+                            Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
     <style>
+.btn-success:hover {
+    background-color: #97cc5f !important;
+}
 body{
     background-color: #ccc;
 }
