@@ -40,7 +40,7 @@
                         </li>
                         <li>
                             <div class="dropdown group-drop-down">
-                                <a class="" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div style="height: 30px;">
                                         <i class="fa-solid fa-people-group"> &#160</i>
                                     </div>
@@ -103,7 +103,7 @@
                         gait and ability to dive through the air are all similar. However, where Draconis obscurum
                         scaled
                         cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                    <img src="ark.jfif" alt="">
+                    <img src="{{ asset('images/koky-logo.png') }}" alt="">
                 </div>
                 <div class="box-footer">
                     <div class="box-infor">
@@ -116,7 +116,7 @@
                             </div>
                             <div class="countshare">
                                 <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i>&#160 0
+                                    <i class="fa-solid fa-share-from-square"></i> &#160 0
                                 </a>
                             </div>
                         </div>
@@ -159,6 +159,9 @@
         </div>
     </div>
     <style>
+body{
+    background-color: #ccc;
+}
 *{
     margin: 0;
     padding: 0;
@@ -172,6 +175,8 @@
     height: auto;
     box-sizing: border-box;
     margin-top: 30px;
+    background-color: #fff;
+    box-shadow: #a5d473 2px 2px;
 }
 .box-header{
     height: 50px;
@@ -259,14 +264,21 @@
     align-items: center;
 }
 .box-content{
-    padding-top: 12px;
+    padding-top: 6px;
     background-color: white;
     width: 100%;
     height: auto;
+    text-align: justify;
 }
 .box-content img{
     max-width: 100%;
     min-width: 100%;
+    padding: 8px;
+    margin: auto;
+    border-radius: 10px;
+}
+.box-content p{
+    padding: 8px;
 }
 .box-footer{
     height: 60px;
@@ -324,12 +336,15 @@
     margin-top: 20px;
 }
 .left{
-    border-right: #8ABE53 solid 1px;
     display: block;
 }
 .left > div{
     position: fixed;
     width: inherit;
+    height: auto;
+    background-color: #fff;
+    border-right: #8ABE53 solid 1px;
+    box-shadow: #8ABE53 2px 2px; 
 }
 .group-action-left-1{
     height:100px;
@@ -344,9 +359,11 @@
     border-radius: 3px;
     vertical-align: middle;
     line-height:40px;
+
 }
 .group-action-left-1 ul li{
     display: flex;
+    transition: all 0.3s ease;
 }
 .group-action-left-1 ul li:last-child{
     border-bottom: #333 solid 1px;
@@ -369,6 +386,7 @@
 }
 .group-drop-down{
     width: 100%;
+    background-color: #fff;
 }
 .group-action-left-2 ul, .group-action-left-2 ul li{
     width: 100%;
@@ -386,6 +404,7 @@
     display: flex;
     text-decoration: none;
     color: #333;
+    transition: all 0.3s ease;
 }
 .group-action-left-2 ul li:last-child{
     border-bottom: #333 solid 1px;
@@ -421,6 +440,14 @@
 .right{
     height: auto;
     border-left: #8ABE53 solid 1px;
+    border-radius: 12px;
+    box-shadow: #8ABE53 2px 2px;
+}
+.right h5{
+    background-color: #fff;
+}
+.right > ul{
+    background-color: #fff;
 }
 .right > ul > li{
     background-color: #8ABE53;
@@ -429,6 +456,7 @@
     height: 30px;
     border-radius: 25px 0 0 25px;
     margin-top: 3px;
+    transition: all 0.3 ease;
 }
 .right > ul > li > img{
     width: 29px;
