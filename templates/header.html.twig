@@ -1,109 +1,111 @@
 <body>
-    <nav class="navbar navbar-expand-lg bg-dark-subtle border navbar-dark border-success bg-dark rounded-bottom">
+    <nav class="navbar navbar-expand-lg border navbar-dark border-success bg-dark rounded-bottom sticky-top">
     <div class="container-fluid">
-        <a class="ms-2 me-2" href="#">
-            <img src="{{asset("images/koky-high-resolution-logo-color-on-transparent-background.png")}}" class="rounded logo-header"/>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav nav-pills mb-2 mb-lg-0 justify-content-between mx-auto">
-            <li class="nav-item m-2">
-            <a class="nav-link active p-2 ps-4 pe-4" aria-current="page" href="#">
-                <i class="fa-solid fa-house"></i>
+        <div class="left-box d-none d-lg-flex">
+            <a class="ms-2 me-2" href="{{ path('page') }}">
+                <img src="{{asset("images/koky-high-resolution-logo-color-on-transparent-background.png")}}" class="rounded img-icon"/>
             </a>
-            </li>
-            <li class="nav-item m-2">
-            <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
-                <i class="fa-solid fa-message"></i>
-            </a>
-            </li>
-            <li class="nav-item m-2">
-            <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
-                <i class="fa-sharp fa-solid fa-envelope"></i>
-            </a>
-            </li>
-            <li class="nav-item m-2">
-            <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
-                <i class="fa-solid fa-plus"></i>
-            </a>
-            </li>
-        </ul>
-
-        <div class="right-box ms-auto">
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
+            <a class="ms-2 me-2 d-block d-lg-none" href="page">
+                <img src="{{asset("images/koky-high-resolution-logo-color-on-transparent-background.png")}}" class="rounded img-icon"/>
+            </a>
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse middle-box" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-pills mb-2 mb-lg-0 justify-content-between mx-auto">
+                <li class="nav-item m-2">
+                <a class="nav-link active p-2 ps-4 pe-4" aria-current="page" href="#">
+                    <i class="fa-solid fa-house"></i>
+                </a>
+                </li>
+                <li class="nav-item m-2">
+                <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
+                    <i class="fa-solid fa-message"></i>
+                </a>
+                </li>
+                <li class="nav-item m-2">
+                <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
+                    <i class="fa-sharp fa-solid fa-envelope"></i>
+                </a>
+                </li>
+                <li class="nav-item m-2">
+                <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+                </li>
+                <li class="nav-item m-2">
+                    <div class="right-box ms-auto d-block d-lg-none">
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+
+
 
         </div>
+            <div class="right-box ms-auto d-none d-lg-flex justify-content-center align-items-center">
+                <a class="text-white text-decoration-none fw-bold m-3" href="{{path('profile')}}">{{app.user.username}}</a>
+                <div class="dropdown">
+                <button class="btn btn-secondary btn-sm dropdown-toggle rounded" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img class="rounded-circle img-icon" src="{{asset("images/defaultProfile.jpg")}}" alt="menu icon">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                {% if app.user != null %}
+                    <li><a class="dropdown-item" href="{{path('profile')}}">Profile</a></li>
+                {% endif %}
+                    <li><a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a></li>
+                </ul>
+                </div>
+            </div>
     </div>
     </nav>
-
-{# <nav class="navbar navbar-expand-lg bg-dark-subtle border navbar-dark border-success bg-dark rounded-bottom">
-  <div class="container-fluid">
-    <a class="logo-link" href="#">
-        <img src="{{asset("images/koky-high-resolution-logo-color-on-transparent-background.png")}}" class="rounded logo-header"></img>
-    </a>
-    <button class="navbar-toggler ms-5" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav nav-pills mb-2 mb-lg-0 d-flex align-items-center justify-content-center">
-        <li class="nav-item m-2">
-          <a class="nav-link active p-2 ps-4 pe-4" aria-current="page" href="#">
-            <i class="fa-solid fa-house"></i>
-          </a>
-        </li>
-        <li class="nav-item m-2">
-          <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
-            <i class="fa-solid fa-message"></i>
-          </a>
-        </li>
-        <li class="nav-item m-2">
-          <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
-            <i class="fa-sharp fa-solid fa-envelope"></i>
-          </a>
-        </li>
-        <li class="nav-item m-2">
-          <a class="nav-link p-2 ps-4 pe-4" aria-current="page" href="#">
-            <i class="fa-solid fa-plus"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="right-box ms-auto d-flex justify-content-center align-items-center">
-      <form class="d-flex search-form" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav> #}
 
 
 </body>
 <style>
-    .logo-header{
+    .navbar{
+        min-height:72px;
+    }
+
+    .img-icon{
         width: 50px;
         height: 50px;
     }
-    /* .logo-link {
-    position: fixed;
-    left: 0;
-    margin: 10px;
-    }
+    /* .middle-box{
+        position: absolute;
+        width:100%;
+        padding-left:20px;
+        padding-right:20px;
+    } */
+    .left-box {
+        position: fixed;
+        top:10px;
+        left: 0;
+        }
 
     .right-box {
-    position: fixed;
-    right: 0;
-    margin: 10px;
-    }
+        position: fixed;
+        right: 0;
+        margin-right:10px;
+        } 
 
-    .navbar-nav {
+    /*.navbar-nav {
     width: 100%;
     text-align: center;
     } */
 </style>
+<script>
+  $(document).ready(function() {
+    $('.navbar-toggler').click(function() {
+      $('.navbar-collapse').toggleClass('show');
+    });
+  });
+</script>
