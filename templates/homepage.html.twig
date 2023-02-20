@@ -6,7 +6,7 @@
 {% if app.user != null %}
 <body>
     <div class="containerall">
-        <div class="left d-none d-lg-block">
+        <div class="left d-none d-lg-block ">
             <div>
                 <div class="group-action-left-1">
                     <ul>
@@ -39,7 +39,7 @@
                             </div>
                         </li>
                         <li>
-                            <div class="dropdown group-drop-down">
+                            {# <div class="dropdown group-drop-down">
                                 <a class="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div style="height: 30px;">
                                         <i class="fa-solid fa-people-group"> &#160</i>
@@ -58,9 +58,50 @@
                                         <a class="dropdown-item" href="#">Action</a>
                                     </li>
                                 </ul>
+                            </div> #}
+                            <div>
+                                <i class="fa-solid fa-people-group">&#160</i>
+                            </div>
+                            <div>
+                                <h6>Ground</h6>
                             </div>
                         </li>
                     </ul>
+                </div>
+                <div class="group-action-left-3">
+                    <ul>
+                        <li>
+                            <div class="sub-avatar">
+                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                            </div>
+                            <div>
+                                <h6>Group 1</h6>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-avatar">
+                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                            </div>
+                            <div>
+                                <h6>Group 2</h6>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-avatar">
+                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                            </div>
+                            <div>
+                                <h6>Group 3</h6>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="left-footer">
+                    <a href=""><li>Privacy &#160 </li></a>
+                    <a href=""><li>koky's policy &#160</li></a>
+                    <a href=""><li>Advertisement &#160</li></a>
+                    <a href=""><li>Term &#160</li></a>
+                    <a href=""><li>Copyright by KOKY (©) &#160</li></a>
                 </div>
             </div>
         </div>
@@ -70,7 +111,7 @@
                     <img src="ark.jfif" class="rounded-circle" alt="" style="width: 40px; height: 40px;">
                 </div>
                 <a href="#" style="height: 60%; margin: auto; width: 80%;">
-                    <button  class="rounded-pill" style=" margin: auto; width: 100%; height: 100%; border: 1px solid #ccc;"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                    <button  class="rounded-pill" style=" margin: auto; width: 100%; height: 100%; border: 1px solid #ccc; background-color: #fff;"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                         <span>What are you thinking?</span>
                     </button>
                 </a>
@@ -318,15 +359,78 @@
         </div>
         <div class="right d-none d-lg-block">
             <h5>&#160 abc</h5>
-            <ul>
+            <div class="list-friend">
+                <ul>
                 <li>
                     <img src="ark.jfif" alt="">
                     <a href="">UserName</a>
                 </li>
                 <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                <li>
+                    <img src="ark.jfif" alt="">
+                    <a href="">UserName</a>
+                </li>
+                
+                <li>
                     <a href="">New Chat</a>
                 </li>
             </ul>
+            </div>
         </div>
     </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -567,11 +671,12 @@ body{
 }
 .left{
     display: block;
+    border-radius: #8ABE53 2px 2px;
 }
 .left > div{
     position: fixed;
     width: inherit;
-    height: auto;
+    height: 198px;
     background-color: #fff;
     border-right: #8ABE53 solid 1px;
     box-shadow: #8ABE53 2px 2px; 
@@ -624,7 +729,6 @@ body{
     height: 40px;
     padding: 0;
     list-style-type: none;
-    margin-top: 6px;
     border-radius: 3px;
     vertical-align: middle;
     line-height:40px;
@@ -639,20 +743,52 @@ body{
 .group-action-left-2 ul li:last-child{
     border-bottom: #333 solid 1px;
 }
-.group-action-left-2 ul li div h6{
+.group-action-left-2 ul li div h6, .group-action-left-3 ul li div h6 {
     line-height: 40px;
 }
 .group-action-left-2 > ul > li > div > ul > li{
     display: flex;
     width: 100%;
 }
-.left-drop-menu{
+.group-action-left-3{
+    margin-top: 50px;
+}
+.group-action-left-3 ul, .group-action-left-3 ul li{
+    width: 100%;
+    list-style: none;
+    height: 40px;
+    padding: 0;
+    list-style-type: none;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height:40px;
+    border: none;
+}
+.group-action-left-3 > ul > li{
+    display: flex;
+    background-color: #fff;
+    list-style-type: none;
+    transition: all 0.3 ease;
+}
+.group-action-left-3 ul li .sub-avatar{
+    height: 40px;
+    weight: 40px;
+}
+.group-action-left-3 ul li .sub-avatar img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.group-action-left-3 > ul > li:hover{
+    background-color: #8ABE53;
+}
+/* .left-drop-menu{
     margin-top: 10px !important;
     background-color: #fff !important;
-}
-.dropdown-item{
+} */
+/* .dropdown-item{
     background-color: #fff;
-}
+} */
 .group-action-left-2 > ul > li > div > ul > li a{
     color: black;
     font-weight: 600;
@@ -671,19 +807,37 @@ body{
     position: relative;
     width: 100%;
 }
+.left-footer{
+    width: 100%;
+    height: 100px;
+    box-shadow: #ccc 2px 2px;
+    margin-top: 139px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.left-footer a{
+    text-decoration: none;
+    color: #606770;
+}
+.left-footer a:hover{
+    text-decoration: underline;
+}
 .right{
     height: auto;
     border-left: #8ABE53 solid 1px;
     border-radius: 12px;
     box-shadow: #8ABE53 2px 2px;
+    overflow: auto;
 }
 .right h5{
     background-color: #fff;
 }
-.right > ul{
+.list-friend{
     background-color: #fff;
+    overflow: auto;
+    position: sticky;
 }
-.right > ul > li{
+.right > div > ul > li{
     background-color: #8ABE53;
     list-style: none;
     list-style-type: none;
@@ -692,18 +846,18 @@ body{
     margin-top: 3px;
     transition: all 0.3 ease;
 }
-.right > ul > li > img{
+.right > div > ul > li > img{
     width: 29px;
     height: 29px;
     border-radius: 50%;
 }
-.right > ul > li > a{
+.right > div > ul > li > a{
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: 12px;
 }
-.right > ul > li:hover{
+.right > div > ul > li:hover{
     background-color: #b6e683;
 }
 .right ul li:last-child:hover{
