@@ -52,7 +52,11 @@
 
         </div>
             <div class="right-box ms-auto d-none d-lg-flex justify-content-center align-items-center">
-                <a class="text-white text-decoration-none fw-bold m-3" href="{{path('profile')}}">{{app.user.username}}</a>
+                {% if app.user != null %}
+                    <a class="text-white text-decoration-none fw-bold m-3" href="{{path('profile')}}">{{app.user.username}}</a>
+                {% else %}
+                    <a class="text-white text-decoration-none fw-bold m-3" href="{{path('profile')}}">Guest</a>
+                {% endif %}
                 <div class="dropdown">
                 <button class="btn btn-secondary btn-sm dropdown-toggle rounded" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <img class="rounded-circle img-icon" src="{{asset("images/defaultProfile.jpg")}}" alt="menu icon">
