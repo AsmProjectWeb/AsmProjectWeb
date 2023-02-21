@@ -91,6 +91,9 @@ class MainController extends AbstractController
 
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid()){
+
+            // return $this->json($p);
+
             if($p->getDate()===null){
                 $p->setDate(new \DateTime());
             }

@@ -6,9 +6,9 @@
 {% if app.user != null %}
 <body>
     <div class="containerall">
-        <div class="left d-none d-lg-block ">
-            <div>
-                <div class="group-action-left-1">
+        <div class="left d-none d-lg-block stick-left vh-100">
+            <div class="h-100">
+                {# <div class="group-action-left-1">
                     <ul>
                         <li>
                             <div>
@@ -39,26 +39,6 @@
                             </div>
                         </li>
                         <li>
-                            {# <div class="dropdown group-drop-down">
-                                <a class="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div style="height: 30px;">
-                                        <i class="fa-solid fa-people-group"> &#160</i>
-                                    </div>
-                                    <div style="height: 30px;">
-                                        <h6>Group</h6>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu left-drop-menu" aria-labelledby="dropdownMenuLink">
-                                    <li>
-                                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                    </li>
-                                </ul>
-                            </div> #}
                             <div>
                                 <i class="fa-solid fa-people-group">&#160</i>
                             </div>
@@ -95,269 +75,275 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-                <div class="left-footer">
+                </div> #}
+                {# <div class="left-footer">
                     <a href=""><li>Privacy &#160 </li></a>
                     <a href=""><li>koky's policy &#160</li></a>
                     <a href=""><li>Advertisement &#160</li></a>
                     <a href=""><li>Term &#160</li></a>
                     <a href=""><li>Copyright by KOKY (©) &#160</li></a>
-                </div>
+                </div> #}
             </div>
         </div>
         <div class="middle mx-auto">
-            <div class="d-flex rounded" style="width: 500px; height: 50px; background-color: #8ABE53;     margin-top: 15px;">
-                <div class="p-1">
-                    <img src="ark.jfif" class="rounded-circle" alt="" style="width: 40px; height: 40px;">
+
+            <div class="friend">
+                <div class="fs-3 fw-bold">
+                    Everyone
                 </div>
-                <a href="#" style="height: 60%; margin: auto; width: 80%;">
-                    <button  class="rounded-pill" style=" margin: auto; width: 100%; height: 100%; border: 1px solid #ccc; background-color: #fff;"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                        <span>What are you thinking?</span>
-                    </button>
-                </a>
-            </div>
-            <div class="box">
-                <div class="box-header">
-                    <div class="box-avata">
-                        <div class="avata">
-                            <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
-                                alt="">
-                            <div class="sub-avata"></div>
+                <hr class="mt-2 mb-2">
+                <div class="box">
+                    <div class="box-header box-header-tag">
+                        <div class="box-avata">
+                            <div class="avata">
+                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
+                                <div class="sub-avata"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="box-title">
-                        <div class="u-tus">
-                            <a href="">
-                                <h5>Hello World</h5>
-                            </a>
-                        </div>
-                        <div class="u-title">
-                            <a href=""><label for="">123</label></a>
-                        </div>
-                    </div>
-                    <div class="box-view">
-                        <span>
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
-                    </div>
-                    <div class="box-close">
-                        <div>
-                            <span>
-                                <i class="fa-solid fa-xmark"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                        stature,
-                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                        scaled
-                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                    <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                </div>
-                <div class="box-footer">
-                    <div class="box-infor">
-                        <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
-                        <div class="infor-right">
-                            <div class="countcomment">
+                        <div class="box-title box-title-tag">
+                            <div class="u-tus">
                                 <a href="">
-                                    <i class="fa-solid fa-comment"></i>&#160 0
+                                    <h5>Hello World</h5>
                                 </a>
                             </div>
-                            <div class="countshare">
+                            <div class="u-title">
                                 <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i> &#160 0
+                                    <label for="">123</label>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="box-action">
-                        <div class="sub-box-action" id="sub-box-action-1">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                <i class="icon-hide fa-solid fa-heart"></i>
-                            </a>
-                            <a href="" class=""></a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-comment"></i>
-                                <i class="icon-hide fa-solid fa-comment"></i>
-                            </a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-share-from-square"></i>
-                                <i class="icon-hide fa-solid fa-share-from-square"></i>
-                            </a>
+                        <div class="right-title">
+                            <div class="icon">
+                                <i class="fa-sharp fa-solid fa-user-plus"></i>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success m-2">Show more</button>
                 </div>
             </div>
 
-            <div class="box">
-                <div class="box-header">
-                    <div class="box-avata">
-                        <div class="avata">
-                            <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
-                                alt="">
-                            <div class="sub-avata"></div>
-                        </div>
-                    </div>
-                    <div class="box-title">
-                        <div class="u-tus">
-                            <a href="">
-                                <h5>Hello World</h5>
-                            </a>
-                        </div>
-                        <div class="u-title">
-                            <a href=""><label for="">123</label></a>
-                        </div>
-                    </div>
-                    <div class="box-view">
-                        <span>
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
-                    </div>
-                    <div class="box-close">
-                        <div>
-                            <span>
-                                <i class="fa-solid fa-xmark"></i>
-                            </span>
-                        </div>
-                    </div>
+            <div class="group">
+                <div class="fs-3 fw-bold">
+                    Group
                 </div>
-                <div class="box-content">
-                    <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                        stature,
-                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                        scaled
-                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                    <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                </div>
-                <div class="box-footer">
-                    <div class="box-infor">
-                        <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
-                        <div class="infor-right">
-                            <div class="countcomment">
+                <hr class="mt-2 mb-2">
+                <div class="box">
+                    <div class="box-header box-header-tag">
+                        <div class="box-avata">
+                            <div class="avata">
+                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
+                                <div class="sub-avata"></div>
+                            </div>
+                        </div>
+                        <div class="box-title box-title-tag">
+                            <div class="u-tus">
                                 <a href="">
-                                    <i class="fa-solid fa-comment"></i>&#160 0
+                                    <h5>Hello World</h5>
                                 </a>
                             </div>
-                            <div class="countshare">
+                            <div class="u-title">
                                 <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i> &#160 0
+                                    <label for="">123</label>
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="box-action">
-                        <div class="sub-box-action" id="sub-box-action-1">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                <i class="icon-hide fa-solid fa-heart"></i>
-                            </a>
-                            <a href="" class=""></a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-comment"></i>
-                                <i class="icon-hide fa-solid fa-comment"></i>
-                            </a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-share-from-square"></i>
-                                <i class="icon-hide fa-solid fa-share-from-square"></i>
-                            </a>
+                        <div class="right-title">
+                            <div class="icon">
+                                <i class="fa-solid fa-user-group"></i>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-success m-2">Show more</button>
                 </div>
             </div>
 
+            <div class="post">
 
-            <div class="box">
-                <div class="box-header">
-                    <div class="box-avata">
-                        <div class="avata">
-                            <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
-                                alt="">
-                            <div class="sub-avata"></div>
+                <div class="fs-3 fw-bold">
+                    Post
+                </div>
+                <hr class="mt-2 mb-2">
+
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-avata">
+                            <div class="avata">
+                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
+                                <div class="sub-avata"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="box-title">
-                        <div class="u-tus">
-                            <a href="">
-                                <h5>Hello World</h5>
-                            </a>
+                        <div class="box-title">
+                            <div class="u-tus">
+                                <a href="">
+                                    <h5>Hello World</h5>
+                                </a>
+                            </div>
+                            <div class="u-title">
+                                <a href="">
+                                    <label for="">123</label>
+                                </a>
+                            </div>
                         </div>
-                        <div class="u-title">
-                            <a href=""><label for="">123</label></a>
-                        </div>
-                    </div>
-                    <div class="box-view">
-                        <span>
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
-                    </div>
-                    <div class="box-close">
-                        <div>
+                        <div class="box-view">
                             <span>
-                                <i class="fa-solid fa-xmark"></i>
+                                <i class="fa-solid fa-bars"></i>
                             </span>
                         </div>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                        stature,
-                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                        scaled
-                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                    <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                </div>
-                <div class="box-footer">
-                    <div class="box-infor">
-                        <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
-                        <div class="infor-right">
-                            <div class="countcomment">
-                                <a href="">
-                                    <i class="fa-solid fa-comment"></i>&#160 0
-                                </a>
-                            </div>
-                            <div class="countshare">
-                                <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i> &#160 0
-                                </a>
+                        <div class="box-close">
+                            <div>
+                                <span>
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <div class="box-action">
-                        <div class="sub-box-action" id="sub-box-action-1">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                <i class="icon-hide fa-solid fa-heart"></i>
-                            </a>
-                            <a href="" class=""></a>
+                    <div class="box-content">
+                        <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
+                                                                                                        stature,
+                                                                                                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
+                                                                                                        scaled
+                                                                                                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                    </div>
+                    <div class="box-footer">
+                        <div class="box-infor">
+                            <div class="countview">
+                                <a href="">
+                                    <i class="fa-solid fa-heart"></i>&#160 0</a>
+                            </div>
+                            <div class="infor-right">
+                                <div class="countcomment">
+                                    <a href="">
+                                        <i class="fa-solid fa-comment"></i>&#160 0
+                                    </a>
+                                </div>
+                                <div class="countshare">
+                                    <a href="">
+                                        <i class="fa-solid fa-share-from-square"></i>
+                                        &#160 0
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-comment"></i>
-                                <i class="icon-hide fa-solid fa-comment"></i>
-                            </a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-share-from-square"></i>
-                                <i class="icon-hide fa-solid fa-share-from-square"></i>
-                            </a>
+                        <div class="box-action">
+                            <div class="sub-box-action" id="sub-box-action-1">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
+                                    <i class="icon-hide fa-solid fa-heart"></i>
+                                </a>
+                                <a href="" class=""></a>
+                            </div>
+                            <div class="sub-box-action">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-comment"></i>
+                                    <i class="icon-hide fa-solid fa-comment"></i>
+                                </a>
+                            </div>
+                            <div class="sub-box-action">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-share-from-square"></i>
+                                    <i class="icon-hide fa-solid fa-share-from-square"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="box">
+                    <div class="box-header">
+                        <div class="box-avata">
+                            <div class="avata">
+                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
+                                <div class="sub-avata"></div>
+                            </div>
+                        </div>
+                        <div class="box-title">
+                            <div class="u-tus">
+                                <a href="">
+                                    <h5>Hello World</h5>
+                                </a>
+                            </div>
+                            <div class="u-title">
+                                <a href="">
+                                    <label for="">123</label>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box-view">
+                            <span>
+                                <i class="fa-solid fa-bars"></i>
+                            </span>
+                        </div>
+                        <div class="box-close">
+                            <div>
+                                <span>
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-content">
+                        <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
+                                                                                                        stature,
+                                                                                                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
+                                                                                                        scaled
+                                                                                                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
+                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                    </div>
+                    <div class="box-footer">
+                        <div class="box-infor">
+                            <div class="countview">
+                                <a href="">
+                                    <i class="fa-solid fa-heart"></i>&#160 0</a>
+                            </div>
+                            <div class="infor-right">
+                                <div class="countcomment">
+                                    <a href="">
+                                        <i class="fa-solid fa-comment"></i>&#160 0
+                                    </a>
+                                </div>
+                                <div class="countshare">
+                                    <a href="">
+                                        <i class="fa-solid fa-share-from-square"></i>
+                                        &#160 0
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-action">
+                            <div class="sub-box-action" id="sub-box-action-1">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
+                                    <i class="icon-hide fa-solid fa-heart"></i>
+                                </a>
+                                <a href="" class=""></a>
+                            </div>
+                            <div class="sub-box-action">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-comment"></i>
+                                    <i class="icon-hide fa-solid fa-comment"></i>
+                                </a>
+                            </div>
+                            <div class="sub-box-action">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-share-from-square"></i>
+                                    <i class="icon-hide fa-solid fa-share-from-square"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></div>
+
         </div>
-        <div class="right d-none d-lg-block">
+
+
+
+
+        {# <div class="right d-none d-lg-block">
             <h5>&#160 abc</h5>
             <div class="list-friend">
                 <ul>
@@ -431,12 +417,11 @@
                 </li>
             </ul>
             </div>
-        </div>
+        </div> #}
     </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {# <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                {# <form class="container border rounded form-up"> #}
                 {{ form_start(form,{'attr': {'class': 'container border rounded form-up'}}) }}
                     <div class="post-header border-bottom text-center">
                         <h2>Make post</h2>
@@ -454,16 +439,10 @@
                                 </div>
                                 <div>
                                     {{ form_widget(form.status, {'attr': {'class': 'form-select bg-light select-opnion','aria-label': 'Default select example'}}) }}
-                                    {# <select class="form-select bg-light select-opnion" aria-label="Default select example">
-                                        <option value="1"selected>Public</option>
-                                        <option value="2">Private</option>
-                                        <option value="3">Only Me</option>
-                                    </select> #}
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            {# <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> #}
                             {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         {{ form_widget(form.date, {'attr': {'hidden': 'hidden', 'value': form.vars.value.date|date('Y-m-d H:i:s')}}) }}
@@ -471,7 +450,6 @@
                             <label class="input-group-text" for="inputGroupFile01">
                                 <i class="fa-solid fa-image"></i>
                             </label>
-                            {# <input type="file" class="form-control" id="inputGroupFile01"> #}
                             {{ form_widget(form.image, {'attr': {'class': 'form-control', 'id': 'inputGroupFile01'}}) }}
                         </div>
                     </div>
@@ -480,11 +458,10 @@
                             Post
                         </button>
                     </div>
-                {# </form> #}
                 {{ form_end(form) }}
             </div>
         </div>
-    </div>
+    </div> #}
     <script>
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
@@ -501,6 +478,7 @@ body{
     background-color: #ccc;
 }
 *{
+    transition:0.3s;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -522,7 +500,8 @@ body{
 }
 .box{
     width: 500px;
-    min-height: 148px;
+    /* min-height: 148px; */
+    height:auto;
     border-radius: 6px;
     border: 1px #999 solid;
     height: auto;
@@ -537,16 +516,19 @@ body{
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 5px 0 5px 0;
     position: relative;
+    
     /* border: 1px solid black; */
 }
+.box-header-tag{
+    height:90px;
+}
 .box-avata{
-    /* background-color: blue; */
     height: 36px;
     width: 36px;
     position: absolute;
     left: 12px;
+    align-self: center;
 }
 .avata{
     width: 100%;
@@ -560,12 +542,39 @@ body{
     border-radius: 50%;
 }
 .box-title{
-    background-color: green;
     height: 46px;
     width: 350px;
     position: absolute;
     left: 11%;
     bottom: 0;
+    align-self: center;
+}
+.box-title-tag{
+    top: 50%; transform: translateY(-50%);
+    left:13%;
+}
+.right-title{
+    top: 50%; transform: translateY(-50%);
+    right:15px;
+    align-self: center;
+    position: absolute;
+    border-radius:50%;
+    background-color:#cccccc;
+    width:40px;
+    height:40px;
+    text-align: center;
+    justify-content:center;
+    display:flex;
+}
+.icon{
+    align-self: center;
+    text-align: center;
+    justify-content:center;
+    display:flex;
+    width:30px;
+}
+.right-title:hover{
+    background-color: #7a7d86;
 }
 .u-title label{
     margin: 0;
@@ -608,7 +617,6 @@ body{
    margin: auto;
 }
 .box-close{
-    /* background-color: pink; */
     height: 36px;
     width: 36px;
     position: absolute;
@@ -686,7 +694,7 @@ body{
 .left , .right {
     width: 20%;
     height: 300px;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .left{
     display: block;

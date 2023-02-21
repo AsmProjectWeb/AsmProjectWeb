@@ -18,11 +18,6 @@ class Post
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $owner;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $subowner;
@@ -47,21 +42,15 @@ class Post
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="UserPost")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Post_UserID;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getOwner(): ?string
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(string $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
     }
 
     public function getSubowner(): ?string
@@ -120,6 +109,18 @@ class Post
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getPostUserID(): ?User
+    {
+        return $this->Post_UserID;
+    }
+
+    public function setPostUserID(?User $Post_UserID): self
+    {
+        $this->Post_UserID = $Post_UserID;
 
         return $this;
     }

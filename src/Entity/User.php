@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -69,6 +71,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $status;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="Post_UserID", orphanRemoval=true)
+     */
+    private $UserPost;
+
+    public function __construct()
+    {
+        $this->UserPost = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -234,6 +246,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getUserPost(): Collection
+    {
+        return $this->UserPost;
+    }
+
+    public function addUserPost(Post $userPost): self
+    {
+        if (!$this->UserPost->contains($userPost)) {
+            $this->UserPost[] = $userPost;
+            $userPost->setPostUserID($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserPost(Post $userPost): self
+    {
+        if ($this->UserPost->removeElement($userPost)) {
+            // set the owning side to null (unless already changed)
+            if ($userPost->getPostUserID() === $this) {
+                $userPost->setPostUserID(null);
+            }
+        }
 
         return $this;
     }
