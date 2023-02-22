@@ -20,39 +20,58 @@ class GroupMembers
     /**
      * @ORM\Column(type="integer")
      */
-    private $group_id;
+    private $rolemember;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="user")
      */
-    private $user_id;
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=groups::class, inversedBy="IDgroup")
+     */
+    private $groupid;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getGroupId(): ?int
+    public function getRolemember(): ?int
     {
-        return $this->group_id;
+        return $this->rolemember;
     }
 
-    public function setGroupId(int $group_id): self
+    public function setRolemember(int $rolemember): self
     {
-        $this->group_id = $group_id;
+        $this->rolemember = $rolemember;
 
         return $this;
     }
 
-    public function getUserId(): ?int
+    public function getUser(): ?user
     {
-        return $this->user_id;
+        return $this->user;
     }
 
-    public function setUserId(int $user_id): self
+    public function setUser(?user $user): self
     {
-        $this->user_id = $user_id;
+        $this->user = $user;
 
         return $this;
     }
+
+    public function getGroupid(): ?groups
+    {
+        return $this->groupid;
+    }
+
+    public function setGroupid(?groups $groupid): self
+    {
+        $this->groupid = $groupid;
+
+        return $this;
+    }
+
 }

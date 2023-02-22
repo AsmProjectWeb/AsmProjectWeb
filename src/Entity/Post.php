@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PostRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,11 +18,6 @@ class Post
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $subowner;
 
     /**
      * @ORM\Column(type="text")
@@ -48,21 +45,30 @@ class Post
      */
     private $Post_UserID;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="userbeforeshare")
+     */
+    private $userberforeshare;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Postliked::class, mappedBy="post")
+     */
+    private $post;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+     */
+    private $IDpost;
+
+    public function __construct()
+    {
+        $this->post = new ArrayCollection();
+        $this->IDpost = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getSubowner(): ?string
-    {
-        return $this->subowner;
-    }
-
-    public function setSubowner(?string $subowner = null): self
-    {
-        $this->subowner = $subowner;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -121,6 +127,78 @@ class Post
     public function setPostUserID(?User $Post_UserID): self
     {
         $this->Post_UserID = $Post_UserID;
+
+        return $this;
+    }
+
+    public function getUserberforeshare(): ?user
+    {
+        return $this->userberforeshare;
+    }
+
+    public function setUserberforeshare(?user $userberforeshare): self
+    {
+        $this->userberforeshare = $userberforeshare;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Postliked>
+     */
+    public function getPost(): Collection
+    {
+        return $this->post;
+    }
+
+    public function addPost(Postliked $post): self
+    {
+        if (!$this->post->contains($post)) {
+            $this->post[] = $post;
+            $post->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePost(Postliked $post): self
+    {
+        if ($this->post->removeElement($post)) {
+            // set the owning side to null (unless already changed)
+            if ($post->getPost() === $this) {
+                $post->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getIDpost(): Collection
+    {
+        return $this->IDpost;
+    }
+
+    public function addIDpost(Comment $iDpost): self
+    {
+        if (!$this->IDpost->contains($iDpost)) {
+            $this->IDpost[] = $iDpost;
+            $iDpost->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIDpost(Comment $iDpost): self
+    {
+        if ($this->IDpost->removeElement($iDpost)) {
+            // set the owning side to null (unless already changed)
+            if ($iDpost->getPost() === $this) {
+                $iDpost->setPost(null);
+            }
+        }
 
         return $this;
     }

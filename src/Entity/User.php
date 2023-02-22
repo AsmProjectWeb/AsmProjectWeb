@@ -77,9 +77,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $UserPost;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Groupmembers::class, mappedBy="user")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Groups::class, mappedBy="createtor")
+     */
+    private $Creator;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="userberforeshare")
+     */
+    private $userbeforeshare;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Postliked::class, mappedBy="user")
+     */
+    private $postuser;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="user")
+     */
+    private $IDuser;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     */
+    private $UserComment;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Mess::class, mappedBy="user")
+     */
+    private $IdUser;
+
     public function __construct()
     {
         $this->UserPost = new ArrayCollection();
+        $this->user = new ArrayCollection();
+        $this->Creator = new ArrayCollection();
+        $this->userbeforeshare = new ArrayCollection();
+        $this->postuser = new ArrayCollection();
+        $this->IDuser = new ArrayCollection();
+        $this->UserComment = new ArrayCollection();
+        $this->IdUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,6 +316,186 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($userPost->getPostUserID() === $this) {
                 $userPost->setPostUserID(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Groupmembers>
+     */
+    public function getUser(): Collection
+    {
+        return $this->user;
+    }
+
+    public function addUser(Groupmembers $user): self
+    {
+        if (!$this->user->contains($user)) {
+            $this->user[] = $user;
+            $user->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(Groupmembers $user): self
+    {
+        if ($this->user->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getUser() === $this) {
+                $user->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Groups>
+     */
+    public function getCreator(): Collection
+    {
+        return $this->Creator;
+    }
+
+    public function addCreator(Groups $creator): self
+    {
+        if (!$this->Creator->contains($creator)) {
+            $this->Creator[] = $creator;
+            $creator->setCreatetor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCreator(Groups $creator): self
+    {
+        if ($this->Creator->removeElement($creator)) {
+            // set the owning side to null (unless already changed)
+            if ($creator->getCreatetor() === $this) {
+                $creator->setCreatetor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getUserbeforeshare(): Collection
+    {
+        return $this->userbeforeshare;
+    }
+
+    public function addUserbeforeshare(Post $userbeforeshare): self
+    {
+        if (!$this->userbeforeshare->contains($userbeforeshare)) {
+            $this->userbeforeshare[] = $userbeforeshare;
+            $userbeforeshare->setUserberforeshare($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserbeforeshare(Post $userbeforeshare): self
+    {
+        if ($this->userbeforeshare->removeElement($userbeforeshare)) {
+            // set the owning side to null (unless already changed)
+            if ($userbeforeshare->getUserberforeshare() === $this) {
+                $userbeforeshare->setUserberforeshare(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Postliked>
+     */
+    public function getPostuser(): Collection
+    {
+        return $this->postuser;
+    }
+
+    public function addPostuser(Postliked $postuser): self
+    {
+        if (!$this->postuser->contains($postuser)) {
+            $this->postuser[] = $postuser;
+            $postuser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostuser(Postliked $postuser): self
+    {
+        if ($this->postuser->removeElement($postuser)) {
+            // set the owning side to null (unless already changed)
+            if ($postuser->getUser() === $this) {
+                $postuser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Post>
+     */
+    public function getIDuser(): Collection
+    {
+        return $this->IDuser;
+    }
+
+    public function addIDuser(Post $iDuser): self
+    {
+        if (!$this->IDuser->contains($iDuser)) {
+            $this->IDuser[] = $iDuser;
+            $iDuser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIDuser(Post $iDuser): self
+    {
+        if ($this->IDuser->removeElement($iDuser)) {
+            // set the owning side to null (unless already changed)
+            if ($iDuser->getUser() === $this) {
+                $iDuser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getUserComment(): Collection
+    {
+        return $this->UserComment;
+    }
+
+    public function addUserComment(Comment $userComment): self
+    {
+        if (!$this->UserComment->contains($userComment)) {
+            $this->UserComment[] = $userComment;
+            $userComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserComment(Comment $userComment): self
+    {
+        if ($this->UserComment->removeElement($userComment)) {
+            // set the owning side to null (unless already changed)
+            if ($userComment->getUser() === $this) {
+                $userComment->setUser(null);
             }
         }
 
