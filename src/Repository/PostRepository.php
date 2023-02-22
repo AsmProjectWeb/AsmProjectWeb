@@ -38,6 +38,14 @@ class PostRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function findPostByContent($value,$number): array{
+        $db = $this->createQueryBuilder('p');
+            return $db->where($db->expr()->like('p.content',':val'))
+        ->setParameter('val', '%'.$value.'%')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
 
 //    /**
 //     * @return Post[] Returns an array of Post objects

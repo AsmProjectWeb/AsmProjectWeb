@@ -48,6 +48,6 @@ class SecurityController extends AbstractController
      */
     public function FunctionName(): Response
     {
-        return $this->render('Group-Profile.html.twig', []);
+        return $this->render('groupProfile.html.twig', []);
     }
 }
