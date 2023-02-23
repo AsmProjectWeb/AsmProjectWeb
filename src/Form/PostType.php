@@ -22,7 +22,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('PostUserID',EntityType::class,['class' => User::class,'choice_label' => 'username'])
-            ->add('userbeforeshare',EntityType::class,['class' => User::class,['class'=>'hideen']])
+            ->add('userbeforeshare',HiddenType::class,['mapped'=>false,'required' => false])
             ->add('content', TextareaType::class, [
                 'label' => 'Write something',
                 'attr' => [

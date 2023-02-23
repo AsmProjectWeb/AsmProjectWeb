@@ -136,7 +136,7 @@ class Post
         return $this->userberforeshare;
     }
 
-    public function setUserberforeshare(?user $userberforeshare): self
+    public function setUserberforeshare(?user $userberforeshare=null): self
     {
         $this->userberforeshare = $userberforeshare;
 
