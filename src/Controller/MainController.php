@@ -146,7 +146,7 @@ class MainController extends AbstractController
         return $this->render('header.html.twig', []);
     }
     /**
-     * @Route("/profile", name="profile", methods={"POST")
+     * @Route("/profile", name="profile", methods={"POST"})
      */
     public function profile(Request $repo): Response
     {

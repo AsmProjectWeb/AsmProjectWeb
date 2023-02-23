@@ -118,11 +118,13 @@
                     </form>
                 </a>
             </div>
+            {% for p in posts %}
+            {% set user = app.entityManager.find('App\\Entity\\User', post.post_user_id) %}
             <div class="box">
                 <div class="box-header">
                     <div class="box-avata">
                         <div class="avata">
-                            <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
+                            <img src="{{asset(images/user.avatar)}}"
                                 alt="">
                             <div class="sub-avata"></div>
                         </div>
@@ -130,11 +132,11 @@
                     <div class="box-title">
                         <div class="u-tus">
                             <a href="">
-                                <h5>Hello World</h5>
+                                <h5>{{ user.username }}</h5>
                             </a>
                         </div>
                         <div class="u-title">
-                            <a href=""><label for="">123</label></a>
+                            <a href=""><label for="">{{p.date}}</label></a>
                         </div>
                     </div>
                     <div class="box-view">
@@ -151,11 +153,7 @@
                     </div>
                 </div>
                 <div class="box-content">
-                    <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                        stature,
-                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                        scaled
-                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
+                    <p>{{p.content}}</p>
                     <img src="{{ asset('images/koky-logo.png') }}" alt="">
                 </div>
                 <div class="box-footer">
@@ -197,6 +195,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
         <div class="right d-none d-lg-block">
             <h5>&#160 abc</h5>
