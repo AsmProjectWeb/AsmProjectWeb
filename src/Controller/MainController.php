@@ -119,7 +119,7 @@ class MainController extends AbstractController
         $posts = $post->findPostsForUser($user);
         
         return $this->render('homepage.html.twig', [
-           'posts' => $posts,
+            'posts' => $posts,
         ]);
     }
 
