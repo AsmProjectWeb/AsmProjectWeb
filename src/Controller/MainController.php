@@ -87,32 +87,27 @@ class MainController extends AbstractController
      */
     public function page(Request $req, SluggerInterface $slugger, PostRepository $post): Response
     {
-        if($req->getMethod()=='POST')
+        $p = new Post();
+        $form = $this -> createForm(PostType::class, $p);
+        
+        if($req->request->get('button-post'))
         {
-            if($req->request->get('button-post'))
-            {
-                $p = new Post();
-                $form = $this -> createForm(PostType::class, $p);
-        
-                $form->handleRequest($req);
-                if($form->isSubmitted() && $form->isValid()){
-        
-                    // return $this->json($p);
-        
-                    if($p->getDate()===null){
-                        $p->setDate(new \DateTime());
-                    }
-                    $imgFile = $form->get('image')->getData();
-                    if ($imgFile) {
-                        $newFilename = $this->uploadImage($imgFile,$slugger);
-                        $p->setImage($newFilename);
-                    }
-                    $this->repo->add($p,true);
-                    return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+    
+            $form->handleRequest($req);
+            if($form->isSubmitted() && $form->isValid()){
+    
+                // return $this->json($p);
+    
+                if($p->getDate()===null){
+                    $p->setDate(new \DateTime());
                 }
-                return $this->render("homepage.html.twig",[
-                    'form' => $form->createView()
-                ]);
+                $imgFile = $form->get('image')->getData();
+                if ($imgFile) {
+                    $newFilename = $this->uploadImage($imgFile,$slugger);
+                    $p->setImage($newFilename);
+                }
+                $this->repo->add($p,true);
+                return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
             }
         }
         $user = $this->getUser();
@@ -120,6 +115,7 @@ class MainController extends AbstractController
         
         return $this->render('homepage.html.twig', [
             'posts' => $posts,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -146,7 +142,7 @@ class MainController extends AbstractController
         return $this->render('header.html.twig', []);
     }
     /**
-     * @Route("/profile", name="profile", methods={"POST")
+     * @Route("/profile", name="profile", methods={"POST"})
      */
     public function profile(Request $repo): Response
     {
