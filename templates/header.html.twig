@@ -59,16 +59,20 @@
                 {% endif %}
                 <div class="dropdown">
                 <button class="btn btn-secondary btn-sm dropdown-toggle rounded" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img class="rounded-circle img-icon" src="{{asset("images/defaultProfile.jpg")}}" alt="menu icon">
+                    {% if app.user.avatar is not empty %}
+                        <img class="img rounded-circle img-icon" src="{{asset('uploads/'~app.user.avatar)}}" alt="">
+                    {% else %}
+                        <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                    {% endif %}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                 {% if app.user != null %}
                     <li>
                         <form action="{{path('profile')}}" method="POST">
                             <input type="hidden" value="{{app.user.id}}">
-                            <button type="submit">Profile</button>
+                            <button class="dropdown-item" type="submit">Profile</button>
                         </form>
-                    </li>s
+                    </li>
                 {% endif %}
                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a></li>
                 </ul>
