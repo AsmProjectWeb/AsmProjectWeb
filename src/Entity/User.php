@@ -454,7 +454,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->IDuser->contains($iDuser)) {
             $this->IDuser[] = $iDuser;
-            $iDuser->setUser($this);
+            $iDuser->setPostUserID($this);
         }
 
         return $this;
@@ -464,8 +464,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->IDuser->removeElement($iDuser)) {
             // set the owning side to null (unless already changed)
-            if ($iDuser->getUser() === $this) {
-                $iDuser->setUser(null);
+            if ($iDuser->getPostUserID() === $this) {
+                $iDuser->setPostUserID(null);
             }
         }
 
