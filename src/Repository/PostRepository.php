@@ -53,22 +53,27 @@ class PostRepository extends ServiceEntityRepository
     //      ;
     //     }
 
-    // public function findPostsForUser(User $user)
-    // {
-    //     $now = new \DateTime();
-    //     $twoWeeksAgo = $now->modify('-2 weeks');
+    public function findPostsForUser(User $user)
+    {
+        $now = new \DateTime();
+        $twoWeeksAgo = $now->modify('-2 weeks');
         
-    //     return $this->createQueryBuilder('p')
-    //         ->innerJoin('p.Post_UserID', 'u')
-    //         ->innerJoin('')
-    //         ->where('p.createdAt >= :twoWeeksAgo')
-    //         ->andWhere('(p.Post_UserID = :user) OR (fu = :user) OR (gu = :user)')
-    //         ->setParameter('twoWeeksAgo', $twoWeeksAgo)
-    //         ->setParameter('user', $user)
-    //         ->orderBy('p.createdAt', 'DESC')
-    //         ->getQuery()
-    //         ->getResult();
-    // }
+        return $this->createQueryBuilder('p')
+            ->innerJoin('p.Post_UserID', 'u')
+            ->innerJoin('p.IdPost', 'pg')
+            ->innerJoin('pg.GroupID', 'g')
+            ->innerJoin('u.FriendUser', 'f')
+            ->innerJoin('u.user', 'gm')
+            ->where('(p.date >= :twoWeeksAgo)')
+            ->andWhere('(p.Post_UserID = :user) OR (gm.id = :user_id) OR (f.FriendUserId = :user_id)')
+            ->setParameter('twoWeeksAgo', $twoWeeksAgo)
+            ->setParameter('user', $user)
+            ->setParameter('user_id', $user->getId())
+            ->orderBy('p.date', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    
     
 
 

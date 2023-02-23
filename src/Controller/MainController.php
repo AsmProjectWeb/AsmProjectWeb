@@ -118,7 +118,7 @@ class MainController extends AbstractController
         $user = $this->getUser();
         $posts = $post->findPostsForUser($user);
         
-        return $this->render('post/index.html.twig', [
+        return $this->render('homepage.html.twig', [
             'posts' => $posts,
         ]);
     }
@@ -145,14 +145,14 @@ class MainController extends AbstractController
     {
         return $this->render('header.html.twig', []);
     }
-    // /**
-    //  * @Route("/profile", name="profile", methods={"POST")
-    //  */
-    // public function profile(Request $repo): Response
-    // {
-    //     $id = $repo->request->get('id');
-    //     return $this->render('profile.html.twig', ['id'=>$id]);
-    // }
+    /**
+     * @Route("/profile", name="profile", methods={"POST")
+     */
+    public function profile(Request $repo): Response
+    {
+        $id = $repo->request->get('id');
+        return $this->render('profile.html.twig', ['id'=>$id]);
+    }
     /**
      * @Route("/group", name="profile_group")
      */
