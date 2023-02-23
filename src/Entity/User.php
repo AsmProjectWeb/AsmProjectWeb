@@ -112,6 +112,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $IdUser;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Friend::class, mappedBy="userId")
+     */
+    private $User;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Friend::class, mappedBy="FriendUserId")
+     */
+    private $FriendUser;
+
     public function __construct()
     {
         $this->UserPost = new ArrayCollection();
@@ -122,6 +132,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->IDuser = new ArrayCollection();
         $this->UserComment = new ArrayCollection();
         $this->IdUser = new ArrayCollection();
+        $this->User = new ArrayCollection();
+        $this->FriendUser = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -496,6 +508,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($userComment->getUser() === $this) {
                 $userComment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Friend>
+     */
+    public function getFriendUser(): Collection
+    {
+        return $this->FriendUser;
+    }
+
+    public function addFriendUser(Friend $friendUser): self
+    {
+        if (!$this->FriendUser->contains($friendUser)) {
+            $this->FriendUser[] = $friendUser;
+            $friendUser->setFriendUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFriendUser(Friend $friendUser): self
+    {
+        if ($this->FriendUser->removeElement($friendUser)) {
+            // set the owning side to null (unless already changed)
+            if ($friendUser->getFriendUserId() === $this) {
+                $friendUser->setFriendUserId(null);
             }
         }
 

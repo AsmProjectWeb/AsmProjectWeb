@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 23, 2023 lúc 03:15 AM
+-- Thời gian đã tạo: Th2 23, 2023 lúc 03:39 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -98,7 +98,20 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230222083743', '2023-02-22 09:37:46', 93),
 ('DoctrineMigrations\\Version20230222084009', '2023-02-22 09:40:13', 99),
 ('DoctrineMigrations\\Version20230222084243', '2023-02-22 09:42:46', 38),
-('DoctrineMigrations\\Version20230223020855', '2023-02-23 03:13:25', 238);
+('DoctrineMigrations\\Version20230223020855', '2023-02-23 03:13:25', 238),
+('DoctrineMigrations\\Version20230223023909', '2023-02-23 03:39:15', 142);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `friend`
+--
+
+CREATE TABLE `friend` (
+  `id` int(11) NOT NULL,
+  `user_id_id` int(11) DEFAULT NULL,
+  `friend_user_id_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -274,6 +287,14 @@ ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
+-- Chỉ mục cho bảng `friend`
+--
+ALTER TABLE `friend`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_55EEAC619D86650F` (`user_id_id`),
+  ADD KEY `IDX_55EEAC6133C1910B` (`friend_user_id_id`);
+
+--
 -- Chỉ mục cho bảng `groups`
 --
 ALTER TABLE `groups`
@@ -361,6 +382,12 @@ ALTER TABLE `conversation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `friend`
+--
+ALTER TABLE `friend`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
@@ -430,6 +457,13 @@ ALTER TABLE `comment`
 --
 ALTER TABLE `conversation`
   ADD CONSTRAINT `FK_8A8E26E9BA0E79C3` FOREIGN KEY (`last_message_id`) REFERENCES `mess` (`id`);
+
+--
+-- Các ràng buộc cho bảng `friend`
+--
+ALTER TABLE `friend`
+  ADD CONSTRAINT `FK_55EEAC6133C1910B` FOREIGN KEY (`friend_user_id_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_55EEAC619D86650F` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`id`);
 
 --
 -- Các ràng buộc cho bảng `groups`
