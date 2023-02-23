@@ -80,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=GroupMembers::class, mappedBy="user")
      */
-    private $user;
+    private $friend;
 
     /**
      * @ORM\OneToMany(targetEntity=Groups::class, mappedBy="createtor")

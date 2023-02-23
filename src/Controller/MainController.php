@@ -9,11 +9,14 @@ use App\Form\PostType;
 use App\Form\RegisterType;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class MainController extends AbstractController
@@ -76,16 +79,18 @@ class MainController extends AbstractController
     //     return $this->render('homepage.html.twig', []);
     // }
 
+    private $security;
     private PostRepository $repo;
-    public function __construct(PostRepository $repo)
+    public function __construct(PostRepository $repo, Security $security)
     {
       $this->repo = $repo;
+      $this->security = $security;
     }
 
     /**
      * @Route("/page", name="page")
      */
-    public function page(Request $req, SluggerInterface $slugger, PostRepository $post): Response
+    public function page(Request $req, SluggerInterface $slugger, UserRepository $userRepository, PostRepository $post): Response
     {
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
@@ -110,13 +115,14 @@ class MainController extends AbstractController
                 return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
             }
         }
-        $user = $this->getUser();
-        $posts = $post->findPostsForUser($user);
-        
+        $user=$this->security->getUser();
+        $userid = $user->getId();
+        $posts = $post->findPostsForUser($userid);
         return $this->render('homepage.html.twig', [
             'posts' => $posts,
             'form' => $form->createView(),
         ]);
+        // return $this->json($avatar);
     }
 
     public function uploadImage($imgFile, SluggerInterface $slugger): ?string{

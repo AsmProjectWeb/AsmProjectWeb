@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use App\Entity\User;
+use App\Entity\Friend;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -40,42 +41,39 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-    //  /**
-    // * @return Post[] Returns an array of Post objects
-    // */  
-    // public function findPostByContent($value,$number): array{
-    //      $db = $this->createQueryBuilder('p');
-    //      return $db->where('p.content like :val')
-    //          ->setParameter('val', '%'.$value.'%')
-    //          ->setMaxResults($number)
-    //          ->getQuery()
-    //          ->getResult()
-    //      ;
-    //     }
-
-    public function findPostsForUser(User $user)
+    /**
+     * @return Post[] Returns an array of Post objects
+     */
+    public function findPostByContent($value, $number): array
     {
-        $now = new \DateTime();
-        $twoWeeksAgo = $now->modify('-2 weeks');
-        
-        return $this->createQueryBuilder('p')
-            ->innerJoin('p.Post_UserID', 'u')
-            ->innerJoin('p.IdPost', 'pg')
-            ->innerJoin('pg.GroupID', 'g')
-            ->innerJoin('u.FriendUser', 'f')
-            ->innerJoin('u.user', 'gm')
-            ->where('(p.date >= :twoWeeksAgo)')
-            ->andWhere('(p.Post_UserID = :user) OR (gm.id = :user_id) OR (f.FriendUserId = :user_id)')
-            ->setParameter('twoWeeksAgo', $twoWeeksAgo)
-            ->setParameter('user', $user)
-            ->setParameter('user_id', $user->getId())
-            ->orderBy('p.date', 'DESC')
+        $db = $this->createQueryBuilder('p');
+        return $db->where('p.content like :val')
+            ->setParameter('val', '%' . $value . '%')
+            ->setMaxResults($number)
             ->getQuery()
             ->getResult();
     }
-    
-    
 
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function findPostsForUser($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '       
+        SELECT post.*, u.*, f.*, gm.*, g.*, gp.* FROM post 
+LEFT JOIN user u ON u.id = post.post_user_id_id 
+LEFT JOIN friend f on f.user_id_id = u.id 
+LEFT JOIN group_members gm on gm.user_id = u.id 
+LEFT JOIN groups g ON gm.groupid_id = g.id 
+LEFT JOIN group_post gp on gp.group_id_id=g.id 
+WHERE post.post_user_id_id = u.id OR f.friend_user_id_id = (SELECT friend.friend_user_id_id FROM friend WHERE friend.user_id_id = u.id) and u.id= :id OR gp.group_id_id = (SELECT groups.id FROM groups WHERE gm.user_id=u.id and g.id = gm.groupid_id)
+';
+
+        $re = $conn->executeQuery($sql, ['id' => $id]);
+        return $re->fetchAllAssociative();
+    }
 
     //    /**
     //     * @return Post[] Returns an array of Post objects
