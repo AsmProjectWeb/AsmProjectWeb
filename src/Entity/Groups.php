@@ -40,7 +40,7 @@ class Groups
     private $createtor;
 
     /**
-     * @ORM\OneToMany(targetEntity=Groupmembers::class, mappedBy="groupid")
+     * @ORM\OneToMany(targetEntity=GroupMembers::class, mappedBy="groupid")
      */
     private $IDgroup;
 
@@ -108,14 +108,14 @@ class Groups
     }
 
     /**
-     * @return Collection<int, Groupmembers>
+     * @return Collection<int, GroupMembers>
      */
     public function getIDgroup(): Collection
     {
         return $this->IDgroup;
     }
 
-    public function addIDgroup(Groupmembers $iDgroup): self
+    public function addIDgroup(GroupMembers $iDgroup): self
     {
         if (!$this->IDgroup->contains($iDgroup)) {
             $this->IDgroup[] = $iDgroup;

@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 22, 2023 at 02:35 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th2 22, 2023 lúc 09:50 AM
+-- Phiên bản máy phục vụ: 10.4.27-MariaDB
+-- Phiên bản PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,27 +18,38 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `koky`
+-- Cơ sở dữ liệu: `koky`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment`
+-- Cấu trúc bảng cho bảng `comment`
 --
 
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `post_id` int(11) DEFAULT NULL,
   `date` datetime NOT NULL,
-  `content` longtext NOT NULL
+  `content` longtext NOT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `doctrine_migration_versions`
+-- Cấu trúc bảng cho bảng `conversation`
+--
+
+CREATE TABLE `conversation` (
+  `id` int(11) NOT NULL,
+  `last_message_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `doctrine_migration_versions`
 --
 
 CREATE TABLE `doctrine_migration_versions` (
@@ -48,7 +59,7 @@ CREATE TABLE `doctrine_migration_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `doctrine_migration_versions`
+-- Đang đổ dữ liệu cho bảng `doctrine_migration_versions`
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
@@ -63,24 +74,35 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230217175816', '2023-02-17 18:58:32', 652),
 ('DoctrineMigrations\\Version20230218213635', '2023-02-18 22:36:43', 615),
 ('DoctrineMigrations\\Version20230219203956', '2023-02-19 21:40:03', 63),
-('DoctrineMigrations\\Version20230220092023', '2023-02-20 10:20:34', 652);
+('DoctrineMigrations\\Version20230220092023', '2023-02-20 10:20:34', 652),
+('DoctrineMigrations\\Version20230222020333', '2023-02-22 03:03:42', 43),
+('DoctrineMigrations\\Version20230222020618', '2023-02-22 03:06:24', 39),
+('DoctrineMigrations\\Version20230222020649', '2023-02-22 03:06:53', 41),
+('DoctrineMigrations\\Version20230222020816', '2023-02-22 03:08:21', 43),
+('DoctrineMigrations\\Version20230222021108', '2023-02-22 03:11:11', 42),
+('DoctrineMigrations\\Version20230222021848', '2023-02-22 03:18:54', 147),
+('DoctrineMigrations\\Version20230222022256', '2023-02-22 03:23:00', 100),
+('DoctrineMigrations\\Version20230222022645', '2023-02-22 03:26:48', 88),
+('DoctrineMigrations\\Version20230222023146', '2023-02-22 03:31:49', 102),
+('DoctrineMigrations\\Version20230222023509', '2023-02-22 03:35:13', 155),
+('DoctrineMigrations\\Version20230222023926', '2023-02-22 03:39:29', 112),
+('DoctrineMigrations\\Version20230222024049', '2023-02-22 03:40:52', 100),
+('DoctrineMigrations\\Version20230222024303', '2023-02-22 03:43:07', 53),
+('DoctrineMigrations\\Version20230222024531', '2023-02-22 03:45:34', 94),
+('DoctrineMigrations\\Version20230222025209', '2023-02-22 03:52:13', 39),
+('DoctrineMigrations\\Version20230222030155', '2023-02-22 04:02:04', 43),
+('DoctrineMigrations\\Version20230222030428', '2023-02-22 04:04:32', 42),
+('DoctrineMigrations\\Version20230222030621', '2023-02-22 04:06:26', 44),
+('DoctrineMigrations\\Version20230222082253', '2023-02-22 09:23:01', 836),
+('DoctrineMigrations\\Version20230222083347', '2023-02-22 09:33:55', 102),
+('DoctrineMigrations\\Version20230222083743', '2023-02-22 09:37:46', 93),
+('DoctrineMigrations\\Version20230222084009', '2023-02-22 09:40:13', 99),
+('DoctrineMigrations\\Version20230222084243', '2023-02-22 09:42:46', 38);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `friends`
---
-
-CREATE TABLE `friends` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `friends_user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `groups`
+-- Cấu trúc bảng cho bảng `groups`
 --
 
 CREATE TABLE `groups` (
@@ -88,39 +110,41 @@ CREATE TABLE `groups` (
   `group_name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `created_at` date NOT NULL,
-  `creator_id` int(11) NOT NULL
+  `createtor_id` int(11) DEFAULT NULL,
+  `type_group` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `group_members`
+-- Cấu trúc bảng cho bảng `group_members`
 --
 
 CREATE TABLE `group_members` (
   `id` int(11) NOT NULL,
-  `group_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `rolemember` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `groupid_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Cấu trúc bảng cho bảng `mess`
 --
 
-CREATE TABLE `message` (
+CREATE TABLE `mess` (
   `id` int(11) NOT NULL,
-  `from_user_id` int(11) NOT NULL,
-  `to_user_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
-  `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)'
+  `create_at` datetime NOT NULL,
+  `conversation_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messenger_messages`
+-- Cấu trúc bảng cho bảng `messenger_messages`
 --
 
 CREATE TABLE `messenger_messages` (
@@ -136,12 +160,25 @@ CREATE TABLE `messenger_messages` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post`
+-- Cấu trúc bảng cho bảng `participant`
+--
+
+CREATE TABLE `participant` (
+  `id` int(11) NOT NULL,
+  `message_read_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `iduser_id` int(11) DEFAULT NULL,
+  `conversation_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `post`
 --
 
 CREATE TABLE `post` (
   `id` int(11) NOT NULL,
-  `subowner` int(11) DEFAULT NULL,
+  `userberforeshare_id` int(11) DEFAULT NULL,
   `content` longtext NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `date` datetime NOT NULL,
@@ -150,29 +187,29 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `post`
+-- Đang đổ dữ liệu cho bảng `post`
 --
 
-INSERT INTO `post` (`id`, `subowner`, `content`, `image`, `date`, `status`, `post_user_id_id`) VALUES
+INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `status`, `post_user_id_id`) VALUES
 (2, NULL, 'Hello', NULL, '2023-02-20 11:06:50', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_liked`
+-- Cấu trúc bảng cho bảng `post_liked`
 --
 
 CREATE TABLE `post_liked` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `post_id` int(11) DEFAULT NULL,
   `isliked` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Cấu trúc bảng cho bảng `user`
 --
 
 CREATE TABLE `user` (
@@ -190,54 +227,62 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `user`
+-- Đang đổ dữ liệu cho bảng `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `phone`, `username`, `birthday`, `hometown`, `gender`, `job`, `status`) VALUES
 (1, 'k@gmail.com', '[\"R0LE_USER\"]', '$2y$13$vZVcz2le9Z6UYBiKBH3rZe1I8jFBVKwzxb909BejWBJgUhGs1h8gm', '987654321', 'Khoa', '2003-12-06', 'Updating', 1, 'Updating', 'Unknown');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `comment`
+-- Chỉ mục cho bảng `comment`
 --
 ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_9474526C4B89032C` (`post_id`),
+  ADD KEY `IDX_9474526CA76ED395` (`user_id`);
 
 --
--- Indexes for table `doctrine_migration_versions`
+-- Chỉ mục cho bảng `conversation`
+--
+ALTER TABLE `conversation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_8A8E26E9BA0E79C3` (`last_message_id`);
+
+--
+-- Chỉ mục cho bảng `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
--- Indexes for table `friends`
---
-ALTER TABLE `friends`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `groups`
+-- Chỉ mục cho bảng `groups`
 --
 ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_F06D3970DCF2EE20` (`createtor_id`);
 
 --
--- Indexes for table `group_members`
+-- Chỉ mục cho bảng `group_members`
 --
 ALTER TABLE `group_members`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_C3A086F3A76ED395` (`user_id`),
+  ADD KEY `IDX_C3A086F3B3BB53C` (`groupid_id`);
 
 --
--- Indexes for table `message`
+-- Chỉ mục cho bảng `mess`
 --
-ALTER TABLE `message`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `mess`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_6B0AF3BA9AC0396` (`conversation_id`),
+  ADD KEY `IDX_6B0AF3BAA76ED395` (`user_id`);
 
 --
--- Indexes for table `messenger_messages`
+-- Chỉ mục cho bảng `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
   ADD PRIMARY KEY (`id`),
@@ -246,92 +291,157 @@ ALTER TABLE `messenger_messages`
   ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
--- Indexes for table `post`
+-- Chỉ mục cho bảng `participant`
+--
+ALTER TABLE `participant`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_D79F6B11786A81FB` (`iduser_id`),
+  ADD KEY `IDX_D79F6B119AC0396` (`conversation_id`);
+
+--
+-- Chỉ mục cho bảng `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_5A8A6C8DBEFE6CCE` (`post_user_id_id`);
+  ADD KEY `IDX_5A8A6C8DBEFE6CCE` (`post_user_id_id`),
+  ADD KEY `IDX_5A8A6C8DF78E8722` (`userberforeshare_id`);
 
 --
--- Indexes for table `post_liked`
+-- Chỉ mục cho bảng `post_liked`
 --
 ALTER TABLE `post_liked`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_5D024755A76ED395` (`user_id`),
+  ADD KEY `IDX_5D0247554B89032C` (`post_id`);
 
 --
--- Indexes for table `user`
+-- Chỉ mục cho bảng `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `comment`
+-- AUTO_INCREMENT cho bảng `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `friends`
+-- AUTO_INCREMENT cho bảng `conversation`
 --
-ALTER TABLE `friends`
+ALTER TABLE `conversation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `groups`
+-- AUTO_INCREMENT cho bảng `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `group_members`
+-- AUTO_INCREMENT cho bảng `group_members`
 --
 ALTER TABLE `group_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `message`
+-- AUTO_INCREMENT cho bảng `mess`
 --
-ALTER TABLE `message`
+ALTER TABLE `mess`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `messenger_messages`
+-- AUTO_INCREMENT cho bảng `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `post`
+-- AUTO_INCREMENT cho bảng `participant`
+--
+ALTER TABLE `participant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `post`
 --
 ALTER TABLE `post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `post_liked`
+-- AUTO_INCREMENT cho bảng `post_liked`
 --
 ALTER TABLE `post_liked`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `post`
+-- Các ràng buộc cho bảng `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `FK_9474526C4B89032C` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
+  ADD CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `conversation`
+--
+ALTER TABLE `conversation`
+  ADD CONSTRAINT `FK_8A8E26E9BA0E79C3` FOREIGN KEY (`last_message_id`) REFERENCES `mess` (`id`);
+
+--
+-- Các ràng buộc cho bảng `groups`
+--
+ALTER TABLE `groups`
+  ADD CONSTRAINT `FK_F06D3970DCF2EE20` FOREIGN KEY (`createtor_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `group_members`
+--
+ALTER TABLE `group_members`
+  ADD CONSTRAINT `FK_C3A086F3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_C3A086F3B3BB53C` FOREIGN KEY (`groupid_id`) REFERENCES `groups` (`id`);
+
+--
+-- Các ràng buộc cho bảng `mess`
+--
+ALTER TABLE `mess`
+  ADD CONSTRAINT `FK_6B0AF3BA9AC0396` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`),
+  ADD CONSTRAINT `FK_6B0AF3BAA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `participant`
+--
+ALTER TABLE `participant`
+  ADD CONSTRAINT `FK_D79F6B11786A81FB` FOREIGN KEY (`iduser_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_D79F6B119AC0396` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`);
+
+--
+-- Các ràng buộc cho bảng `post`
 --
 ALTER TABLE `post`
-  ADD CONSTRAINT `FK_5A8A6C8DBEFE6CCE` FOREIGN KEY (`post_user_id_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `FK_5A8A6C8DBEFE6CCE` FOREIGN KEY (`post_user_id_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_5A8A6C8DF78E8722` FOREIGN KEY (`userberforeshare_id`) REFERENCES `user` (`id`);
+
+--
+-- Các ràng buộc cho bảng `post_liked`
+--
+ALTER TABLE `post_liked`
+  ADD CONSTRAINT `FK_5D0247554B89032C` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
+  ADD CONSTRAINT `FK_5D024755A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

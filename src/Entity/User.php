@@ -78,7 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $UserPost;
 
     /**
-     * @ORM\OneToMany(targetEntity=Groupmembers::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=GroupMembers::class, mappedBy="user")
      */
     private $user;
 
@@ -93,7 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $userbeforeshare;
 
     /**
-     * @ORM\OneToMany(targetEntity=Postliked::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=PostLiked::class, mappedBy="user")
      */
     private $postuser;
 
@@ -323,14 +323,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Groupmembers>
+     * @return Collection<int, GroupMembers>
      */
     public function getUser(): Collection
     {
         return $this->user;
     }
 
-    public function addUser(Groupmembers $user): self
+    public function addUser(GroupMembers $user): self
     {
         if (!$this->user->contains($user)) {
             $this->user[] = $user;
@@ -340,7 +340,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeUser(Groupmembers $user): self
+    public function removeUser(GroupMembers $user): self
     {
         if ($this->user->removeElement($user)) {
             // set the owning side to null (unless already changed)
@@ -413,14 +413,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Postliked>
+     * @return Collection<int, PostLiked>
      */
     public function getPostuser(): Collection
     {
         return $this->postuser;
     }
 
-    public function addPostuser(Postliked $postuser): self
+    public function addPostuser(PostLiked $postuser): self
     {
         if (!$this->postuser->contains($postuser)) {
             $this->postuser[] = $postuser;
@@ -430,7 +430,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removePostuser(Postliked $postuser): self
+    public function removePostuser(PostLiked $postuser): self
     {
         if ($this->postuser->removeElement($postuser)) {
             // set the owning side to null (unless already changed)

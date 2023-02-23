@@ -22,7 +22,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('PostUserID',EntityType::class,['class' => User::class,'choice_label' => 'username'])
-            ->add('subowner',HiddenType::class)
+            ->add('userbeforeshare',EntityType::class,['class' => User::class,['class'=>'hideen']])
             ->add('content', TextareaType::class, [
                 'label' => 'Write something',
                 'attr' => [
@@ -46,26 +46,6 @@ class PostType extends AbstractType
                 'data' => 1,
                 'required' => true,
             ])
-
-            // ->add('name')
-            // ->add('price')
-            // ->add('created',DateType::class,[
-            //     'widget' => 'single_text',
-            //     'required'=> false
-            // ])
-            // ->add('quantity')
-            // ->add('file',FileType::class, [
-            //     'label' => 'Product Image',
-            //     'required' => false,
-            //     'mapped' => false]
-            // )
-            // ->add('image',HiddenType::class,[
-            //     'required'=>false
-            // ])
-            // ->add('save',SubmitType::class,[
-            //     'label'=>"Confirm"
-            // ])
-            // ;
         ;
     }
 

@@ -39,6 +39,20 @@ class GroupsRepository extends ServiceEntityRepository
         }
     }
 
+   /**
+    * @return Groups[] Returns an array of Groups objects
+    */
+    public function findGroupByName($value,$number): array
+    {
+     $db = $this->createQueryBuilder('g');
+     return $db->where('g.group_name like :val')
+         ->setParameter('val', '%'.$value.'%')
+         ->setMaxResults($number)
+         ->getQuery()
+         ->getResult()
+     ;
+    }
+
 //    /**
 //     * @return Groups[] Returns an array of Groups objects
 //     */

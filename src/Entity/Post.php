@@ -51,7 +51,7 @@ class Post
     private $userberforeshare;
 
     /**
-     * @ORM\OneToMany(targetEntity=Postliked::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=PostLiked::class, mappedBy="post")
      */
     private $post;
 
@@ -144,14 +144,14 @@ class Post
     }
 
     /**
-     * @return Collection<int, Postliked>
+     * @return Collection<int, PostLiked>
      */
     public function getPost(): Collection
     {
         return $this->post;
     }
 
-    public function addPost(Postliked $post): self
+    public function addPost(PostLiked $post): self
     {
         if (!$this->post->contains($post)) {
             $this->post[] = $post;
@@ -161,7 +161,7 @@ class Post
         return $this;
     }
 
-    public function removePost(Postliked $post): self
+    public function removePost(PostLiked $post): self
     {
         if ($this->post->removeElement($post)) {
             // set the owning side to null (unless already changed)
