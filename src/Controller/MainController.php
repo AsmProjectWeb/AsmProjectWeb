@@ -8,6 +8,7 @@ use App\Form\LoginType;
 use App\Form\PostType;
 use App\Form\RegisterType;
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -133,11 +134,12 @@ class MainController extends AbstractController
         return $this->render('header.html.twig', []);
     }
     /**
-     * @Route("/profile", name="profile")
+     * @Route("/profile", name="profile", methods={"POST"})
      */
-    public function profile(): Response
+    public function profile(Request $repo): Response
     {
-        return $this->render('profile.html.twig', []);
+        $id = $repo->request->get('id');
+        return $this->render('profile.html.twig', ['id'=>$id]);
     }
     /**
      * @Route("/group", name="profile_group")

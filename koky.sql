@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 22, 2023 lúc 09:50 AM
+-- Thời gian đã tạo: Th2 23, 2023 lúc 03:15 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -97,7 +97,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230222083347', '2023-02-22 09:33:55', 102),
 ('DoctrineMigrations\\Version20230222083743', '2023-02-22 09:37:46', 93),
 ('DoctrineMigrations\\Version20230222084009', '2023-02-22 09:40:13', 99),
-('DoctrineMigrations\\Version20230222084243', '2023-02-22 09:42:46', 38);
+('DoctrineMigrations\\Version20230222084243', '2023-02-22 09:42:46', 38),
+('DoctrineMigrations\\Version20230223020855', '2023-02-23 03:13:25', 238);
 
 -- --------------------------------------------------------
 
@@ -125,6 +126,18 @@ CREATE TABLE `group_members` (
   `rolemember` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `groupid_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `group_post`
+--
+
+CREATE TABLE `group_post` (
+  `id` int(11) NOT NULL,
+  `post_id_id` int(11) DEFAULT NULL,
+  `group_id_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -191,7 +204,8 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `status`, `post_user_id_id`) VALUES
-(2, NULL, 'Hello', NULL, '2023-02-20 11:06:50', 1, 1);
+(2, NULL, 'Hello', NULL, '2023-02-20 11:06:50', 1, 1),
+(3, NULL, 'First Post with picture', 'Screenshot-2-63f6bda251600.png', '2023-02-23 02:13:06', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -231,7 +245,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `phone`, `username`, `birthday`, `hometown`, `gender`, `job`, `status`) VALUES
-(1, 'k@gmail.com', '[\"R0LE_USER\"]', '$2y$13$vZVcz2le9Z6UYBiKBH3rZe1I8jFBVKwzxb909BejWBJgUhGs1h8gm', '987654321', 'Khoa', '2003-12-06', 'Updating', 1, 'Updating', 'Unknown');
+(1, 'k@gmail.com', '[\"R0LE_USER\"]', '$2y$13$vZVcz2le9Z6UYBiKBH3rZe1I8jFBVKwzxb909BejWBJgUhGs1h8gm', '987654321', 'Khoa', '2003-12-06', 'Updating', 1, 'Updating', 'Unknown'),
+(2, 'l@gmail.com', '[\"R0LE_USER\"]', '$2y$13$sHY4tprWFx0X3K7yBzKu6.FX0u6YChIsMoUvwi6JJZqhAAClH1XhK', '352145894', 'Nguyen Losky', '2003-11-03', 'Updating', 1, 'Updating', 'Unknown');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -272,6 +287,14 @@ ALTER TABLE `group_members`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_C3A086F3A76ED395` (`user_id`),
   ADD KEY `IDX_C3A086F3B3BB53C` (`groupid_id`);
+
+--
+-- Chỉ mục cho bảng `group_post`
+--
+ALTER TABLE `group_post`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `IDX_73D037FDE85F12B8` (`post_id_id`),
+  ADD KEY `IDX_73D037FD2F68B530` (`group_id_id`);
 
 --
 -- Chỉ mục cho bảng `mess`
@@ -350,6 +373,12 @@ ALTER TABLE `group_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT cho bảng `group_post`
+--
+ALTER TABLE `group_post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT cho bảng `mess`
 --
 ALTER TABLE `mess`
@@ -371,7 +400,7 @@ ALTER TABLE `participant`
 -- AUTO_INCREMENT cho bảng `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `post_liked`
@@ -383,7 +412,7 @@ ALTER TABLE `post_liked`
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -414,6 +443,13 @@ ALTER TABLE `groups`
 ALTER TABLE `group_members`
   ADD CONSTRAINT `FK_C3A086F3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_C3A086F3B3BB53C` FOREIGN KEY (`groupid_id`) REFERENCES `groups` (`id`);
+
+--
+-- Các ràng buộc cho bảng `group_post`
+--
+ALTER TABLE `group_post`
+  ADD CONSTRAINT `FK_73D037FD2F68B530` FOREIGN KEY (`group_id_id`) REFERENCES `groups` (`id`),
+  ADD CONSTRAINT `FK_73D037FDE85F12B8` FOREIGN KEY (`post_id_id`) REFERENCES `post` (`id`);
 
 --
 -- Các ràng buộc cho bảng `mess`

@@ -49,9 +49,15 @@ class Groups
      */
     private $TypeGroup;
 
+    /**
+     * @ORM\OneToMany(targetEntity=GroupPost::class, mappedBy="GroupID")
+     */
+    private $IdGroup;
+
     public function __construct()
     {
         $this->IDgroup = new ArrayCollection();
+        $this->IdGroup = new ArrayCollection();
     }
 
     public function getId(): ?int

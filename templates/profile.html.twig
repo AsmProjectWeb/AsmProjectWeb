@@ -28,8 +28,12 @@
 
         </div>
         <div class="button">
+        {% if app.user.id == id %}
+            <button class="button1">Edit information</button>
+        {% else %}
             <button class="button1">Add Friend</button>
             <button class="button1">Message</button>
+        {% endif %}
         </div>
         <div class="analytic">
             <div class="data">
@@ -398,11 +402,11 @@
     border-radius: 24px;
     color: #fff;
     border: none;
-    font-weight: 400;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 0 8px;
+    padding: 5px 25px;
 }
 .button .button1:hover{
     background-color: #000;
@@ -446,6 +450,7 @@
 .information{
     background-color: #fff;
     border-radius: 6px;
+    box-shadow: 2px 2px 5px #8ABE53;
 }
 .information .infor{
     margin: 4px;

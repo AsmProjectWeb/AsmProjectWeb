@@ -60,10 +60,16 @@ class Post
      */
     private $IDpost;
 
+    /**
+     * @ORM\OneToMany(targetEntity=GroupPost::class, mappedBy="PostId")
+     */
+    private $IdPost;
+
     public function __construct()
     {
         $this->post = new ArrayCollection();
         $this->IDpost = new ArrayCollection();
+        $this->IdPost = new ArrayCollection();
     }
 
     public function getId(): ?int

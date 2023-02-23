@@ -63,7 +63,12 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                 {% if app.user != null %}
-                    <li><a class="dropdown-item" href="{{path('profile')}}">Profile</a></li>
+                    <li>
+                        <form action="{{path('profile')}}" method="POST">
+                            <input type="hidden" value="{{app.user.id}}">
+                            <button type="submit">Profile</button>
+                        </form>
+                    </li>
                 {% endif %}
                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Log Out</a></li>
                 </ul>
