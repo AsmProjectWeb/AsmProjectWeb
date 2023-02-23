@@ -113,7 +113,7 @@ class MainController extends AbstractController
         $user = $this->getUser();
         $posts = $post->findPostsForUser($user);
         
-        return $this->render('post/index.html.twig', [
+        return $this->render('homepage.html.twig', [
             'posts' => $posts,
             'form' => $form->createView(),
         ]);
