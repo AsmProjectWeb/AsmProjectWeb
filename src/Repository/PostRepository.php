@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,41 +40,60 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-     /**
-    * @return Post[] Returns an array of Post objects
-    */  
-    public function findPostByContent($value,$number): array{
-         $db = $this->createQueryBuilder('p');
-         return $db->where('p.content like :val')
-             ->setParameter('val', '%'.$value.'%')
-             ->setMaxResults($number)
-             ->getQuery()
-             ->getResult()
-         ;
-        }
+    //  /**
+    // * @return Post[] Returns an array of Post objects
+    // */  
+    // public function findPostByContent($value,$number): array{
+    //      $db = $this->createQueryBuilder('p');
+    //      return $db->where('p.content like :val')
+    //          ->setParameter('val', '%'.$value.'%')
+    //          ->setMaxResults($number)
+    //          ->getQuery()
+    //          ->getResult()
+    //      ;
+    //     }
 
-//    /**
-//     * @return Post[] Returns an array of Post objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    // public function findPostsForUser(User $user)
+    // {
+    //     $now = new \DateTime();
+    //     $twoWeeksAgo = $now->modify('-2 weeks');
+        
+    //     return $this->createQueryBuilder('p')
+    //         ->innerJoin('p.Post_UserID', 'u')
+    //         ->innerJoin('')
+    //         ->where('p.createdAt >= :twoWeeksAgo')
+    //         ->andWhere('(p.Post_UserID = :user) OR (fu = :user) OR (gu = :user)')
+    //         ->setParameter('twoWeeksAgo', $twoWeeksAgo)
+    //         ->setParameter('user', $user)
+    //         ->orderBy('p.createdAt', 'DESC')
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+    
 
-//    public function findOneBySomeField($value): ?Post
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    //    /**
+    //     * @return Post[] Returns an array of Post objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('p.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
+
+    //    public function findOneBySomeField($value): ?Post
+    //    {
+    //        return $this->createQueryBuilder('p')
+    //            ->andWhere('p.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

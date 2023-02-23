@@ -122,6 +122,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $FriendUser;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $avatar;
+
     public function __construct()
     {
         $this->UserPost = new ArrayCollection();
@@ -540,6 +545,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $friendUser->setFriendUserId(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
 
         return $this;
     }

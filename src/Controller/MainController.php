@@ -85,29 +85,41 @@ class MainController extends AbstractController
     /**
      * @Route("/page", name="page")
      */
-    public function page(Request $req, SluggerInterface $slugger): Response
+    public function page(Request $req, SluggerInterface $slugger, PostRepository $post): Response
     {
-        $p = new Post();
-        $form = $this -> createForm(PostType::class, $p);
-
-        $form->handleRequest($req);
-        if($form->isSubmitted() && $form->isValid()){
-
-            // return $this->json($p);
-
-            if($p->getDate()===null){
-                $p->setDate(new \DateTime());
+        if($req->getMethod()=='POST')
+        {
+            if($req->request->get('button-post'))
+            {
+                $p = new Post();
+                $form = $this -> createForm(PostType::class, $p);
+        
+                $form->handleRequest($req);
+                if($form->isSubmitted() && $form->isValid()){
+        
+                    // return $this->json($p);
+        
+                    if($p->getDate()===null){
+                        $p->setDate(new \DateTime());
+                    }
+                    $imgFile = $form->get('image')->getData();
+                    if ($imgFile) {
+                        $newFilename = $this->uploadImage($imgFile,$slugger);
+                        $p->setImage($newFilename);
+                    }
+                    $this->repo->add($p,true);
+                    return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+                }
+                return $this->render("homepage.html.twig",[
+                    'form' => $form->createView()
+                ]);
             }
-            $imgFile = $form->get('image')->getData();
-            if ($imgFile) {
-                $newFilename = $this->uploadImage($imgFile,$slugger);
-                $p->setImage($newFilename);
-            }
-            $this->repo->add($p,true);
-            return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
         }
-        return $this->render("homepage.html.twig",[
-            'form' => $form->createView()
+        $user = $this->getUser();
+        $posts = $post->findPostsForUser($user);
+        
+        return $this->render('post/index.html.twig', [
+            'posts' => $posts,
         ]);
     }
 
@@ -133,14 +145,14 @@ class MainController extends AbstractController
     {
         return $this->render('header.html.twig', []);
     }
-    /**
-     * @Route("/profile", name="profile", methods={"POST"})
-     */
-    public function profile(Request $repo): Response
-    {
-        $id = $repo->request->get('id');
-        return $this->render('profile.html.twig', ['id'=>$id]);
-    }
+    // /**
+    //  * @Route("/profile", name="profile", methods={"POST")
+    //  */
+    // public function profile(Request $repo): Response
+    // {
+    //     $id = $repo->request->get('id');
+    //     return $this->render('profile.html.twig', ['id'=>$id]);
+    // }
     /**
      * @Route("/group", name="profile_group")
      */
