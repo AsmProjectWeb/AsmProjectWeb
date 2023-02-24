@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 23, 2023 lúc 09:18 PM
+-- Thời gian đã tạo: Th2 24, 2023 lúc 07:26 AM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -100,7 +100,8 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 ('DoctrineMigrations\\Version20230222084243', '2023-02-22 09:42:46', 38),
 ('DoctrineMigrations\\Version20230223020855', '2023-02-23 03:13:25', 238),
 ('DoctrineMigrations\\Version20230223023909', '2023-02-23 03:39:15', 142),
-('DoctrineMigrations\\Version20230223035841', '2023-02-23 04:59:09', 72);
+('DoctrineMigrations\\Version20230223035841', '2023-02-23 04:59:09', 72),
+('DoctrineMigrations\\Version20230223205551', '2023-02-23 21:56:07', 806);
 
 -- --------------------------------------------------------
 
@@ -133,15 +134,16 @@ CREATE TABLE `groups` (
   `description` varchar(255) DEFAULT NULL,
   `created_at` date NOT NULL,
   `createtor_id` int(11) DEFAULT NULL,
-  `type_group` varchar(255) NOT NULL
+  `type_group` varchar(255) NOT NULL,
+  `group_avatar` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `groups`
 --
 
-INSERT INTO `groups` (`id`, `group_name`, `description`, `created_at`, `createtor_id`, `type_group`) VALUES
-(1, 'ARK', 'As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. H', '2003-11-03', 2, 'game');
+INSERT INTO `groups` (`id`, `group_name`, `description`, `created_at`, `createtor_id`, `type_group`, `group_avatar`) VALUES
+(1, 'ARK', 'As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. H', '2003-11-03', 2, 'game', 'ark-poster-63f29897b0ac2.jpg');
 
 -- --------------------------------------------------------
 
@@ -248,7 +250,6 @@ CREATE TABLE `post` (
 --
 
 INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `status`, `post_user_id_id`) VALUES
-(2, NULL, 'Hello', NULL, '2023-02-20 11:06:50', 1, 1),
 (3, NULL, 'First Post with picture', 'Screenshot-2-63f6bda251600.png', '2023-02-23 02:13:06', 2, 1),
 (4, NULL, 'As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. Hunt, harvest resources, craft items, grow crops, research technologies, and build shelters to withstand the elements and store valuables, all while teaming up with (or preying upon) hundreds of other players to survive, dominate... and escape!', 'ark-poster-63f29897b0ac2.jpg', '2023-02-23 15:48:11', 0, 1),
 (6, NULL, 'Lost Island is a free DLC Expansion Map available on Steam, Xbox One, PS4 and PS5, Epic Games, and Stadia.\r\nThis DLC boasts 150 square kilometers of new biomes, new challenges, and mysterious ruins. Discover jungle valleys fed by giant waterfalls, build a treehouse high in the forest canopies, get down and dirty in vast mangrove swamps, dive deep underwater, brave treacherous snowy peaks, or spelunk uncharted cave systems in search of treasure…', 'Khoa-63f71f9dd862f.jpg', '2023-02-23 15:52:40', 0, 2),

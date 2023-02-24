@@ -198,25 +198,26 @@
             {% endfor %}
         </div>
         <div class="right d-none d-lg-block">
-            <h5>&#160 Recent contact</h5>
-            <div class="list-friend">
-                <ul>
-                {% for f in friend %}  
-                <li>
-                    {# <img src="ark.jfif" alt=""> #}
-                    {% if f.avatar is null %}
-                        <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
-                    {% else %}
-                        <img src="{{ asset('uploads/' ~ f.avatar)}}" alt="">
-                    {% endif %}
-                    <a href="">{{f.username}}</a>
-                </li>
-                {% endfor %}               
-                <li>
-                    <a href="">New Chat</a>
-                </li>
-            </ul>
-            </div>
+            {# <div> #}
+                <h5>&#160 Recent contact</h5>
+                <div class="list-friend">
+                    <ul>
+                    {% for f in friend %}  
+                        <li>
+                        {% if f.avatar is null %}
+                            <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
+                        {% else %}
+                            <img src="{{ asset('uploads/' ~ f.avatar)}}" alt="">
+                        {% endif %}
+                        <a href="">{{f.username}}</a>
+                        </li>
+                    {% endfor %}               
+                        <li>
+                            <a href="">New Chat</a>
+                        </li>
+                    </ul>
+                </div>
+            {# </div> #}
         </div>
     </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -638,15 +639,12 @@ body{
     border-left: #8ABE53 solid 1px;
     border-radius: 12px;
     box-shadow: #8ABE53 2px 2px;
-    overflow: auto;
 }
 .right h5{
     background-color: #fff;
 }
 .list-friend{
     background-color: #fff;
-    overflow: auto;
-    position: sticky;
 }
 .right > div > ul > li{
     background-color: #8ABE53;
