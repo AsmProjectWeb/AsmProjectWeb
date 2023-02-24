@@ -1,0 +1,89 @@
+{% extends 'base.html.twig'%}
+{% block header %}
+    {% include 'header.html.twig' %}
+{% endblock %}
+{% block body %}
+{% if app.user != null %}
+
+<body>
+    <div class="d-flex justify-content-center align-items-center vh-100 vw-100">
+        <div class="chatList p-2 rounded shadow">
+            <div class="d-flex mb-3 p-3 justify-content-between align-items-center shadow">
+                <div class="d-flex align-items-center">
+                    <img class="avatar rounded-circle shadow" src="{{asset('uploads/'~ app.user.avatar)}}" alt="">
+                    <h3 class="m-2" style="font-size: 1.5rem;">Chat</h3>
+                </div>
+                <a href="" class="btn btn-success">Homepage</a>
+            </div>
+            <div class="input-group mb-3 shadow">
+                <input type="text" name="" id="searchText" class="form-control" placeholder="Search...">
+                <button class="btn btn-success" id="searchButton">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <ul class="list-group mvh-50 overflow-y-auto shadow">
+                <li class="list-group-item">
+                    <a href="" class="d-flex justify-content-between align-item-center p-2">
+                        <div class="d-flex align-items-center">
+                            <img src="{{asset('images/defaultProfile.jpg')}}" alt="" class="w-10 rounded-circle">
+                            <h3 class="m-2" style="font-size: 1rem;">Name</h3>
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="" class="d-flex justify-content-between align-item-center p-2">
+                        <div class="d-flex align-items-center">
+                            <img src="{{asset('images/defaultProfile.jpg')}}" alt="" class="w-10 rounded-circle">
+                            <h3 class="m-2" style="font-size: 1rem;">Name</h3>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<style>
+    *{
+        transition:0.3s;
+        margin: 0;
+        padding: 0;
+    }
+
+    .chatList{
+        width: 400px;
+    }
+
+    .w-10{
+        width:10%;
+    }
+
+    .overflow-y-auto{
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .avatar{
+        width: 62px;
+        height: 62px;
+    }
+
+    a{
+        text-decoration: none;
+    }
+    li.list-group-item:hover{
+        transform: scale(1.1);
+        background-color: rgb(236, 236, 236, 1);
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        $("#searchText").on("input",function(){
+            let searchText = $(this).val();
+            console.log(searchText);
+        })
+    })
+</script>
+
+{% else %}
+{% endif %}
+{% endblock %}

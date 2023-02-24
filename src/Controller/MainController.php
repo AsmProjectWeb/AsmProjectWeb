@@ -168,4 +168,12 @@ class MainController extends AbstractController
     {
         return $this->render('groupProfile.html.twig', []);
     }
+
+        /**
+     * @Route("/test", name="testPage")
+     */
+    public function test(): Response
+    {
+        return $this->render('test.html.twig', []);
+    }
 }
