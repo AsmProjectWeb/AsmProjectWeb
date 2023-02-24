@@ -25,7 +25,7 @@ class EditProfileController extends AbstractController
     }
 
     /**
-     * @Route("/edit/profile", name="app_edit_profile", requirements={"id"="\d+"})
+     * @Route("profile/edit", name="app_edit_profile", requirements={"id"="\d+"})
      */
     public function index(Request $req,UserPasswordHasherInterface $userPasswordHasher, SluggerInterface $slugger,Security $security): Response
     {

@@ -93,23 +93,26 @@
                 </div>
                 <hr class="mt-2 mb-2">
                 <div class="box">
+                {% for user in dataUser %}
                     <div class="box-header box-header-tag">
                         <div class="box-avata">
                             <div class="avata">
-                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
+                                {% if user.avatar is not empty %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~user.avatar)}}" alt="">
+                                {% else %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                                {% endif %}                            
                                 <div class="sub-avata"></div>
                             </div>
                         </div>
                         <div class="box-title box-title-tag">
                             <div class="u-tus">
                                 <a href="">
-                                    <h5>Hello World</h5>
+                                    <h5>{{user.name}}</h5>
                                 </a>
                             </div>
                             <div class="u-title">
-                                <a href="">
-                                    <label for="">123</label>
-                                </a>
+                                    <label for="">{{user.hometown}}</label>
                             </div>
                         </div>
                         <div class="right-title">
@@ -118,6 +121,7 @@
                             </div>
                         </div>
                     </div>
+                {% endfor %}
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn btn-success m-2">Show more</button>
@@ -130,23 +134,25 @@
                 </div>
                 <hr class="mt-2 mb-2">
                 <div class="box">
+                {% for group in dataGroup %}
                     <div class="box-header box-header-tag">
                         <div class="box-avata">
                             <div class="avata">
-                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
-                                <div class="sub-avata"></div>
+                                {% if group.avatar is not empty %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~group.avatar)}}" alt="">
+                                {% else %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                                {% endif %} 
                             </div>
                         </div>
                         <div class="box-title box-title-tag">
                             <div class="u-tus">
                                 <a href="">
-                                    <h5>Hello World</h5>
+                                    <h5>{{group.name}}</h5>
                                 </a>
                             </div>
                             <div class="u-title">
-                                <a href="">
-                                    <label for="">123</label>
-                                </a>
+                                    <label for="">Created at {{group.create.format('d-m-Y')}}</label>
                             </div>
                         </div>
                         <div class="right-title">
@@ -155,6 +161,7 @@
                             </div>
                         </div>
                     </div>
+                {% endfor %}
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn btn-success m-2">Show more</button>
@@ -168,24 +175,27 @@
                 </div>
                 <hr class="mt-2 mb-2">
 
+
+                {% for post in dataPost %}
                 <div class="box">
                     <div class="box-header">
                         <div class="box-avata">
                             <div class="avata">
-                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
-                                <div class="sub-avata"></div>
+                                {% if post.avatar is not empty %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~post.avatar)}}" alt="">
+                                {% else %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                                {% endif %}
                             </div>
                         </div>
                         <div class="box-title">
                             <div class="u-tus">
                                 <a href="">
-                                    <h5>Hello World</h5>
+                                    <h5>{{post.name}}</h5>
                                 </a>
                             </div>
                             <div class="u-title">
-                                <a href="">
-                                    <label for="">123</label>
-                                </a>
+                                    <label for="">{{post.create.format('H:i:s d-m-Y')}}</label>
                             </div>
                         </div>
                         <div class="box-view">
@@ -202,12 +212,11 @@
                         </div>
                     </div>
                     <div class="box-content">
-                        <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                                                                                                        stature,
-                                                                                                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                                                                                                        scaled
-                                                                                                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                        <p>{{post.content}}</p>
+                        {% if post.image is not empty %}
+                            <img src="{{ asset('uploads/'~post.image) }}" alt="">
+                        {% endif %}
+
                     </div>
                     <div class="box-footer">
                         <div class="box-infor">
@@ -252,91 +261,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="box">
-                    <div class="box-header">
-                        <div class="box-avata">
-                            <div class="avata">
-                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA" alt="">
-                                <div class="sub-avata"></div>
-                            </div>
-                        </div>
-                        <div class="box-title">
-                            <div class="u-tus">
-                                <a href="">
-                                    <h5>Hello World</h5>
-                                </a>
-                            </div>
-                            <div class="u-title">
-                                <a href="">
-                                    <label for="">123</label>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="box-view">
-                            <span>
-                                <i class="fa-solid fa-bars"></i>
-                            </span>
-                        </div>
-                        <div class="box-close">
-                            <div>
-                                <span>
-                                    <i class="fa-solid fa-xmark"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-content">
-                        <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                                                                                                        stature,
-                                                                                                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                                                                                                        scaled
-                                                                                                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                    </div>
-                    <div class="box-footer">
-                        <div class="box-infor">
-                            <div class="countview">
-                                <a href="">
-                                    <i class="fa-solid fa-heart"></i>&#160 0</a>
-                            </div>
-                            <div class="infor-right">
-                                <div class="countcomment">
-                                    <a href="">
-                                        <i class="fa-solid fa-comment"></i>&#160 0
-                                    </a>
-                                </div>
-                                <div class="countshare">
-                                    <a href="">
-                                        <i class="fa-solid fa-share-from-square"></i>
-                                        &#160 0
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-action">
-                            <div class="sub-box-action" id="sub-box-action-1">
-                                <a href="">
-                                    <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                    <i class="icon-hide fa-solid fa-heart"></i>
-                                </a>
-                                <a href="" class=""></a>
-                            </div>
-                            <div class="sub-box-action">
-                                <a href="">
-                                    <i class="icon-none fa-regular fa-comment"></i>
-                                    <i class="icon-hide fa-solid fa-comment"></i>
-                                </a>
-                            </div>
-                            <div class="sub-box-action">
-                                <a href="">
-                                    <i class="icon-none fa-regular fa-share-from-square"></i>
-                                    <i class="icon-hide fa-solid fa-share-from-square"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div></div>
+                {% endfor %}
 
         </div>
 
@@ -582,7 +507,6 @@ body{
     color: #999;
 }
 .u-title label:hover{
-    text-decoration: underline;
     color: #333;
 }
 .u-tus{

@@ -1,0 +1,138 @@
+{% extends 'base.html.twig'%}
+{% block header %}
+    {% include 'header.html.twig' %}
+{% endblock %}
+{% block body %}
+<body>
+    <div class="box d-flex flex-row">
+        <div class="friend-zone d-flex flex-column">
+            <div>                
+                <h2>Friend</h2>
+            </div>
+            <div class="friend-list overflow-y-auto d-flex flex-column">
+                <div class="friend d-flex align-items-center flex-row">
+                    <img class="rounded-circle icon" src="koky-high-resolution-logo-color-on-transparent-background.png" alt="">
+                    <div class=" w-100 ms-3 h-100">
+                        <p class="fs-5 m-0 bold fw-bold">User Name</p>
+                        <div class="d-flex flex-row justify-content-between w-100 fs-6">
+                            <p>Last Message</p>
+                            <p>Time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-zone d-flex flex-column w-100">
+            <div class="chat-person d-flex flex-row align-items-center border-bottom">
+                <img class="rounded-circle icon m-3" src="koky-high-resolution-logo-color-on-transparent-background.png" alt="">
+                <div class="fs-6 m-0 bold fw-bold text-white m-3">User Name</div>
+            </div>
+            <div class="chat-area overflow-y-auto d-flex flex-column">
+                <div class="message w-100 d-flex justify-content-start">
+                    <div class="send rounded-3 d-inline-block">Hello</div>
+                </div>
+                <div class="message w-100 rounded-3 d-flex justify-content-end">
+                    <div class="receive rounded-3 d-inline-block">Hi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root{
+        --box-height:90vh;
+        --box-width:90vw;
+    }
+    
+    * {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Poppins', sans-serif;
+	}
+
+    body {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100vh;
+		flex-direction: column;
+		background: #ccc;
+	}
+
+    .box {
+		position: relative;
+		width: var(--box-width);
+		height: var(--box-height);
+		background: #1c1c1c;
+		border-radius: 40px;
+		overflow: hidden;
+	}
+
+    ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 3px;
+    }
+
+    .overflow-y-auto{
+        overflow-y: scroll;
+    }
+    .friend-zone{
+        min-width: 100px;
+        width:300px;
+        height: 100%;
+        background-color:aqua;
+    }
+
+    .friend{
+        height: 60px;
+        background-color: aquamarine;
+        box-sizing: content-box;
+        padding:10px;
+    }
+
+    .chat-zone{
+
+    }
+
+    .message{
+        height: 54px;
+    }
+
+    .send{
+        margin: 5px 10px;
+        padding:10px;
+        color: azure;
+        background-color: #303030;
+        box-sizing: content-box;
+    }
+
+    .receive{
+        margin: 5px 10px;
+        padding:10px;
+        color: azure;
+        background-color: #8abe53;
+        box-sizing: content-box;
+    }
+
+    .icon{
+        width: 50px;
+        height: 50px;
+        /* align-self: center; */
+    }
+
+    h2 {
+		color: #8abe53;
+		font-weight: 500;
+		text-align: center;
+		letter-spacing: 0.1em;
+	}
+</style>
+{% endblock %}

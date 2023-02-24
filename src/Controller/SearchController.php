@@ -23,6 +23,7 @@ class SearchController extends AbstractController
         foreach ($users as $s){
             $dataUser[]=[
                 'id'=>$s->getId(),
+                'avatar'=>$s->getAvatar(),
                 'name'=>$s->getUsername(),
                 'hometown'=>$s->getHometown(),
             ];
@@ -32,8 +33,9 @@ class SearchController extends AbstractController
         foreach ($groups as $g){
             $dataGroup[]=[
                 'id'=>$g->getId(),
+                'avatar'=>$g->getGroupAvatar(),
                 'name'=>$g->getGroupName(),
-                'des'=>$g->getDescription(),
+                'create'=>$g->getCreatedAt(),
             ];
         }
         $posts = $post->findPostByContent($keyword,3);
@@ -41,11 +43,13 @@ class SearchController extends AbstractController
         foreach ($posts as $p){
             $dataPost[]=[
                 'id'=>$p->getId(),
+                'avatar'=>$p->getPostUserID()->getAvatar(),
                 'name'=>$p->getPostUserID()->getUsername(),
+                'create'=>$p->getDate(),
                 'image'=>$p->getImage(),
                 'content'=>$p->getContent(),
             ];
         }
-        return $this->json(array_merge($dataUser,$dataGroup,$dataPost));
+        return $this->render("search/index.html.twig",['dataUser'=>$dataUser, 'dataGroup'=>$dataGroup, 'dataPost'=>$dataPost]);
     }
 }
