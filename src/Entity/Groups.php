@@ -54,6 +54,11 @@ class Groups
      */
     private $IdGroup;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $GroupAvatar;
+
     public function __construct()
     {
         $this->IDgroup = new ArrayCollection();
@@ -151,6 +156,18 @@ class Groups
     public function setTypeGroup(string $TypeGroup): self
     {
         $this->TypeGroup = $TypeGroup;
+
+        return $this;
+    }
+
+    public function getGroupAvatar(): ?string
+    {
+        return $this->GroupAvatar;
+    }
+
+    public function setGroupAvatar(?string $GroupAvatar): self
+    {
+        $this->GroupAvatar = $GroupAvatar;
 
         return $this;
     }

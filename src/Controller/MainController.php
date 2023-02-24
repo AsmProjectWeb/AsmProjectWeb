@@ -7,6 +7,8 @@ use App\Entity\User;
 use App\Form\LoginType;
 use App\Form\PostType;
 use App\Form\RegisterType;
+use App\Repository\FriendRepository;
+use App\Repository\GroupsRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping\Id;
@@ -90,7 +92,7 @@ class MainController extends AbstractController
     /**
      * @Route("/page", name="page")
      */
-    public function page(Request $req, SluggerInterface $slugger, UserRepository $userRepository, PostRepository $post): Response
+    public function page(Request $req,GroupsRepository $grepo, SluggerInterface $slugger, UserRepository $userRepository, PostRepository $post, FriendRepository $frepo): Response
     {
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
@@ -118,9 +120,13 @@ class MainController extends AbstractController
         $user=$this->security->getUser();
         $userid = $user->getId();
         $posts = $post->findPostsForUser($userid);
+        $friends = $frepo->findFriendsByUserId($userid);
+        $group = $grepo->findGroupsByUserId($userid);
         return $this->render('homepage.html.twig', [
             'posts' => $posts,
             'form' => $form->createView(),
+            'friend'=> $friends,
+            'group'=>$group,
         ]);
         // return $this->json($avatar);
     }

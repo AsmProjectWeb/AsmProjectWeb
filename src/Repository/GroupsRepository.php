@@ -53,6 +53,19 @@ class GroupsRepository extends ServiceEntityRepository
      ;
     }
 
+
+    public function findGroupsByUserId(int $userId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '       
+        SELECT groups.group_avatar, groups.id, groups.group_name FROM groups 
+        INNER JOIN group_members gm ON gm.groupid_id = groups.id 
+        INNER JOIN user u on gm.user_id=u.id WHERE u.id = :id LIMIT 3;
+';
+
+        $re = $conn->executeQuery($sql, ['id' => $userId]);
+        return $re->fetchAllAssociative();
+    }
 //    /**
 //     * @return Groups[] Returns an array of Groups objects
 //     */

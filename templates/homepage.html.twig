@@ -74,30 +74,20 @@
                 </div>
                 <div class="group-action-left-3">
                     <ul>
+                    {% for g in group %}
                         <li>
                             <div class="sub-avatar">
-                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                            {% if g.group_avatar is null %}
+                            <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
+                            {% else %}
+                            <img src="{{ asset('uploads/' ~ g.group_avatar)}}" alt="">
+                            {% endif %}
                             </div>
                             <div>
-                                <h6>Group 1</h6>
+                                <h6>{{g.group_name}}</h6>
                             </div>
                         </li>
-                        <li>
-                            <div class="sub-avatar">
-                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                            </div>
-                            <div>
-                                <h6>Group 2</h6>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sub-avatar">
-                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                            </div>
-                            <div>
-                                <h6>Group 3</h6>
-                            </div>
-                        </li>
+                    {% endfor %}
                     </ul>
                 </div>
                 <div class="left-footer">
@@ -112,7 +102,6 @@
         <div class="middle mx-auto">
             <div class="d-flex rounded" style="width: 500px; height: 50px; background-color: #8ABE53;     margin-top: 15px;">
                 <div class="p-1">
-                    {# <img src="ark.jfif" class="rounded-circle" alt="" style="width: 40px; height: 40px;"> #}
                     {% if app.user.avatar is not empty %}
                         <img class="rounded-circle" src="{{asset('uploads/'~app.user.avatar)}}" alt="" style="width: 40px; height: 40px;">
                     {% else %}
@@ -165,7 +154,7 @@
                 </div>
                 <div class="box-content">
                     <p>{{p.content}}</p>
-                    <img src="{{ asset('images/koky-logo.png') }}" alt="">
+                    <img src="{{ asset('uploads/' ~p.image) }}" alt="">
                 </div>
                 <div class="box-footer">
                     <div class="box-infor">
@@ -209,74 +198,20 @@
             {% endfor %}
         </div>
         <div class="right d-none d-lg-block">
-            <h5>&#160 abc</h5>
+            <h5>&#160 Recent contact</h5>
             <div class="list-friend">
                 <ul>
+                {% for f in friend %}  
                 <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
+                    {# <img src="ark.jfif" alt=""> #}
+                    {% if f.avatar is null %}
+                        <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
+                    {% else %}
+                        <img src="{{ asset('uploads/' ~ f.avatar)}}" alt="">
+                    {% endif %}
+                    <a href="">{{f.username}}</a>
                 </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                <li>
-                    <img src="ark.jfif" alt="">
-                    <a href="">UserName</a>
-                </li>
-                
+                {% endfor %}               
                 <li>
                     <a href="">New Chat</a>
                 </li>
@@ -295,8 +230,13 @@
                     <div class="post-body">
                         <div class="d-flex mt-1" style="height: 80px;">
                             <div class="">
-                                <img src="ark.jfif" class="rounded-circle border-dark" alt=""
-                                    style="width: 60px; height: 60px;">&nbsp &nbsp
+                                {# <img src="ark.jfif" class="rounded-circle border-dark" alt=""
+                                    style="width: 60px; height: 60px;">&nbsp &nbsp #}
+                                {% if app.user.avatar is not empty %}
+                                <img class="rounded-circle border-dark" src="{{asset('uploads/'~app.user.avatar)}}" alt="" style="width: 60px; height: 60px;"> &nbsp &nbsp
+                                {% else %}
+                                <img class="rounded-circle border-dark" src="{{asset('images/defaultProfile.jpg')}}" alt="" style="width: 60px; height: 60px;"> &nbsp &nbsp
+                                {% endif %}
                             </div>
                             <div>
                                 <div>

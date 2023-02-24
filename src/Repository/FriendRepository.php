@@ -39,28 +39,40 @@ class FriendRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Friend[] Returns an array of Friend objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('f.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Friend[] Returns an array of Friend objects
+    //     */
+    //    public function findFriendById($value): array
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //         ->select()
+    //            ->andWhere('f.userId = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('f.id', 'ASC')
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Friend
-//    {
-//        return $this->createQueryBuilder('f')
-//            ->andWhere('f.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+
+    public function findFriendsByUserId(int $userId)
+    {
+        return $this->createQueryBuilder('f')
+            ->select('u.id, u.username, u.avatar')
+            ->join('f.FriendUserId', 'u')
+            ->where('f.userId = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getResult();
+    }
+
+    //    public function findOneBySomeField($value): ?Friend
+    //    {
+    //        return $this->createQueryBuilder('f')
+    //            ->andWhere('f.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }
