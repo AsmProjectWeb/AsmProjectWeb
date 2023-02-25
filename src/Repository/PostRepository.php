@@ -118,15 +118,16 @@ class PostRepository extends ServiceEntityRepository
         $re = $conn->executeQuery($sql);
         return $re->fetchAllAssociative();
     }
-        /**
+    
+    /**
      * @return Post[] Returns an array of Customer objects
      */
-    public function RemovePost(): array
+    public function RemovePost($id): array
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql ='
         DELETE FROM `post` WHERE post.id = :id';
-        $re = $conn->executeQuery($sql);
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
         return $re->fetchAllAssociative();
     }
     //    /**
