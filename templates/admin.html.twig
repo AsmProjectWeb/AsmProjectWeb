@@ -1,7 +1,7 @@
 {% extends 'base.html.twig'%}
-{% block header %}
+{# {% block header %}
     {% include 'header.html.twig' %}
-{% endblock %}
+{% endblock %} #}
 {% block body %}
 {% if app.user != null %}
 <body>
@@ -86,7 +86,6 @@
             </div>
         </div>
         <div class="middle mx-auto">
-
             {# <div class="friend">
                 <div class="fs-3 fw-bold">
                     Everyone
@@ -127,7 +126,6 @@
                     <button type="button" class="btn btn-success m-2">Show more</button>
                 </div>
             </div> #}
-
             {# <div class="group">
                 <div class="fs-3 fw-bold">
                     Group
@@ -167,15 +165,12 @@
                     <button type="button" class="btn btn-success m-2">Show more</button>
                 </div>
             </div> #}
-
-            {# <div class="post">
+            <div class="post">
 
                 <div class="fs-3 fw-bold">
-                    Post
+                    Posts were reported
                 </div>
                 <hr class="mt-2 mb-2">
-
-
                 {% for post in dataPost %}
                 <div class="box">
                     <div class="box-header">
@@ -262,18 +257,18 @@
                     </div>
                 </div>
                 {% endfor %}
-            <div> #}
+            <div>
         </div>
     </div>
 </body>
-    <script>
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
+    // <script>
+    //     var myModal = document.getElementById('myModal')
+    //     var myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
-        })
-    </script>
+    //     myModal.addEventListener('shown.bs.modal', function () {
+    //         myInput.focus()
+    //     })
+    // </script>
     <style>
 .btn-success:hover {
     background-color: #97cc5f !important;

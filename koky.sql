@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 25, 2023 lúc 05:49 PM
+-- Thời gian đã tạo: Th2 25, 2023 lúc 07:35 PM
 -- Phiên bản máy phục vụ: 10.4.27-MariaDB
 -- Phiên bản PHP: 7.4.33
 
@@ -24,61 +24,48 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post`
+-- Cấu trúc bảng cho bảng `friend_request`
 --
 
-CREATE TABLE `post` (
+CREATE TABLE `friend_request` (
   `id` int(11) NOT NULL,
-  `userberforeshare_id` int(11) DEFAULT NULL,
-  `content` longtext NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `date` datetime NOT NULL,
-  `status` int(11) NOT NULL,
-  `post_user_id_id` int(11) NOT NULL
+  `sender_id` int(11) DEFAULT NULL,
+  `receiver_id` int(11) DEFAULT NULL,
+  `created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Đang đổ dữ liệu cho bảng `post`
---
-
-INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `status`, `post_user_id_id`) VALUES
-(4, NULL, 'As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. Hunt, harvest resources, craft items, grow crops, research technologies, and build shelters to withstand the elements and store valuables, all while teaming up with (or preying upon) hundreds of other players to survive, dominate... and escape!', 'ark-poster-63f29897b0ac2.jpg', '2023-02-23 15:48:11', 0, 1),
-(6, NULL, 'Lost Island is a free DLC Expansion Map available on Steam, Xbox One, PS4 and PS5, Epic Games, and Stadia.\r\nThis DLC boasts 150 square kilometers of new biomes, new challenges, and mysterious ruins. Discover jungle valleys fed by giant waterfalls, build a treehouse high in the forest canopies, get down and dirty in vast mangrove swamps, dive deep underwater, brave treacherous snowy peaks, or spelunk uncharted cave systems in search of treasure…', 'Khoa-63f71f9dd862f.jpg', '2023-02-23 15:52:40', 0, 2),
-(7, 3, 'Hello wORL', NULL, '2023-02-21 22:27:24', 0, 3),
-(8, 3, 'Trong trường hợp này, chúng ta sử dụng GROUP BY để nhóm các bài đăng theo các trường chính xác, bao gồm cả post_user_id_id và post_content, và sau đó sử dụng hàm MAX để chọn bài đăng mới nhất cho mỗi nhóm.', NULL, '2023-02-25 16:06:27', 0, 3);
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Chỉ mục cho bảng `post`
+-- Chỉ mục cho bảng `friend_request`
 --
-ALTER TABLE `post`
+ALTER TABLE `friend_request`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `IDX_5A8A6C8DBEFE6CCE` (`post_user_id_id`),
-  ADD KEY `IDX_5A8A6C8DF78E8722` (`userberforeshare_id`);
+  ADD KEY `IDX_F284D94F624B39D` (`sender_id`),
+  ADD KEY `IDX_F284D94CD53EDB6` (`receiver_id`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT cho bảng `post`
+-- AUTO_INCREMENT cho bảng `friend_request`
 --
-ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `friend_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Các ràng buộc cho bảng `post`
+-- Các ràng buộc cho bảng `friend_request`
 --
-ALTER TABLE `post`
-  ADD CONSTRAINT `FK_5A8A6C8DBEFE6CCE` FOREIGN KEY (`post_user_id_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `FK_5A8A6C8DF78E8722` FOREIGN KEY (`userberforeshare_id`) REFERENCES `user` (`id`);
+ALTER TABLE `friend_request`
+  ADD CONSTRAINT `FK_F284D94CD53EDB6` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `FK_F284D94F624B39D` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

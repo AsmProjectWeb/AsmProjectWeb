@@ -27,6 +27,11 @@ class FriendRequest
      */
     private $receiver;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class FriendRequest
     public function setReceiver(?user $receiver): self
     {
         $this->receiver = $receiver;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
 
         return $this;
     }
