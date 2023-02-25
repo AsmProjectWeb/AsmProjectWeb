@@ -48,16 +48,16 @@
             // data is the JSON response
             console.log(users);
             for (var i = 0; i < users.length; i++) {
-                $('#list-group').append(`
-                    <li class="list-group-item">
-                        <a href="" class="d-flex justify-content-between align-item-center p-2">
-                            <div class="d-flex align-items-center">
-                                <img src="{{asset('images/defaultProfile.jpg')}}" alt="" class="w-10 rounded-circle">
-                                <h3 class="m-2" style="font-size: 1rem;">${users[i]['username']}</h3>
-                            </div>
-                        </a>
-                    </li>
-                `);
+                $('#list-group').append(
+                    '<li class="list-group-item">' +
+                        '<a href = "/message/chat/' + (users[i]['id'])+ '" class="d-flex justify-content-between align-item-center p-2">' +
+                            '<div class="d-flex align-items-center">' +
+                                '<img src="{{asset("uploads/")}}' + (users[i]['avatar'] != null ? users[i]['avatar'] : 'defaultProfile.jpg') + '" alt="" class="icon rounded-circle shadow">' +
+                                '<h3 class="m-2" style="font-size: 1rem;">' + users[i]['username'] + '</h3>' +
+                            '</div>' +
+                        '</a>' +
+                    '</li>'
+                );
             }
         }
         });
@@ -72,16 +72,16 @@
                 // data is the JSON response
                 console.log(users);
                 for (var i = 0; i < users.length; i++) {
-                    $('#list-group').append(`
-                        <li class="list-group-item">
-                            <a href="" class="d-flex justify-content-between align-item-center p-2">
-                                <div class="d-flex align-items-center">
-                                    <img src="{{asset('images/defaultProfile.jpg')}}" alt="" class="w-10 rounded-circle">
-                                    <h3 class="m-2" style="font-size: 1rem;">${users[i]['username']}</h3>
-                                </div>
-                            </a>
-                        </li>
-                    `);
+                    $('#list-group').append(
+                        '<li class="list-group-item">' +
+                            '<a href = "/message/chat/' + (users[i]['id'])+ '" class="d-flex justify-content-between align-item-center p-2">' +
+                                '<div class="d-flex align-items-center">' +
+                                    '<img src="{{asset("uploads/")}}' + (users[i]['avatar'] != null ? users[i]['avatar'] : 'defaultProfile.jpg') + '" alt="" class="icon rounded-circle shadow">' +
+                                    '<h3 class="m-2" style="font-size: 1rem;">' + users[i]['username'] + '</h3>' +
+                                '</div>' +
+                            '</a>' +
+                        '</li>'
+                    );
                 }
             }
             });
@@ -100,12 +100,12 @@
                 for (var i = 0; i < users.length; i++) {
                     $('#list-group').append(
                         '<li class="list-group-item">' +
-                        '<a href="" class="d-flex justify-content-between align-item-center p-2">' +
-                        '<div class="d-flex align-items-center">' +
-                        '<img src="{{asset("uploads/")}}' + (users[i]['avatar'] != null ? users[i]['avatar'] : 'defaultProfile.jpg') + '" alt="" class="w-10 rounded-circle">' +
-                        '<h3 class="m-2" style="font-size: 1rem;">' + users[i]['username'] + '</h3>' +
-                        '</div>' +
-                        '</a>' +
+                            '<a href = "/message/chat/' + (users[i]['id'])+ '" class="d-flex justify-content-between align-item-center p-2">' +
+                                '<div class="d-flex align-items-center">' +
+                                    '<img src="{{asset("uploads/")}}' + (users[i]['avatar'] != null ? users[i]['avatar'] : 'defaultProfile.jpg') + '" alt="" class="icon rounded-circle shadow">' +
+                                    '<h3 class="m-2" style="font-size: 1rem;">' + users[i]['username'] + '</h3>' +
+                                '</div>' +
+                            '</a>' +
                         '</li>'
                     );
                 }
@@ -138,6 +138,10 @@
         overflow-x: hidden;
     }
 
+    .icon{
+        width:50px;
+        height:50px;
+    }
     .avatar{
         width: 62px;
         height: 62px;
