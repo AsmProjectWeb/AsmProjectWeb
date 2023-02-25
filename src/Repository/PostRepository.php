@@ -88,6 +88,22 @@ class PostRepository extends ServiceEntityRepository
         $re = $conn->executeQuery($sql, ['id' => $id]);
         return $re->fetchAllAssociative();
     }
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function findPostsInGroup($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='
+        SELECT post.*, u.* FROM post
+        LEFT JOIN group_post gp on gp.post_id_id = post.id
+        LEFT JOIN groups g on g.id = gp.group_id_id
+        LEFT JOIN `user` u on u.id = post.post_user_id_id
+        WHERE g.id =  :id';
+        $re = $conn->executeQuery($sql, ['id' => $id]);
+        return $re->fetchAllAssociative();
+    }
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

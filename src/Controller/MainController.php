@@ -8,6 +8,7 @@ use App\Form\LoginType;
 use App\Form\PostType;
 use App\Form\RegisterType;
 use App\Repository\FriendRepository;
+use App\Repository\GroupMembersRepository;
 use App\Repository\GroupsRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
@@ -154,34 +155,48 @@ class MainController extends AbstractController
         return $this->render('header.html.twig', []);
     }
     /**
-     * @Route("/profile", name="profile", methods={"POST"})
+     * @Route("/profile", name="profile", methods={"GET"})
      */
-    public function profile(Request $request, PostRepository $postRepo, UserRepository $userRepo): Response
+    public function profileAction(Request $request, FriendRepository $friendRepo, PostRepository $postRepo, UserRepository $userRepo): Response
     {
-        $id = $request->get('id');
+        // $id = $request->get('id');
+        $id = $request->query->get('id');
         $user = $userRepo->find($id);
         $post = $postRepo->findPostsInProfile($id);
+        $friend = $friendRepo->findFriendsUserById($id);
         return $this->render('profile.html.twig', [
             'id'=>$id,
             'post'=>$post,
             'user'=>$user,
+            'friend'=>$friend,
         ]); 
 
-        // return $this->json($user);
+        return $this->json($user);
     }
     /**
-     * @Route("/group", name="profile_group")
+     * @Route("/group", name="profile_group", methods={"GET"})
      */
-    public function FunctionName(): Response
-    {
-        return $this->render('groupProfile.html.twig', []);
+    public function groupAction(Request $req, GroupsRepository $groupRepo, GroupMembersRepository $gmRepo, PostRepository $postRepo): Response
+    {   
+        $id = $req->query->get('id');
+        $user = $this->getUser();
+        $userId = $user->getId();
+        $group = $groupRepo->find($id);
+        $post = $postRepo->findPostsInGroup($id);
+        $userGroup = $gmRepo->findUserInGroup($id, $userId);
+        return $this->render('groupProfile.html.twig', [
+            'group'=>$group,
+            'user'=>$userGroup,
+            'post'=>$post,
+        ]);
+        // return $this->json($ava);
     }
 
-        /**
-     * @Route("/test", name="testPage")
-     */
+    /**
+    * @Route("/test", name="testPage")
+    */
     public function test(): Response
     {
-        return $this->render('test.html.twig', []);
+        return $this->render('admin.html.twig', []);
     }
 }

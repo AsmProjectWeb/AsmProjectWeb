@@ -64,7 +64,9 @@
                             {% endif %}
                             </div>
                             <div>
-                                <h6>{{g.group_name}}</h6>
+                                <a href="{{path('profile_group',{'id': g.id})}}" style="text-decoration: none; color: black">
+                                    <h6>{{g.group_name}}</h6>
+                                </a>
                             </div>
                         </li>
                     {% endfor %}
@@ -146,7 +148,7 @@
                     <div class="box-close">
                         <div>
                             <span>
-                                <a href="#">
+                                <a>
                                     <i class="fa-solid fa-xmark"></i>
                                 </a>
                             </span>
@@ -210,7 +212,7 @@
                         {% else %}
                             <img src="{{ asset('uploads/' ~ f.avatar)}}" alt="">
                         {% endif %}
-                        <a href="">{{f.username}}</a>
+                        <a href="{{path('profile',{'id': f.id})}}">{{f.username}}</a>
                         </li>
                     {% endfor %}               
                         <li>
@@ -717,7 +719,6 @@ body{
     /* border-right: #8ABE53 solid 1px; */
     position: fixed;
     width: inherit;
-    overflow-y: scroll;
     padding: 15px;
     overflow:hidden;
     max-height: 100%;

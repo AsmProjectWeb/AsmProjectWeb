@@ -38,6 +38,20 @@ class FriendRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+        /**
+    * @return User[] Returns an array of User objects
+    */
+    public function findFriendsUserById($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='
+        SELECT u.*
+        FROM friend f
+        LEFT JOIN user u ON f.friend_user_id_id = u.id
+        WHERE f.user_id_id = :id';
+        $re = $conn->executeQuery($sql, ['id' => $id]);
+        return $re->fetchAllAssociative();
+    }
 
     //    /**
     //     * @return Friend[] Returns an array of Friend objects

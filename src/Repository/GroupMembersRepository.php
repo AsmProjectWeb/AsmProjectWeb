@@ -39,6 +39,22 @@ class GroupMembersRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function findUserInGroup($gid,$uid): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '       
+        SELECT u.id, u.username, u.avatar, u.email, u.phone, u.birthday, u.hometown, u.gender, u.job, u.status, gm.rolemember
+        FROM user u
+        JOIN group_members gm ON u.id = gm.user_id
+        WHERE gm.groupid_id = :gid AND u.id = :uid;
+';
+        $re = $conn->executeQuery($sql, ['uid' => $uid, 'gid'=>$gid]);
+        return $re->fetchAllAssociative();
+    }
 //    /**
 //     * @return GroupMembers[] Returns an array of GroupMembers objects
 //     */

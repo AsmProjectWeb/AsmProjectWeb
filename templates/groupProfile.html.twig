@@ -1,243 +1,164 @@
 {% extends 'base.html.twig'%}
+{% block header %}
+    {% include 'header.html.twig' %}
+{% endblock %}
 {% block body %}
 {% if app.user != null %}
-    <body>
-    <div class="profilecard">
-        <div class="image">
-            <img src="avt.jpg" alt="" class="profileimg">
-        </div>
-        <div class="textdata">
-            <span class="name">Leagues of Legends</span>
-        </div>
-        <div class="media-button">
-            <a href="https://www.facebook.com/losky.nguyen.9/" style="background: #4267b2" class="link">
-                <i class='bx bxl-facebook-square'></i>
-            </a>
-            <a href="https://github.com/Nguyen-Losky" style="background: black" class="link">
-                <i class='bx bxl-github'></i>
-            </a>
-            <a href="" style="background: #1da1f2 " class="link">
-                <i class='bx bxl-twitter'></i>
-            </a>
-            <a href="" style="background: #e1306c" class="link">
-                <i class='bx bxl-instagram'></i>
-            </a>
-        </div>
-        <div>
-
-        </div>
-        <div class="button">
-            <button class="button1">Join Group</button>
-            <button class="button1">Post</button>
-        </div>
-        <div class="analytic">
-            <div class="data">
-                <i class='bx bx-heart'></i>
-                <span class="number">1k friend</span>
+<body class="h-100">
+    <div class="contain-all">
+        <div class="profilecard">
+            <div class="image">
+                {% if group.GroupAvatar != null %}
+                    <img src="{{ asset('uploads/' ~ group.GroupAvatar) }}"alt="" class="profileimg">
+                {% else %}
+                    <img src="{{ asset('images/defaultProfile.jpg') }}"alt="" class="profileimg">
+                {% endif %}
             </div>
-            <div class="data">
-                <i class='bx bx-share'></i>
-                <span class="number">3k follow</span>
+            <div class="textdata">
+                <span class="name">{{group.GroupName}}</span>                
             </div>
+            <div class="media-button">
+                <a href="https://www.facebook.com/losky.nguyen.9/" style="background: #4267b2" class="link">
+                    <i class='bx bxl-facebook-square'></i>
+                </a>
+                <a href="https://github.com/Nguyen-Losky" style="background: black" class="link">
+                    <i class='bx bxl-github'></i>
+                </a>
+                <a href="" style="background: #1da1f2 " class="link">
+                    <i class='bx bxl-twitter'></i>
+                </a>
+                <a href="" style="background: #e1306c" class="link">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+            </div>
+            <div>
+            </div>
+            <div class="button">
+            {% for user in user %}
+                {% if user.id == group.createtor.id %}
+                <button class="button1">Edit information</button>
+                <button class="button1">Post</button>               
+                {% elseif user != null %}
+                <button class="button1">Post</button>
+                {% else %}
+                <button class="button1">Join Group</button>
+                {% endif %}
+            {% endfor %}
+            </div>
+            {# <div class="analytic">
+                <div class="data">
+                    <i class='bx bx-heart'></i>
+                    <span class="number">1k friend</span>
+                </div>
+                <div class="data">
+                    <i class='bx bx-share'></i>
+                    <span class="number">3k follow</span>
+                </div>
+            </div> #}
         </div>
-    </div>
-    <div class="body-profile-group d-flex position-relative m-auto mt-2 justify-content-between "
-        style="height: 12px; width: 70%;">
-        <div class="body-left">
-            <div class="row box">
-                <div class="box-header">
-                    <div class="box-avata">
-                        <div class="avata">
-                            <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
-                                alt="">
-                            <div class="sub-avata"></div>
+        <div class="body-profile-group d-flex position-relative m-auto mt-2 justify-content-between "
+            style="min-height: 12px; width: 70%;">
+            <div class="body-left">
+            {% for p in post %}
+                <div class="row box">
+                    <div class="box-header">
+                        <div class="box-avata">
+                            <div class="avata">
+                                <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
+                                    alt="">
+                                <div class="sub-avata"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="box-title">
-                        <div class="u-tus">
-                            <a href="">
-                                <h5>Hello World</h5>
-                            </a>
+                        <div class="box-title">
+                            <div class="u-tus">
+                                <a href="">
+                                    <h5>{{p.username}}</h5>
+                                </a>
+                            </div>
+                            <div class="u-title">
+                                <a href=""><label for="">{{p.date}}</label></a>
+                            </div>
                         </div>
-                        <div class="u-title">
-                            <a href=""><label for="">123</label></a>
-                        </div>
-                    </div>
-                    <div class="box-view">
-                        <span>
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
-                    </div>
-                    <div class="box-close">
-                        <div>
+                        <div class="box-view">
                             <span>
-                                <i class="fa-solid fa-xmark"></i>
+                                <i class="fa-solid fa-bars"></i>
                             </span>
                         </div>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                        stature,
-                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                        scaled
-                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                    <img src="ark.jfif" alt="">
-                </div>
-                <div class="box-footer">
-                    <div class="box-infor">
-                        <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
-                        <div class="infor-right">
-                            <div class="countcomment">
-                                <a href="">
-                                    <i class="fa-solid fa-comment"></i>&#160 0
-                                </a>
-                            </div>
-                            <div class="countshare">
-                                <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i>&#160 0
-                                </a>
+                        <div class="box-close">
+                            <div>
+                                <span>
+                                    <i class="fa-solid fa-xmark"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <div class="box-action">
-                        <div class="sub-box-action" id="sub-box-action-1">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                <i class="icon-hide fa-solid fa-heart"></i>
-                            </a>
-                            <a href="" class=""></a>
+                    <div class="box-content">
+                        <p>{{p.content}}</p>
+                        <img src="{{asset('uploads/' ~ p.image)}}" alt="">
+                    </div>
+                    <div class="box-footer">
+                        <div class="box-infor">
+                            <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
+                            <div class="infor-right">
+                                <div class="countcomment">
+                                    <a href="">
+                                        <i class="fa-solid fa-comment"></i>&#160 0
+                                    </a>
+                                </div>
+                                <div class="countshare">
+                                    <a href="">
+                                        <i class="fa-solid fa-share-from-square"></i>&#160 0
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-comment"></i>
-                                <i class="icon-hide fa-solid fa-comment"></i>
-                            </a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-share-from-square"></i>
-                                <i class="icon-hide fa-solid fa-share-from-square"></i>
-                            </a>
+                        <div class="box-action">
+                            <div class="sub-box-action" id="sub-box-action-1">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
+                                    <i class="icon-hide fa-solid fa-heart"></i>
+                                </a>
+                                <a href="" class=""></a>
+                            </div>
+                            <div class="sub-box-action">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-comment"></i>
+                                    <i class="icon-hide fa-solid fa-comment"></i>
+                                </a>
+                            </div>
+                            <div class="sub-box-action">
+                                <a href="">
+                                    <i class="icon-none fa-regular fa-share-from-square"></i>
+                                    <i class="icon-hide fa-solid fa-share-from-square"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+            {% endfor %}                
             </div>
-            <div class="row box mt-2">
-                <div class="box-header">
-                    <div class="box-avata">
-                        <div class="avata">
-                            <img src="https://i.ytimg.com/vi/dV-znS6RPbQ/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&rs=AOn4CLDgS0RcbwMegazHyEMtNprFmWlPhA"
-                                alt="">
-                            <div class="sub-avata"></div>
-                        </div>
+            <div class="body-right">
+                <div>
+                    <div class="group-introduction border border-2 rounded-2 p-2 bg-white">
+                        <h5 class="title-intro">Introduction</h5>
+                        {# <div class="d-flex">
+                            <p>Group theme: &#160</p>
+                            <a href="">Game</a>
+                        </div> #}
+                        <span>{{group.description}}</span>
                     </div>
-                    <div class="box-title">
-                        <div class="u-tus">
-                            <a href="">
-                                <h5>Hello World</h5>
-                            </a>
-                        </div>
-                        <div class="u-title">
-                            <a href=""><label for="">123</label></a>
-                        </div>
-                    </div>
-                    <div class="box-view">
-                        <span>
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
-                    </div>
-                    <div class="box-close">
-                        <div>
-                            <span>
-                                <i class="fa-solid fa-xmark"></i>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="box-content">
-                    <p>Draconis auragelus appears to be directly related to the stealthy Draconis obscurum. Their
-                        stature,
-                        gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                        scaled
-                        cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</p>
-                    <img src="ark.jfif" alt="">
-                </div>
-                <div class="box-footer">
-                    <div class="box-infor">
-                        <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
-                        <div class="infor-right">
-                            <div class="countcomment">
-                                <a href="">
-                                    <i class="fa-solid fa-comment"></i>&#160 0
-                                </a>
+                    <div class="group-event mt-2 border border-2 rounded-2">
+                        <div class="store-img bg-white">
+                            <h5> &nbsp Featured photo</h5>
+                            <div class="container-img d-flex">
+                                {% for p in post|slice(0, 6) %}
+                                {% if p.image != null %}
+                                <div class="m-1">
+                                    <img src="{{asset('uploads/' ~ p.image)}}" alt="">
+                                </div>
+                                {% endif %}
+                                {% endfor %}
                             </div>
-                            <div class="countshare">
-                                <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i>&#160 0
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-action">
-                        <div class="sub-box-action" id="sub-box-action-1">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                <i class="icon-hide fa-solid fa-heart"></i>
-                            </a>
-                            <a href="" class=""></a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-comment"></i>
-                                <i class="icon-hide fa-solid fa-comment"></i>
-                            </a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-share-from-square"></i>
-                                <i class="icon-hide fa-solid fa-share-from-square"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="body-right ">
-            <div class="group-introduction border border-2 rounded-2 p-2 bg-white">
-                <h5 class="title-intro">Introduction</h5>
-                <div class="d-flex">
-                    <p>Group theme: &#160</p>
-                    <a href="">Game</a>
-                </div>
-                <span>Description: Draconis auragelus appears to be directly related to the stealthy Draconis obscurum.
-                    Their
-                    stature,
-                    gait and ability to dive through the air are all similar. However, where Draconis obscurum
-                    scaled
-                    cavern walls to gain the high ground, Draconis auragelus takes a more bombastic approach.</span>
-            </div>
-            <div class="group-event mt-2 border border-2 rounded-2">
-                <div class="store-img bg-white">
-                    <h5> &nbsp Featured photo</h5>
-                    <div class="container-img d-flex">
-                        <div class="m-1">
-                            <img src="ark.jfif" alt="">
-                        </div>
-                        <div class="m-1">
-                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                        </div>
-                        <div class="m-1">
-                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                        </div>
-                        <div class="m-1">
-                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                        </div>
-                        <div class="m-1">
-                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                        </div>
-                        <div class="m-1">
-                            <img src="{{ asset('images/koky-logo.png') }}" alt="">
                         </div>
                     </div>
                 </div>
@@ -252,13 +173,11 @@
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    color: black;
 }
 h5{
     font-weight: bold;
 }
 body{
-    min-height: 100vh;
     background-color: #ccc;
 }
 .image{
@@ -280,6 +199,7 @@ body{
 }
 .profilecard{
     width: 72%;
+    height:300px;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     padding: 25px;
@@ -304,13 +224,15 @@ body{
     flex-direction: column;
     margin-left: 200px;
     color: #000;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 .name{
     font-size: 25px;
-    font-weight: 500;
+    font-weight: 600;
 }
 .media-button{
+    bottom: 30px;
+    position: absolute;
     display: flex;
     align-items: center;
     margin-top: 15px;
@@ -418,7 +340,6 @@ body{
 .box-title{
     background-color: green;
     height: 46px;
-    width: 350px;
     position: absolute;
     left: 11%;
     bottom: 0;
@@ -533,7 +454,20 @@ body{
     background-color: #eee7e7;
 }
 .body-right{
-    width: 35%;
+    max-width: 35%;
+    height: 331px;
+}
+.body-right > div {
+    overflow: hidden;
+    max-height: 100%;
+    box-shadow: 2px 2px 2px #8ABE53;
+    transition: all 0.5s ease;
+    overflow:hidden;
+    position: sticky;
+    width: inherit;
+}
+.body-right > div:hover{
+    overflow-y: scroll;
 }
 .body-right .group-introduction{
     box-shadow: 2px 2px 7px #8ABE53;

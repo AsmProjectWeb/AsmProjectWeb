@@ -8,11 +8,15 @@
     <div class="contain-all">
         <div class="profilecard">
             <div class="image">
-                <img src="{{ asset('uploads/' ~ user.avatar) }}"alt="" class="profileimg">
+                {% if user.avatar != null %}
+                    <img src="{{ asset('uploads/' ~ user.avatar) }}"alt="" class="profileimg">
+                {% else %}
+                    <img src="{{ asset('images/defaultProfile.jpg') }}"alt="" class="profileimg">
+                {% endif %}
             </div>
             <div class="textdata">
-                <span class="name">{{app.user.username}}</span>
-                <span class="job">{{app.user.status}}</span>
+                <span class="name">{{user.username}}</span>
+                <span class="job">{{user.status}}</span>                
             </div>
             <div class="media-button">
                 <a href="https://www.facebook.com/losky.nguyen.9/" style="background: #4267b2" class="link">
@@ -96,11 +100,15 @@
                     <div class="store-friend">
                         <h3> &nbsp Recent friends</h3>
                         <div class="container-img">
-                        {% for u in post|slice(0, 6) %}
+                        {% for f in friend|slice(0, 6) %}
                             <div>
-                                <a href="">
-                                    {# <img src="{{ asset('uploads/' ~ u) }}" alt=""> #}
-                                    <p>alo</p>
+                                <a href="{{path('profile',{'id': f.id})}}">
+                                {% if f.avatar != null %}
+                                    <img src="{{ asset('uploads/' ~ f.avatar) }}" alt="">
+                                {% else %}
+                                    <img src="{{ asset('images/defaultProfile.jpg') }}" alt="">
+                                {% endif %}
+                                    <p>{{f.username}}</p>
                                 </a>
                             </div>
                         {% endfor %}
@@ -135,9 +143,28 @@
                                     </div>
                                 </div>
                                 <div class="box-view">
-                                    <span>
-                                        <i class="fa-solid fa-bars"></i>
-                                    </span>
+                                    <div class="dropdown">
+                            <button class="btn rounded" type="button" data-bs-toggle="dropdown"aria-expanded="false">
+                                <span>
+                                    <i class="fa-solid fa-bars"></i>
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                {% if app.user.id == p.post_user_id_id %}
+                                <li>
+                                    <a class="dropdown-item" href="">Edit</a>
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <a class="dropdown-item" href="">Report</a>
+                                </li>
+                                {% if app.user.id == p.post_user_id_id %}
+                                <li>
+                                    <a class="dropdown-item" href="">Delete</a>
+                                </li>
+                                {% endif %}
+                             </ul>
+                        </div>
                                 </div>
                                 <div class="box-close">
                                     <div>
@@ -350,6 +377,7 @@
     margin-top: 15px;
     background-color: #fff;
     border-radius: 6px;
+    box-shadow: 2px 2px 5px #8ABE53;
 }
 .container-img{
     overflow: hidden;
@@ -475,9 +503,25 @@
     right: 11%;
     display: flex;
     justify-content: center; 
+    transition: all 0.4s ease;
 }
 .box-view span{
    margin: auto;
+}
+.box-view:hover{
+    background-color: #b6e683;
+    border-radius: 12px;
+}
+.box-view > div > ul > li{
+    transition: all 0.3s ease;
+}
+.box-view .dropdown-item:hover {
+  background-color: #8ABE53;
+   border-radius: 12px;
+}
+.box-view > div > ul > li:hover{
+    background-color: #8ABE53;
+    border-radius: 12px;
 }
 .box-close{
     /* background-color: pink; */
@@ -487,6 +531,18 @@
     right: 12px;
     display: flex;
     align-items: center;
+}
+.box-close span{
+    padding: 6px 12px 6px 12px;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+}
+.box-close span a{
+    text-decoration: none;
+    color: black;
+}
+.box-close span:hover{
+    background-color: #b6e683;
 }
 .box-content{
     padding-top: 6px;
