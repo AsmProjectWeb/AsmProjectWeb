@@ -44,12 +44,20 @@
                                         <h6>Friend Request</h6>
                                     </div>
                                 </button>
+
                                 <ul class="dropdown-menu" style="width:400px;">
+
+                                {% for request in friendRe %}
                                     <li class="bg-white m-0 d-flex flex-row">
-                                        <a class="dropdown-item col p-0 ps-3 shadow overflow-hidden" href="#">Name</a>
-                                        <a class="btn btn-success shadow" href="#">&#10004</a>
-                                        <a class="btn btn-danger shadow" href="#">&#10006</a>
-                                    </li>
+                                        <a class="dropdown-item col p-0 ps-3 shadow overflow-hidden" href="#">
+                                            <img class="sub-avatar rounded-circle me-3" src="{{asset('/uploads/' ~ (request.avatar != null ? request.avatar : 'defaultProfile.jpg'))}}" alt="">
+                                            {{request.name}}
+                                        </a>
+                                        <a class="btn btn-success shadow" href="{{path('acceptfriendrequest',{'id':request.reqid})}}">&#10004</a>
+                                        <a class="btn btn-danger shadow" href="{{path('denyfriendrequest',{'id':request.reqid})}}">&#10006</a>
+                                    </li>                                    
+                                {% endfor %}
+
                                 </ul>
                             </div>
 
@@ -126,7 +134,7 @@
                     </div>
                     <div class="box-title">
                         <div class="u-tus">
-                            <a href="">
+                            <a href="{{path('profile',{'id':p.post_user_id_id})}}">
                                 <h5>{{p.username}}</h5>
                             </a>
                         </div>

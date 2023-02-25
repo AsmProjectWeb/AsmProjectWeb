@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 25, 2023 lúc 08:38 PM
--- Phiên bản máy phục vụ: 10.4.27-MariaDB
--- Phiên bản PHP: 7.4.33
+-- Host: 127.0.0.1
+-- Generation Time: Feb 25, 2023 at 11:33 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `koky`
+-- Database: `koky`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `comment`
+-- Table structure for table `comment`
 --
 
 CREATE TABLE `comment` (
@@ -38,7 +38,7 @@ CREATE TABLE `comment` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `conversation`
+-- Table structure for table `conversation`
 --
 
 CREATE TABLE `conversation` (
@@ -49,7 +49,7 @@ CREATE TABLE `conversation` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `doctrine_migration_versions`
+-- Table structure for table `doctrine_migration_versions`
 --
 
 CREATE TABLE `doctrine_migration_versions` (
@@ -59,7 +59,7 @@ CREATE TABLE `doctrine_migration_versions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `doctrine_migration_versions`
+-- Dumping data for table `doctrine_migration_versions`
 --
 
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
@@ -110,7 +110,7 @@ INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `friend`
+-- Table structure for table `friend`
 --
 
 CREATE TABLE `friend` (
@@ -120,17 +120,19 @@ CREATE TABLE `friend` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `friend`
+-- Dumping data for table `friend`
 --
 
 INSERT INTO `friend` (`id`, `user_id_id`, `friend_user_id_id`) VALUES
 (1, 1, 2),
-(2, 2, 1);
+(2, 2, 1),
+(3, 4, 1),
+(4, 1, 4);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `friend_request`
+-- Table structure for table `friend_request`
 --
 
 CREATE TABLE `friend_request` (
@@ -140,10 +142,17 @@ CREATE TABLE `friend_request` (
   `created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `friend_request`
+--
+
+INSERT INTO `friend_request` (`id`, `sender_id`, `receiver_id`, `created`) VALUES
+(1, 1, 4, '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `groups`
+-- Table structure for table `groups`
 --
 
 CREATE TABLE `groups` (
@@ -157,7 +166,7 @@ CREATE TABLE `groups` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `groups`
+-- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`id`, `group_name`, `description`, `created_at`, `createtor_id`, `group_avatar`, `type_id`) VALUES
@@ -166,7 +175,7 @@ INSERT INTO `groups` (`id`, `group_name`, `description`, `created_at`, `createto
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `group_members`
+-- Table structure for table `group_members`
 --
 
 CREATE TABLE `group_members` (
@@ -177,7 +186,7 @@ CREATE TABLE `group_members` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `group_members`
+-- Dumping data for table `group_members`
 --
 
 INSERT INTO `group_members` (`id`, `rolemember`, `user_id`, `groupid_id`) VALUES
@@ -188,7 +197,7 @@ INSERT INTO `group_members` (`id`, `rolemember`, `user_id`, `groupid_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `group_post`
+-- Table structure for table `group_post`
 --
 
 CREATE TABLE `group_post` (
@@ -198,7 +207,7 @@ CREATE TABLE `group_post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `group_post`
+-- Dumping data for table `group_post`
 --
 
 INSERT INTO `group_post` (`id`, `post_id_id`, `group_id_id`) VALUES
@@ -207,7 +216,7 @@ INSERT INTO `group_post` (`id`, `post_id_id`, `group_id_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `mess`
+-- Table structure for table `mess`
 --
 
 CREATE TABLE `mess` (
@@ -221,7 +230,7 @@ CREATE TABLE `mess` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `messenger_messages`
+-- Table structure for table `messenger_messages`
 --
 
 CREATE TABLE `messenger_messages` (
@@ -237,7 +246,7 @@ CREATE TABLE `messenger_messages` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `participant`
+-- Table structure for table `participant`
 --
 
 CREATE TABLE `participant` (
@@ -250,7 +259,7 @@ CREATE TABLE `participant` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post`
+-- Table structure for table `post`
 --
 
 CREATE TABLE `post` (
@@ -264,7 +273,7 @@ CREATE TABLE `post` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `post`
+-- Dumping data for table `post`
 --
 
 INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `status`, `post_user_id_id`) VALUES
@@ -276,7 +285,7 @@ INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `st
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `post_liked`
+-- Table structure for table `post_liked`
 --
 
 CREATE TABLE `post_liked` (
@@ -289,7 +298,7 @@ CREATE TABLE `post_liked` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `report`
+-- Table structure for table `report`
 --
 
 CREATE TABLE `report` (
@@ -300,7 +309,7 @@ CREATE TABLE `report` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `report`
+-- Dumping data for table `report`
 --
 
 INSERT INTO `report` (`id`, `postid_id`, `reporter_id`, `send_at`) VALUES
@@ -309,7 +318,7 @@ INSERT INTO `report` (`id`, `postid_id`, `reporter_id`, `send_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `typegoup`
+-- Table structure for table `typegoup`
 --
 
 CREATE TABLE `typegoup` (
@@ -320,7 +329,7 @@ CREATE TABLE `typegoup` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -339,20 +348,23 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `phone`, `username`, `birthday`, `hometown`, `gender`, `job`, `status`, `avatar`) VALUES
 (1, 'k@gmail.com', '[\"R0LE_USER\"]', '$2y$13$vZVcz2le9Z6UYBiKBH3rZe1I8jFBVKwzxb909BejWBJgUhGs1h8gm', '987654321', 'Khoa', '2003-12-06', 'Updating', 1, 'Updating', 'Unknown', 'Khoa-63f71f138a300.jpg'),
 (2, 'l@gmail.com', '[\"R0LE_USER\"]', '$2y$13$sHY4tprWFx0X3K7yBzKu6.FX0u6YChIsMoUvwi6JJZqhAAClH1XhK', '352145894', 'Nguyen Losky', '2003-11-03', 'Updating', 1, 'Updating', 'Unknown', NULL),
-(3, 'Losky@gmail.com', '', 'loc', '0258963147', 'LocNguyen', '2023-02-01', NULL, 0, NULL, '', NULL);
+(3, 'Losky@gmail.com', '', 'loc', '0258963147', 'LocNguyen', '2023-02-01', NULL, 0, NULL, '', NULL),
+(4, 'a@gmail.com', '[\"R0LE_USER\"]', '$2y$13$qJRo39hYqjVY9VtQwRlkS.xHyHXQvw2yepyPr8VapQMSgHRg1wlyq', '987654321', 'a', '2023-02-01', 'Updating', 1, 'Updating', 'Unknown', 'a-63fa851c8ad6b.png'),
+(5, 'b@gmail.com', '[\"R0LE_USER\"]', '$2y$13$xGdOJuR4h2PjWtGTols0z.QXlcLNKoN57MGeQi/9yr2EBBrBqIe1u', '123456789', 'b', '2023-03-09', 'Updating', 1, 'Updating', 'Unknown', NULL),
+(6, 'admin@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$QLmqlf5NpE4Gw7TE3O3W8OJhGwp.3UbxrerxC4Pu5AM3Y9DdCV9ee', '9182736455', 'admin', '2023-02-26', 'Updating', 1, 'Updating', 'Unknown', NULL);
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `comment`
+-- Indexes for table `comment`
 --
 ALTER TABLE `comment`
   ADD PRIMARY KEY (`id`),
@@ -360,20 +372,20 @@ ALTER TABLE `comment`
   ADD KEY `IDX_9474526CA76ED395` (`user_id`);
 
 --
--- Chỉ mục cho bảng `conversation`
+-- Indexes for table `conversation`
 --
 ALTER TABLE `conversation`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_8A8E26E9BA0E79C3` (`last_message_id`);
 
 --
--- Chỉ mục cho bảng `doctrine_migration_versions`
+-- Indexes for table `doctrine_migration_versions`
 --
 ALTER TABLE `doctrine_migration_versions`
   ADD PRIMARY KEY (`version`);
 
 --
--- Chỉ mục cho bảng `friend`
+-- Indexes for table `friend`
 --
 ALTER TABLE `friend`
   ADD PRIMARY KEY (`id`),
@@ -381,7 +393,7 @@ ALTER TABLE `friend`
   ADD KEY `IDX_55EEAC6133C1910B` (`friend_user_id_id`);
 
 --
--- Chỉ mục cho bảng `friend_request`
+-- Indexes for table `friend_request`
 --
 ALTER TABLE `friend_request`
   ADD PRIMARY KEY (`id`),
@@ -389,7 +401,7 @@ ALTER TABLE `friend_request`
   ADD KEY `IDX_F284D94CD53EDB6` (`receiver_id`);
 
 --
--- Chỉ mục cho bảng `groups`
+-- Indexes for table `groups`
 --
 ALTER TABLE `groups`
   ADD PRIMARY KEY (`id`),
@@ -397,7 +409,7 @@ ALTER TABLE `groups`
   ADD KEY `IDX_F06D3970C54C8C93` (`type_id`);
 
 --
--- Chỉ mục cho bảng `group_members`
+-- Indexes for table `group_members`
 --
 ALTER TABLE `group_members`
   ADD PRIMARY KEY (`id`),
@@ -405,7 +417,7 @@ ALTER TABLE `group_members`
   ADD KEY `IDX_C3A086F3B3BB53C` (`groupid_id`);
 
 --
--- Chỉ mục cho bảng `group_post`
+-- Indexes for table `group_post`
 --
 ALTER TABLE `group_post`
   ADD PRIMARY KEY (`id`),
@@ -413,7 +425,7 @@ ALTER TABLE `group_post`
   ADD KEY `IDX_73D037FD2F68B530` (`group_id_id`);
 
 --
--- Chỉ mục cho bảng `mess`
+-- Indexes for table `mess`
 --
 ALTER TABLE `mess`
   ADD PRIMARY KEY (`id`),
@@ -421,7 +433,7 @@ ALTER TABLE `mess`
   ADD KEY `IDX_6B0AF3BAA76ED395` (`user_id`);
 
 --
--- Chỉ mục cho bảng `messenger_messages`
+-- Indexes for table `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
   ADD PRIMARY KEY (`id`),
@@ -430,7 +442,7 @@ ALTER TABLE `messenger_messages`
   ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
--- Chỉ mục cho bảng `participant`
+-- Indexes for table `participant`
 --
 ALTER TABLE `participant`
   ADD PRIMARY KEY (`id`),
@@ -438,7 +450,7 @@ ALTER TABLE `participant`
   ADD KEY `IDX_D79F6B119AC0396` (`conversation_id`);
 
 --
--- Chỉ mục cho bảng `post`
+-- Indexes for table `post`
 --
 ALTER TABLE `post`
   ADD PRIMARY KEY (`id`),
@@ -446,7 +458,7 @@ ALTER TABLE `post`
   ADD KEY `IDX_5A8A6C8DF78E8722` (`userberforeshare_id`);
 
 --
--- Chỉ mục cho bảng `post_liked`
+-- Indexes for table `post_liked`
 --
 ALTER TABLE `post_liked`
   ADD PRIMARY KEY (`id`),
@@ -454,7 +466,7 @@ ALTER TABLE `post_liked`
   ADD KEY `IDX_5D0247554B89032C` (`post_id`);
 
 --
--- Chỉ mục cho bảng `report`
+-- Indexes for table `report`
 --
 ALTER TABLE `report`
   ADD PRIMARY KEY (`id`),
@@ -462,194 +474,194 @@ ALTER TABLE `report`
   ADD KEY `IDX_C42F7784E1CFE6F5` (`reporter_id`);
 
 --
--- Chỉ mục cho bảng `typegoup`
+-- Indexes for table `typegoup`
 --
 ALTER TABLE `typegoup`
   ADD PRIMARY KEY (`id`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `comment`
+-- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `conversation`
+-- AUTO_INCREMENT for table `conversation`
 --
 ALTER TABLE `conversation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `friend`
+-- AUTO_INCREMENT for table `friend`
 --
 ALTER TABLE `friend`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `friend_request`
+-- AUTO_INCREMENT for table `friend_request`
 --
 ALTER TABLE `friend_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `groups`
+-- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `group_members`
+-- AUTO_INCREMENT for table `group_members`
 --
 ALTER TABLE `group_members`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `group_post`
+-- AUTO_INCREMENT for table `group_post`
 --
 ALTER TABLE `group_post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `mess`
+-- AUTO_INCREMENT for table `mess`
 --
 ALTER TABLE `mess`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `messenger_messages`
+-- AUTO_INCREMENT for table `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `participant`
+-- AUTO_INCREMENT for table `participant`
 --
 ALTER TABLE `participant`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `post`
+-- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `post_liked`
+-- AUTO_INCREMENT for table `post_liked`
 --
 ALTER TABLE `post_liked`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `report`
+-- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `typegoup`
+-- AUTO_INCREMENT for table `typegoup`
 --
 ALTER TABLE `typegoup`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `comment`
+-- Constraints for table `comment`
 --
 ALTER TABLE `comment`
   ADD CONSTRAINT `FK_9474526C4B89032C` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   ADD CONSTRAINT `FK_9474526CA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `conversation`
+-- Constraints for table `conversation`
 --
 ALTER TABLE `conversation`
   ADD CONSTRAINT `FK_8A8E26E9BA0E79C3` FOREIGN KEY (`last_message_id`) REFERENCES `mess` (`id`);
 
 --
--- Các ràng buộc cho bảng `friend`
+-- Constraints for table `friend`
 --
 ALTER TABLE `friend`
   ADD CONSTRAINT `FK_55EEAC6133C1910B` FOREIGN KEY (`friend_user_id_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_55EEAC619D86650F` FOREIGN KEY (`user_id_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `friend_request`
+-- Constraints for table `friend_request`
 --
 ALTER TABLE `friend_request`
   ADD CONSTRAINT `FK_F284D94CD53EDB6` FOREIGN KEY (`receiver_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_F284D94F624B39D` FOREIGN KEY (`sender_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `groups`
+-- Constraints for table `groups`
 --
 ALTER TABLE `groups`
   ADD CONSTRAINT `FK_F06D3970C54C8C93` FOREIGN KEY (`type_id`) REFERENCES `typegoup` (`id`),
   ADD CONSTRAINT `FK_F06D3970DCF2EE20` FOREIGN KEY (`createtor_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `group_members`
+-- Constraints for table `group_members`
 --
 ALTER TABLE `group_members`
   ADD CONSTRAINT `FK_C3A086F3A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_C3A086F3B3BB53C` FOREIGN KEY (`groupid_id`) REFERENCES `groups` (`id`);
 
 --
--- Các ràng buộc cho bảng `group_post`
+-- Constraints for table `group_post`
 --
 ALTER TABLE `group_post`
   ADD CONSTRAINT `FK_73D037FD2F68B530` FOREIGN KEY (`group_id_id`) REFERENCES `groups` (`id`),
   ADD CONSTRAINT `FK_73D037FDE85F12B8` FOREIGN KEY (`post_id_id`) REFERENCES `post` (`id`);
 
 --
--- Các ràng buộc cho bảng `mess`
+-- Constraints for table `mess`
 --
 ALTER TABLE `mess`
   ADD CONSTRAINT `FK_6B0AF3BA9AC0396` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`),
   ADD CONSTRAINT `FK_6B0AF3BAA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `participant`
+-- Constraints for table `participant`
 --
 ALTER TABLE `participant`
   ADD CONSTRAINT `FK_D79F6B11786A81FB` FOREIGN KEY (`iduser_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_D79F6B119AC0396` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`);
 
 --
--- Các ràng buộc cho bảng `post`
+-- Constraints for table `post`
 --
 ALTER TABLE `post`
   ADD CONSTRAINT `FK_5A8A6C8DBEFE6CCE` FOREIGN KEY (`post_user_id_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `FK_5A8A6C8DF78E8722` FOREIGN KEY (`userberforeshare_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `post_liked`
+-- Constraints for table `post_liked`
 --
 ALTER TABLE `post_liked`
   ADD CONSTRAINT `FK_5D0247554B89032C` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`),
   ADD CONSTRAINT `FK_5D024755A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Các ràng buộc cho bảng `report`
+-- Constraints for table `report`
 --
 ALTER TABLE `report`
   ADD CONSTRAINT `FK_C42F7784E1CFE6F5` FOREIGN KEY (`reporter_id`) REFERENCES `user` (`id`),
