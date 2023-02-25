@@ -39,6 +39,18 @@ class PostLikedRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function RemovePostLiked($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='
+        DELETE FROM `post_liked` WHERE post_liked.post_id = :id';
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
+        return $re->fetchAllAssociative();
+    }
 //    /**
 //     * @return PostLiked[] Returns an array of PostLiked objects
 //     */
