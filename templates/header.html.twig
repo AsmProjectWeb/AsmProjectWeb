@@ -69,7 +69,7 @@
                 {% if app.user != null %}
                     <li>
                         <form action="{{path('profile')}}" method="POST">
-                            <input type="hidden" value="{{app.user.id}}">
+                            <input type="hidden" name="id" value="{{app.user.id}}">
                             <button class="dropdown-item" type="submit">Profile</button>
                         </form>
                     </li>

@@ -156,10 +156,18 @@ class MainController extends AbstractController
     /**
      * @Route("/profile", name="profile", methods={"POST"})
      */
-    public function profile(Request $repo): Response
+    public function profile(Request $request, PostRepository $postRepo, UserRepository $userRepo): Response
     {
-        $id = $repo->request->get('id');
-        return $this->render('profile.html.twig', ['id'=>$id]);
+        $id = $request->get('id');
+        $user = $userRepo->find($id);
+        $post = $postRepo->findPostsInProfile($id);
+        return $this->render('profile.html.twig', [
+            'id'=>$id,
+            'post'=>$post,
+            'user'=>$user,
+        ]); 
+
+        // return $this->json($user);
     }
     /**
      * @Route("/group", name="profile_group")

@@ -43,26 +43,6 @@
                             </div>
                         </li>
                         <li>
-                            {# <div class="dropdown group-drop-down">
-                                <a class="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div style="height: 30px;">
-                                        <i class="fa-solid fa-people-group"> &#160</i>
-                                    </div>
-                                    <div style="height: 30px;">
-                                        <h6>Group</h6>
-                                    </div>
-                                </a>
-                                <ul class="dropdown-menu left-drop-menu" aria-labelledby="dropdownMenuLink">
-                                    <li>
-                                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                    </li>
-                                    <li>
-                                        <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                    </li>
-                                </ul>
-                            </div> #}
                             <div>
                                 <i class="fa-solid fa-people-group">&#160</i>
                             </div>
@@ -140,14 +120,35 @@
                         </div>
                     </div>
                     <div class="box-view">
-                        <span>
-                            <i class="fa-solid fa-bars"></i>
-                        </span>
+                        <div class="dropdown">
+                            <button class="btn rounded" type="button" data-bs-toggle="dropdown"aria-expanded="false">
+                                <span>
+                                    <i class="fa-solid fa-bars"></i>
+                                </span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                {% if app.user.id == p.post_user_id_id %}
+                                <li>
+                                    <a class="dropdown-item" href="">Edit</a>
+                                </li>
+                                {% endif %}
+                                <li>
+                                    <a class="dropdown-item" href="">Report</a>
+                                </li>
+                                {% if app.user.id == p.post_user_id_id %}
+                                <li>
+                                    <a class="dropdown-item" href="">Delete</a>
+                                </li>
+                                {% endif %}
+                             </ul>
+                        </div>
                     </div>
                     <div class="box-close">
                         <div>
                             <span>
-                                <i class="fa-solid fa-xmark"></i>
+                                <a href="#">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </a>
                             </span>
                         </div>
                     </div>
@@ -198,7 +199,7 @@
             {% endfor %}
         </div>
         <div class="right d-none d-lg-block">
-            {# <div> #}
+            <div> 
                 <h5>&#160 Recent contact</h5>
                 <div class="list-friend">
                     <ul>
@@ -217,7 +218,7 @@
                         </li>
                     </ul>
                 </div>
-            {# </div> #}
+            </div>
         </div>
     </div>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -396,9 +397,25 @@ body{
     right: 11%;
     display: flex;
     justify-content: center; 
+    transition: all 0.4s ease;
 }
 .box-view span{
    margin: auto;
+}
+.box-view:hover{
+    background-color: #b6e683;
+    border-radius: 12px;
+}
+.box-view > div > ul > li{
+    transition: all 0.3s ease;
+}
+.box-view .dropdown-item:hover {
+  background-color: #8ABE53;
+   border-radius: 12px;
+}
+.box-view > div > ul > li:hover{
+    background-color: #8ABE53;
+    border-radius: 12px;
 }
 .box-close{
     /* background-color: pink; */
@@ -408,6 +425,18 @@ body{
     right: 12px;
     display: flex;
     align-items: center;
+}
+.box-close span{
+    padding: 6px 12px 6px 12px;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+}
+.box-close span a{
+    text-decoration: none;
+    color: black;
+}
+.box-close span:hover{
+    background-color: #b6e683;
 }
 .box-content{
     padding-top: 6px;
@@ -510,7 +539,7 @@ body{
 }
 .group-action-left-1 ul li{
     display: flex;
-    transition: all 0.3s ease;
+    transition: all 0.5s ease;
 }
 .group-action-left-1 ul li:last-child{
     border-bottom: #333 solid 1px;
@@ -564,6 +593,7 @@ body{
 }
 .group-action-left-3{
     margin-top: 50px;
+    box-shadow: 2px 2px 2px #8ABE53;
 }
 .group-action-left-3 ul, .group-action-left-3 ul li{
     width: 100%;
@@ -575,12 +605,13 @@ body{
     vertical-align: middle;
     line-height:40px;
     border: none;
+    transition: all 0.4s ease;
 }
 .group-action-left-3 > ul > li{
     display: flex;
     background-color: #fff;
     list-style-type: none;
-    transition: all 0.3 ease;
+    transition: all 0.3s ease;
 }
 .group-action-left-3 ul li .sub-avatar{
     height: 40px;
@@ -646,27 +677,27 @@ body{
 .list-friend{
     background-color: #fff;
 }
-.right > div > ul > li{
+.right > div > div > ul > li{
     background-color: #8ABE53;
     list-style: none;
     list-style-type: none;
     height: 30px;
     border-radius: 25px 0 0 25px;
     margin-top: 3px;
-    transition: all 0.3 ease;
+    transition: all 0.4s ease;
 }
-.right > div > ul > li > img{
+.right > div > div > ul > li > img{
     width: 29px;
     height: 29px;
     border-radius: 50%;
 }
-.right > div > ul > li > a{
+.right > div > div > ul > li > a{
     text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: 12px;
 }
-.right > div > ul > li:hover{
+.right > div > div > ul > li:hover{
     background-color: #b6e683;
 }
 .right ul li:last-child:hover{
@@ -681,6 +712,22 @@ body{
     border-radius:12px;
     text-align: center;
     width: 80%;
+}
+.right > div{
+    /* border-right: #8ABE53 solid 1px; */
+    position: fixed;
+    width: inherit;
+    overflow-y: scroll;
+    padding: 15px;
+    overflow:hidden;
+    max-height: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 2px 2px 2px #8ABE53;
+    transition: all 0.5s ease;
+}
+.right > div:hover{
+    overflow-y: scroll;
 }
 </style>
 </body>
