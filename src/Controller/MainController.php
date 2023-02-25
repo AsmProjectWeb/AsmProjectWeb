@@ -195,8 +195,13 @@ class MainController extends AbstractController
     /**
     * @Route("/test", name="testPage")
     */
-    public function test(): Response
+    public function test(Request $request, PostRepository $postRepo): Response
     {
-        return $this->render('admin.html.twig', []);
+        // $id = $request->query->get('id');
+        $post = $postRepo->findPostsReported();
+        return $this->render('admin.html.twig', [
+            'post'=>$post,
+            
+        ]);
     }
 }

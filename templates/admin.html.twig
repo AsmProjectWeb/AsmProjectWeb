@@ -11,11 +11,33 @@
                 <div class="group-action-left-1">
                     <ul>
                         <li>
-                            <div>
+                            {# <div>
                                 <i class="fa-solid fa-house">&#160</i>
                             </div>
                             <div>
                                 <h6>Home</h6>
+                                
+                            </div> #}
+                            <div class="btn-group dropend w-100">
+                                <button type="button" class="none  d-flex flex-row w-100" data-bs-toggle="dropdown" aria-expanded="false" style="border: none !important">
+                                    <div>
+                                        <i class="fa-solid fa-user-group">&#160</i>
+                                    </div>
+                                    <div>
+                                        <h6>Friend Request</h6>
+                                    </div>
+                                </button>
+                                <ul class="dropdown-menu" style="width:400px">
+                                    <li class="bg-white m-0 d-flex flex-row">
+                                        {# <a class="dropdown-item col p-0 shadow overflow-hidden" href="#">Name</a>
+                                        <a class="btn btn-success shadow" href="#">&#10004</a>
+                                        <a class="btn btn-danger shadow" href="#">&#10006</a> #}
+                                        <form>
+                                            <input type="text">
+                                            <button></button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <li>
@@ -171,13 +193,13 @@
                     Posts were reported
                 </div>
                 <hr class="mt-2 mb-2">
-                {% for post in dataPost %}
+                {% for p in post %}
                 <div class="box">
                     <div class="box-header">
                         <div class="box-avata">
                             <div class="avata">
-                                {% if post.avatar is not empty %}
-                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~post.avatar)}}" alt="">
+                                {% if p.avatar is not empty %}
+                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~ p.avatar)}}" alt="">
                                 {% else %}
                                     <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
                                 {% endif %}
@@ -186,30 +208,18 @@
                         <div class="box-title">
                             <div class="u-tus">
                                 <a href="">
-                                    <h5>{{post.name}}</h5>
+                                    <h5>{{p.username}}</h5>
                                 </a>
                             </div>
                             <div class="u-title">
-                                    <label for="">{{post.create.format('H:i:s d-m-Y')}}</label>
-                            </div>
-                        </div>
-                        <div class="box-view">
-                            <span>
-                                <i class="fa-solid fa-bars"></i>
-                            </span>
-                        </div>
-                        <div class="box-close">
-                            <div>
-                                <span>
-                                    <i class="fa-solid fa-xmark"></i>
-                                </span>
+                                    <label for="">{{p.date}}</label>
                             </div>
                         </div>
                     </div>
                     <div class="box-content">
-                        <p>{{post.content}}</p>
-                        {% if post.image is not empty %}
-                            <img src="{{ asset('uploads/'~post.image) }}" alt="">
+                        <p>{{p.content}}</p>
+                        {% if p.image is not empty %}
+                            <img src="{{ asset('uploads/'~ p.image) }}" alt="">
                         {% endif %}
 
                     </div>
@@ -236,21 +246,13 @@
                         <div class="box-action">
                             <div class="sub-box-action" id="sub-box-action-1">
                                 <a href="">
-                                    <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                    <i class="icon-hide fa-solid fa-heart"></i>
+                                    &#10006
                                 </a>
                                 <a href="" class=""></a>
                             </div>
                             <div class="sub-box-action">
                                 <a href="">
-                                    <i class="icon-none fa-regular fa-comment"></i>
-                                    <i class="icon-hide fa-solid fa-comment"></i>
-                                </a>
-                            </div>
-                            <div class="sub-box-action">
-                                <a href="">
-                                    <i class="icon-none fa-regular fa-share-from-square"></i>
-                                    <i class="icon-hide fa-solid fa-share-from-square"></i>
+                                    &#10004
                                 </a>
                             </div>
                         </div>
@@ -261,14 +263,14 @@
         </div>
     </div>
 </body>
-    // <script>
+       <script>
     //     var myModal = document.getElementById('myModal')
     //     var myInput = document.getElementById('myInput')
 
     //     myModal.addEventListener('shown.bs.modal', function () {
     //         myInput.focus()
     //     })
-    // </script>
+    </script>
     <style>
 .btn-success:hover {
     background-color: #97cc5f !important;
@@ -521,9 +523,9 @@ body{
     line-height:40px;
 
 }
-.group-action-left-1 ul li{
+.group-action-left-1 ul li, .group-action-left-1 ul li button{
     display: flex;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 .group-action-left-1 ul li:last-child{
     border-bottom: #333 solid 1px;
@@ -540,6 +542,9 @@ body{
     width: 100%;
     height: 100%;
     border-radius: 50%;
+}
+.group-action-left-1 ul li button:hover{
+        background-color: #8ABE53;
 }
 .group-action-left-1 li:hover{
     background-color: #8ABE53;

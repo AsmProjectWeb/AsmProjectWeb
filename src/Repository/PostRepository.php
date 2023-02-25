@@ -104,6 +104,20 @@ class PostRepository extends ServiceEntityRepository
         $re = $conn->executeQuery($sql, ['id' => $id]);
         return $re->fetchAllAssociative();
     }
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function findPostsReported(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='
+        SELECT * FROM `post` 
+        INNER JOIN user u on u.id = post.post_user_id_id
+        INNER JOIN report r on r.postid_id = post.id';
+        $re = $conn->executeQuery($sql);
+        return $re->fetchAllAssociative();
+    }
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

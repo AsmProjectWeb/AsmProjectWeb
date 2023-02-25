@@ -45,11 +45,6 @@ class Groups
     private $IDgroup;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $TypeGroup;
-
-    /**
      * @ORM\OneToMany(targetEntity=GroupPost::class, mappedBy="GroupID")
      */
     private $IdGroup;
@@ -58,6 +53,11 @@ class Groups
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $GroupAvatar;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Typegoup::class, inversedBy="Type")
+     */
+    private $type;
 
     public function __construct()
     {
@@ -148,18 +148,6 @@ class Groups
         return $this;
     }
 
-    public function getTypeGroup(): ?string
-    {
-        return $this->TypeGroup;
-    }
-
-    public function setTypeGroup(string $TypeGroup): self
-    {
-        $this->TypeGroup = $TypeGroup;
-
-        return $this;
-    }
-
     public function getGroupAvatar(): ?string
     {
         return $this->GroupAvatar;
@@ -168,6 +156,18 @@ class Groups
     public function setGroupAvatar(?string $GroupAvatar): self
     {
         $this->GroupAvatar = $GroupAvatar;
+
+        return $this;
+    }
+
+    public function getType(): ?Typegoup
+    {
+        return $this->type;
+    }
+
+    public function setType(?Typegoup $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
