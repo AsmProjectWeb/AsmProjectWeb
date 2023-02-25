@@ -104,9 +104,10 @@ class MainController extends AbstractController
     {
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
-        
-        if($req->request->get('button-post'))
-        {
+        // return $this->json($p);
+        // if($req->request->get('button-post'))
+        // {
+            // return $this->json($p);
             $form->handleRequest($req);
             if($form->isSubmitted() && $form->isValid()){
     
@@ -123,7 +124,7 @@ class MainController extends AbstractController
                 $this->repo->add($p,true);
                 return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
             }
-        }
+        // }
         $user=$this->security->getUser();
         $userid = $user->getId();
 
