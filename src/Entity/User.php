@@ -127,6 +127,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity=FriendRequest::class, mappedBy="Sender")
+     */
+    private $sender;
+
+    /**
+     * @ORM\OneToMany(targetEntity=FriendRequest::class, mappedBy="receiver")
+     */
+    private $receiver;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="Reporter")
+     */
+    private $Reporter;
+
     public function __construct()
     {
         $this->UserPost = new ArrayCollection();
@@ -139,6 +154,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->IdUser = new ArrayCollection();
         $this->User = new ArrayCollection();
         $this->FriendUser = new ArrayCollection();
+        $this->sender = new ArrayCollection();
+        $this->receiver = new ArrayCollection();
+        $this->Reporter = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -557,6 +575,96 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FriendRequest>
+     */
+    public function getSender(): Collection
+    {
+        return $this->sender;
+    }
+
+    public function addSender(FriendRequest $sender): self
+    {
+        if (!$this->sender->contains($sender)) {
+            $this->sender[] = $sender;
+            $sender->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSender(FriendRequest $sender): self
+    {
+        if ($this->sender->removeElement($sender)) {
+            // set the owning side to null (unless already changed)
+            if ($sender->getSender() === $this) {
+                $sender->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FriendRequest>
+     */
+    public function getReceiver(): Collection
+    {
+        return $this->receiver;
+    }
+
+    public function addReceiver(FriendRequest $receiver): self
+    {
+        if (!$this->receiver->contains($receiver)) {
+            $this->receiver[] = $receiver;
+            $receiver->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceiver(FriendRequest $receiver): self
+    {
+        if ($this->receiver->removeElement($receiver)) {
+            // set the owning side to null (unless already changed)
+            if ($receiver->getReceiver() === $this) {
+                $receiver->setReceiver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Report>
+     */
+    public function getReporter(): Collection
+    {
+        return $this->Reporter;
+    }
+
+    public function addReporter(Report $reporter): self
+    {
+        if (!$this->Reporter->contains($reporter)) {
+            $this->Reporter[] = $reporter;
+            $reporter->setReporter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReporter(Report $reporter): self
+    {
+        if ($this->Reporter->removeElement($reporter)) {
+            // set the owning side to null (unless already changed)
+            if ($reporter->getReporter() === $this) {
+                $reporter->setReporter(null);
+            }
+        }
 
         return $this;
     }

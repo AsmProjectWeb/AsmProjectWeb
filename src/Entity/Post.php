@@ -65,11 +65,17 @@ class Post
      */
     private $IdPost;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="postid")
+     */
+    private $ReportPost;
+
     public function __construct()
     {
         $this->post = new ArrayCollection();
         $this->IDpost = new ArrayCollection();
         $this->IdPost = new ArrayCollection();
+        $this->ReportPost = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -203,6 +209,36 @@ class Post
             // set the owning side to null (unless already changed)
             if ($iDpost->getPost() === $this) {
                 $iDpost->setPost(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Report>
+     */
+    public function getReportPost(): Collection
+    {
+        return $this->ReportPost;
+    }
+
+    public function addReportPost(Report $reportPost): self
+    {
+        if (!$this->ReportPost->contains($reportPost)) {
+            $this->ReportPost[] = $reportPost;
+            $reportPost->setPostid($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReportPost(Report $reportPost): self
+    {
+        if ($this->ReportPost->removeElement($reportPost)) {
+            // set the owning side to null (unless already changed)
+            if ($reportPost->getPostid() === $this) {
+                $reportPost->setPostid(null);
             }
         }
 
