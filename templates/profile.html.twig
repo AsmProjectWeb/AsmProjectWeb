@@ -36,7 +36,8 @@
             </div>
             <div class="button">
             {% if app.user.id == id %}
-                <button class="button1">Edit information</button>
+                {# <button class="button1" href="{{path('app_edit_profile')}}">Edit information</button> #}
+                <a class="button1" href="{{path('app_edit_profile')}}" style="text-decoration:none">Edit information</a>
             {% else %}
                 <button class="button1">Add Friend</button>
                 <button class="button1">Message</button>

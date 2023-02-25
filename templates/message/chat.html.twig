@@ -4,41 +4,150 @@
 {% endblock %}
 {% block body %}
 <body>
-    <div class="box d-flex flex-row">
-        <div class="friend-zone d-flex flex-column">
-            <div>                
-                <h2>Friend</h2>
+    <div class="d-flex justify-content-center align-items-center vh-100 vw-100">
+        <div class="chatList p-2 rounded shadow-green h-90 d-flex flex-column">
+            <div class="d-flex mb-3 p-3 justify-content-between align-items-center shadow">
+                <div class="d-flex align-items-center">
+                    <img class="b-icon rounded-circle shadow" src="{{asset('/uploads/' ~ (user.avatar != null ? user.avatar : 'defaultProfile.jpg'))}}" alt="">
+                    <h3 class="m-2" style="font-size: 1.5rem;">{{user.username}}</h3>
+                </div>
+                <a href="{{path('app_list')}}" class="btn btn-success">Back</a>
             </div>
-            <div class="friend-list overflow-y-auto d-flex flex-column">
-                <div class="friend d-flex align-items-center flex-row">
-                    <img class="rounded-circle icon" src="koky-high-resolution-logo-color-on-transparent-background.png" alt="">
-                    <div class=" w-100 ms-3 h-100">
-                        <p class="fs-5 m-0 bold fw-bold">User Name</p>
-                        <div class="d-flex flex-row justify-content-between w-100 fs-6">
-                            <p>Last Message</p>
-                            <p>Time</p>
-                        </div>
+            <div class="input-group mb-3 shadow">
+                <input type="text" name="" id="searchText" class="form-control" placeholder="Search...">
+                <button class="btn btn-success" id +="searchBtn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+            <ul class="chat-group overflow-y-auto shadow d-flex flex-column flex-grow-1 mb-3 ps-2 pe-2" id="chat-zone">
+                {# <li class="chat-group-item">
+                    <div class=" w-100 d-flex justify-content-end">
+                        <div class="message send rounded-3 shadow p-2 m-05" title="Time send">Hi</div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="chat-zone d-flex flex-column w-100">
-            <div class="chat-person d-flex flex-row align-items-center border-bottom">
-                <img class="rounded-circle icon m-3" src="koky-high-resolution-logo-color-on-transparent-background.png" alt="">
-                <div class="fs-6 m-0 bold fw-bold text-white m-3">User Name</div>
-            </div>
-            <div class="chat-area overflow-y-auto d-flex flex-column">
-                <div class="message w-100 d-flex justify-content-start">
-                    <div class="send rounded-3 d-inline-block">Hello</div>
-                </div>
-                <div class="message w-100 rounded-3 d-flex justify-content-end">
-                    <div class="receive rounded-3 d-inline-block">Hi</div>
-                </div>
+                </li>
+                <li>
+                    <div class="w-100 d-flex justify-content-start">
+                        <div class="message receive rounded-3 shadow p-2 m-05" title="Time send">Hi</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="w-100 d-flex justify-content-start">
+                        <div class="message receive rounded-3 shadow p-2 m-05" title="Time send">Hi</div>
+                    </div>
+                </li> #}
+            </ul>
+
+            <div class="input-group shadow">
+                <input type="text" name="" id="chatText" class="form-control" placeholder="Type a message...">
+                <button class="btn btn-success" id ="chatBtn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </div>
 </body>
-</html>
+{% block javascript %}
+<script>
+    $(document).ready(function(){
+        var id = {{user.id}};
+        var messArray = [];
+        var $chatZone = $("#chat-zone");
+
+        $.ajax({
+            url: '/message/chat/' + id,
+            data:{
+                'id': id,
+                'new': 'yes',
+                },
+            type:'POST',
+            success: function(data) {
+                console.log(data);
+                $('#chat-zone').empty();
+                $.each(data, function (index, user) { 
+                    messArray.push(user);
+                    if (user.userid != id) {
+                        $('#chat-zone').append(
+                            '<li class="chat-group-item">'+
+                                '<div class=" w-100 d-flex justify-content-end">' +
+                                    '<div class="message send rounded-3 shadow p-2 m-05" title="' + user.createAt +'">'+ user.content +'</div>' +
+                                '</div>'+
+                            '</li>'
+                        );
+                    } else {
+                        $('#chat-zone').append(
+                            '<li class="chat-group-item">'+
+                                '<div class=" w-100 d-flex justify-content-start">' +
+                                    '<div class="message receive rounded-3 shadow p-2 m-05" title="' + user.createAt +'">'+ user.content +'</div>' +
+                                '</div>'+
+                            '</li>'
+                        );
+                    };
+                    $chatZone.scrollTop($chatZone.prop("scrollHeight"));
+                });
+            }
+        });
+
+        $("#chatBtn").on("click",function(){
+            var chatText = $("#chatText").val();
+            if (chatText != ''){
+                $("#chatText").val('');
+                $.ajax({
+                    url: '/message/chat/' + id,
+                    data:{
+                        'id': id,
+                        'message': chatText,
+                    },
+                    type:'POST',
+                    success: function(data) {
+                        console.log(data);
+                        var mess = data[0];
+                        messArray.push(mess);
+                        $('#chat-zone').append(
+                            '<li class="chat-group-item">'+
+                                '<div class=" w-100 d-flex justify-content-end">' +
+                                    '<div class="message send rounded-3 shadow p-2 m-05" title="' + mess.createAt +'">'+ mess.content +'</div>' +
+                                '</div>'+
+                            '</li>'
+                        );
+                        $chatZone.scrollTop($chatZone.prop("scrollHeight"));
+                    }
+                });
+            };
+            // console.log(searchText);
+        });
+
+        setInterval(function() {
+            $.ajax({
+                url: '/message/chat/' + id,
+                data:{
+                        'id': id,
+                        'new': 'no',
+                        },
+                type:'POST',
+                success: function(data) {
+                    var lastMess = messArray[messArray.length - 1];
+                    var mess = data[0];
+                    // console.log(messArray);
+                    // console.log(newMess);
+                    if (lastMess.id != mess.id){
+                        messArray.push(mess);
+                        $('#chat-zone').append(
+                            '<li class="chat-group-item">'+
+                                '<div class=" w-100 d-flex justify-content-start">' +
+                                    '<div class="message receive rounded-3 shadow p-2 m-05" title="' + mess.createAt +'">'+ mess.content +'</div>' +
+                                '</div>'+
+                            '</li>'
+                        );    
+                        $chatZone.scrollTop($chatZone.prop("scrollHeight"));                    
+                    }
+                }
+            });
+        }, 1000);
+
+    });
+
+</script>
+{% endblock %}
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -50,89 +159,75 @@
     * {
 		margin: 0;
 		padding: 0;
-		box-sizing: border-box;
 		font-family: 'Poppins', sans-serif;
+        transition: 0.3s;
 	}
 
-    body {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		min-height: 100vh;
-		flex-direction: column;
-		background: #ccc;
-	}
-
-    .box {
-		position: relative;
-		width: var(--box-width);
-		height: var(--box-height);
-		background: #1c1c1c;
-		border-radius: 40px;
-		overflow: hidden;
-	}
-
-    ::-webkit-scrollbar {
-    background-color: transparent;
-    width: 5px;
-    }
-    ::-webkit-scrollbar-thumb {
-    background-color: gray;
-    border-radius: 3px;
+    h3{
+        color:rgba(0, 0, 0, 0.7)
     }
 
-    .overflow-y-auto{
-        overflow-y: scroll;
-    }
-    .friend-zone{
-        min-width: 100px;
-        width:300px;
-        height: 100%;
-        background-color:aqua;
-    }
-
-    .friend{
-        height: 60px;
-        background-color: aquamarine;
-        box-sizing: content-box;
-        padding:10px;
-    }
-
-    .chat-zone{
-
-    }
-
-    .message{
-        height: 54px;
-    }
-
-    .send{
-        margin: 5px 10px;
-        padding:10px;
-        color: azure;
-        background-color: #303030;
-        box-sizing: content-box;
-    }
-
-    .receive{
-        margin: 5px 10px;
-        padding:10px;
-        color: azure;
-        background-color: #8abe53;
-        box-sizing: content-box;
+    .b-icon{
+        width: 80px;
+        height: 80px;
     }
 
     .icon{
         width: 50px;
         height: 50px;
-        /* align-self: center; */
     }
 
-    h2 {
-		color: #8abe53;
-		font-weight: 500;
-		text-align: center;
-		letter-spacing: 0.1em;
-	}
+    .chatList{
+        width:800px;
+    }
+
+    .h-90{
+        height: 90%;
+    }
+
+    .shadow-green{
+        box-shadow: 0 .5rem 1rem rgba(182, 230, 131,0.3)!important;
+    }
+
+    .m-05{
+        margin: 1px;
+    }
+    .overflow-y-auto{
+        overflow-y: auto;
+    }
+
+    li{
+        list-style: none;
+    }
+
+    ul{
+        padding:0;
+        margin:0;
+    }
+
+    .send{
+        background-color: #b6e683;
+    }
+    .receive{
+        background-color: #8ABE53;
+    }
+
+    .message{
+        cursor:pointer;
+    }
+
+    .message:hover{
+        transform: scale(1.2);
+    }
+
+    ::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 3px;
+    }
 </style>
 {% endblock %}
