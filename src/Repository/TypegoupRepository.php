@@ -39,6 +39,42 @@ class TypegoupRepository extends ServiceEntityRepository
         }
     }
 
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function addType($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="
+        INSERT INTO `typegoup`(`type_ground`) VALUES  ( :id ) ";
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
+        return $re->fetchAllAssociative();
+    }
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function editType($id, $edittype): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="
+        UPDATE `typegoup` SET `type_ground`= :edittype WHERE typegoup.id = :id ";
+        $re = $conn->executeQuery($sql, [ 'edittype'=>$edittype, 'id'=>$id]);
+        return $re->fetchAllAssociative();
+    }
+
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function deleteType($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="
+        DELETE FROM `typegoup` WHERE id = :id ";
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
+        return $re->fetchAllAssociative();
+    }
 //    /**
 //     * @return Typegoup[] Returns an array of Typegoup objects
 //     */

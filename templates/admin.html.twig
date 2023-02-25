@@ -21,10 +21,10 @@
                             <div class="btn-group dropend w-100">
                                 <button type="button" class="none  d-flex flex-row w-100" data-bs-toggle="dropdown" aria-expanded="false" style="border: none !important">
                                     <div>
-                                        <i class="fa-solid fa-user-group">&#160</i>
+                                        <i class="fa-solid fa-add">&#160</i>
                                     </div>
                                     <div>
-                                        <h6>Friend Request</h6>
+                                        <h6>Add new type</h6>
                                     </div>
                                 </button>
                                 <ul class="dropdown-menu" style="width:400px">
@@ -32,79 +32,44 @@
                                         {# <a class="dropdown-item col p-0 shadow overflow-hidden" href="#">Name</a>
                                         <a class="btn btn-success shadow" href="#">&#10004</a>
                                         <a class="btn btn-danger shadow" href="#">&#10006</a> #}
-                                        <form>
-                                            <input type="text">
-                                            <button></button>
+                                        <form action="{{path('newtype')}}" class="d-flex" method="GET">
+                                            <input type="text" name="newtype" style="width:370px">
+                                            <button type="submit" style="border: none; width: 30px;">&#10004</button>
                                         </form>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li>
-                            <div class="sub-avatar">
-                                <img src="ark.jfif" alt="">
+                            <div>
+                                <i class="fa-solid fa-edit">&#160</i>
                             </div>
                             <div>
-                                <h6>Name</h6>
+                                <h6>Type</h6>
                             </div>
                         </li>
                     </ul>
                 </div>
-                {# <div class="group-action-left-2">
+                <div class="group-action-left-2">
                     <ul>
+                    {% for t in type %}
                         <li>
-                            <div>
-                                <i class="fa-solid fa-user-group">&#160</i>
-                            </div>
-                            <div>
-                                <h6>Friend</h6>
-                            </div>
+                            <form action="{{path('Edit_type')}}" class="d-flex">
+                                <div>
+                                    <input type="hidden" name="idedittype" value="{{t.id}}">
+                                    <input type="text" readonly name="edittype" onclick="removeReadonly(this)" value="{{t.TypeGround}}" style="border: none; width: 100%">
+                                </div>
+                                <div>
+                                    <button type="submit" style="width:50px;border: none;border-radius: 12px    ">&#10004</button>
+                                </div>
+                            </form>
+                                <div>
+                                    <a href="{{path('Delete_type',{'id': t.id})}}" name="deleteid" style=" width:40px; border-radius: 12px">&#10006</a>
+                                </div>
                         </li>
-                        <li>
-                            <div>
-                                <i class="fa-solid fa-people-group">&#160</i>
-                            </div>
-                            <div>
-                                <h6>Ground</h6>
-                            </div>
-                        </li>
+                    {% endfor %}
                     </ul>
                 </div>
-                <div class="group-action-left-3">
-                    <ul>
-                        <li>
-                            <div class="sub-avatar">
-                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                            </div>
-                            <div>
-                                <h6>Group 1</h6>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sub-avatar">
-                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                            </div>
-                            <div>
-                                <h6>Group 2</h6>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sub-avatar">
-                                <img src="{{ asset('images/koky-logo.png') }}" alt="">
-                            </div>
-                            <div>
-                                <h6>Group 3</h6>
-                            </div>
-                        </li>
-                    </ul>
-                </div> #}
-                {# <div class="left-footer">
-                    <a href=""><li>Privacy &#160 </li></a>
-                    <a href=""><li>koky's policy &#160</li></a>
-                    <a href=""><li>Advertisement &#160</li></a>
-                    <a href=""><li>Term &#160</li></a>
-                    <a href=""><li>Copyright by KOKY (©) &#160</li></a>
-                </div> #}
             </div>
         </div>
         <div class="middle mx-auto">
@@ -264,12 +229,9 @@
     </div>
 </body>
        <script>
-    //     var myModal = document.getElementById('myModal')
-    //     var myInput = document.getElementById('myInput')
-
-    //     myModal.addEventListener('shown.bs.modal', function () {
-    //         myInput.focus()
-    //     })
+            function removeReadonly(input) {
+            input.removeAttribute('readonly');
+}
     </script>
     <style>
 .btn-success:hover {
@@ -449,7 +411,6 @@ body{
     height: 30px;
     width: 100%;
     border-top: 1px solid #999;
-    border-bottom: 1px solid #999;
     display: flex;
     justify-content: space-between;
 }
@@ -528,7 +489,7 @@ body{
     transition: all 0.4s ease;
 }
 .group-action-left-1 ul li:last-child{
-    border-bottom: #333 solid 1px;
+    /* border-bottom: #333 solid 1px; */
 }
 .group-action-left-1 ul li div h6{
     line-height: 40px;
@@ -571,7 +532,7 @@ body{
     transition: all 0.3s ease;
 }
 .group-action-left-2 ul li:last-child{
-    border-bottom: #333 solid 1px;
+    /* border-bottom: #333 solid 1px; */
 }
 .group-action-left-2 ul li div h6, .group-action-left-3 ul li div h6 {
     line-height: 40px;
@@ -579,6 +540,12 @@ body{
 .group-action-left-2 > ul > li > div > ul > li{
     display: flex;
     width: 100%;
+}
+.group-action-left-2 button{
+    transition: all 0.4s ease;
+}
+.group-action-left-2 div button:hover{
+    background-color: #8ABE53;
 }
 .group-action-left-3{
     margin-top: 50px;
@@ -628,7 +595,7 @@ body{
     height: 40px;
     width: 40px;
 }
-.group-action-left-2 li:hover , .group-action-left-2 a:hover{
+ .group-action-left-2 a:hover{
     background-color: #8ABE53;
 }
 .containerall{

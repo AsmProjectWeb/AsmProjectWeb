@@ -3,15 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\Typegoup;
 use App\Entity\User;
 use App\Form\LoginType;
 use App\Form\PostType;
 use App\Form\RegisterType;
+use App\Form\TypegoupType;
 use App\Repository\FriendRepository;
 use App\Repository\GroupMembersRepository;
 use App\Repository\GroupsRepository;
 use App\Repository\PostRepository;
+use App\Repository\TypegoupRepository;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -100,7 +104,6 @@ class MainController extends AbstractController
         
         if($req->request->get('button-post'))
         {
-    
             $form->handleRequest($req);
             if($form->isSubmitted() && $form->isValid()){
     
@@ -193,15 +196,47 @@ class MainController extends AbstractController
     }
 
     /**
-    * @Route("/test", name="testPage")
+    * @Route("/test", name="admin_page")
     */
-    public function test(Request $request, PostRepository $postRepo): Response
+    public function admin(Request $request, PostRepository $postRepo,TypegoupRepository $typeRepo ): Response
     {
         // $id = $request->query->get('id');
         $post = $postRepo->findPostsReported();
+        $type = $typeRepo->findAll();
         return $this->render('admin.html.twig', [
             'post'=>$post,
-            
+            'type'=>$type,
         ]);
+        // return $this->json($post);
+    }
+    /**
+     * @Route("/newtype", name="newtype")
+     */
+    public function addType(Request $req,TypegoupRepository $typeRepo ): Response
+    {
+        $type = $req->query->get('newtype');
+        $addnewtype = $typeRepo->addType($type);
+        return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/edittype", name="Edit_type", methods={"GET"})
+     */
+    public function edittypeAction(Request $req,TypegoupRepository $typeRepo ): Response
+    {
+        $id = $req->query->get('idedittype');
+        $edittype = $req->query->get('edittype');
+        $update = $typeRepo->editType($id,$edittype); 
+        return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
+        // return $this->json($id);
+    }
+        /**
+     * @Route("/deletetype", name="Delete_type", methods={"GET"})
+     */
+    public function deletetypeAction(Request $req,TypegoupRepository $typeRepo ): Response
+    {
+        $id = $req->query->get('id');
+        $delete = $typeRepo->deleteType($id);
+        return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
+        // return $this->json($type);
     }
 }
