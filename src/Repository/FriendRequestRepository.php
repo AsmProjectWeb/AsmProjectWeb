@@ -39,6 +39,19 @@ class FriendRequestRepository extends ServiceEntityRepository
         }
     }
 
+    public function addFriendRequest($from, $to):void{
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='INSERT INTO `friend_request`( `sender_id`, `receiver_id`) VALUES (:from,:to)';
+        $re = $conn->executeQuery($sql, ['from' => $from, 'to' => $to]);
+    }
+
+    public function isWaiting($from, $to): int {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='SELECT * FROM `friend_request` WHERE sender_id = :from AND receiver_id = :to';
+        $re = $conn->executeQuery($sql, ['from' => $from, 'to' => $to]);
+        return $re->rowCount();
+    }
+
 //    /**
 //     * @return FriendRequest[] Returns an array of FriendRequest objects
 //     */

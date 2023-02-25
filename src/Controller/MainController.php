@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Friend;
+use App\Entity\FriendRequest;
 use App\Entity\Post;
 use App\Entity\Typegoup;
 use App\Entity\User;
@@ -10,6 +12,7 @@ use App\Form\PostType;
 use App\Form\RegisterType;
 use App\Form\TypegoupType;
 use App\Repository\FriendRepository;
+use App\Repository\FriendRequestRepository;
 use App\Repository\GroupMembersRepository;
 use App\Repository\GroupsRepository;
 use App\Repository\PostRepository;
@@ -97,7 +100,7 @@ class MainController extends AbstractController
     /**
      * @Route("/page", name="page")
      */
-    public function page(Request $req,GroupsRepository $grepo, SluggerInterface $slugger, UserRepository $userRepository, PostRepository $post, FriendRepository $frepo): Response
+    public function page(Request $req,GroupsRepository $grepo, SluggerInterface $slugger, UserRepository $userRepository, PostRepository $post, FriendRepository $frepo, FriendRequestRepository $frieReRepo): Response
     {
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
@@ -123,16 +126,28 @@ class MainController extends AbstractController
         }
         $user=$this->security->getUser();
         $userid = $user->getId();
+
         $posts = $post->findPostsForUser($userid);
         $friends = $frepo->findFriendsByUserId($userid);
         $group = $grepo->findGroupsByUserId($userid);
+        $friendRequestObj = $frieReRepo->findBy(['receiver'=>$userid]);
+        $friendRequest = [];
+        foreach ($friendRequestObj as $friend ) {
+            $friendRequest[] = [
+                'reqid'=>$friend->getId(),
+                'id'=>$friend->getSender()->getId(),
+                'avatar'=>$friend->getSender()->getAvatar(),
+                'name'=>$friend->getSender()->getUsername(),
+            ];
+        }
         return $this->render('homepage.html.twig', [
             'posts' => $posts,
             'form' => $form->createView(),
             'friend'=> $friends,
             'group'=>$group,
+            'friendRe'=>$friendRequest,
         ]);
-        // return $this->json($avatar);
+        // return $this->json($friendRequest);
     }
 
     public function uploadImage($imgFile, SluggerInterface $slugger): ?string{
@@ -160,22 +175,79 @@ class MainController extends AbstractController
     /**
      * @Route("/profile", name="profile", methods={"GET"})
      */
-    public function profileAction(Request $request, FriendRepository $friendRepo, PostRepository $postRepo, UserRepository $userRepo): Response
+    public function profileAction(Request $request, FriendRepository $friendRepo, PostRepository $postRepo, UserRepository $userRepo, FriendRequestRepository $frieRe): Response
     {
         // $id = $request->get('id');
+        $user=$this->security->getUser();
+        $userid = $user->getId();
+
         $id = $request->query->get('id');
         $user = $userRepo->find($id);
         $post = $postRepo->findPostsInProfile($id);
         $friend = $friendRepo->findFriendsUserById($id);
+        if (($friendRepo->isFriend($userid,$id))>0){
+            $isFriend = 'true';
+        } else {
+            $isFriend = 'false';
+        }
+
+        if (($frieRe->isWaiting($userid,$id))>0){
+            $isWaiting = 'true';
+        } else {
+            $isWaiting = 'false';
+        }
+
         return $this->render('profile.html.twig', [
             'id'=>$id,
             'post'=>$post,
             'user'=>$user,
             'friend'=>$friend,
+            'isFriend'=>$isFriend,
+            'isWaiting'=>$isWaiting,
         ]); 
 
         return $this->json($user);
     }
+    /**
+     * @Route("/friendrequest", name="friendrequest", methods={"GET"})
+     */
+    public function friendRequest(Request $request, FriendRequestRepository $frieRe): Response
+    {
+        $from = $request->query->get('from');
+        $to = $request->query->get('to');
+        $frieRe->addFriendRequest($from, $to);
+        return $this->redirectToRoute('profile',['id'=>$to]);
+    }
+
+    /**
+     * @Route("/acceptfriendrequest", name="acceptfriendrequest", methods={"GET"})
+     */
+    public function acceptFriendRequest(Request $request, FriendRequestRepository $frieRe, FriendRepository $frie): Response
+    {
+        $reqid = $request->query->get('id');
+        $frieReq = $frieRe->find($reqid);
+        $from = $frieReq->getSender()->getId();
+        $to = $frieReq->getReceiver()->getId();
+        // $from = $request->query->get('from');
+        // $to = $request->query->get('to');
+        $frie->addFriend($from, $to);
+        $frieRe->remove($frieReq,true);
+
+        return $this->redirectToRoute('page');
+    }
+
+    /**
+     * @Route("/denyfriendrequest", name="denyfriendrequest", methods={"GET"})
+     */
+    public function denyFriendRequest(Request $request, FriendRequestRepository $frieRe, FriendRepository $frie): Response
+    {
+        $reqid = $request->query->get('id');
+        $frieReq = $frieRe->find($reqid);
+        $frieRe->remove($frieReq,true);
+
+        return $this->redirectToRoute('page');
+    }
+
     /**
      * @Route("/group", name="profile_group", methods={"GET"})
      */

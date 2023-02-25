@@ -80,6 +80,21 @@ class FriendRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function isFriend($from, $to): int {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='SELECT * FROM `friend` WHERE user_id_id IN (:from,:to) AND friend_user_id_id IN (:from,:to)';
+        $re = $conn->executeQuery($sql, ['from' => $from, 'to' => $to]);
+        return $re->rowCount();
+    }
+
+    public function addFriend($from, $to):void{
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='INSERT INTO `friend`( `user_id_id`, `friend_user_id_id`) VALUES (:from,:to)';
+        $re = $conn->executeQuery($sql, ['from' => $from, 'to' => $to]);
+        $sql ='INSERT INTO `friend`( `user_id_id`, `friend_user_id_id`) VALUES (:to,:from)';
+        $re = $conn->executeQuery($sql, ['from' => $from, 'to' => $to]);
+    }
+
     //    public function findOneBySomeField($value): ?Friend
     //    {
     //        return $this->createQueryBuilder('f')
