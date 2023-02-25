@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,11 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/", name="app_message")
+     * @Route("/list", name="app_list")
      */
-    public function index(): Response
+    public function list(Request $req, UserRepository $user): Response
     {
-        return $this->render('message/index.html.twig');
+        if ($req->isXmlHttpRequest()) {
+            $curAcc = $this->getUser();
+            $id = $curAcc->getid();
+            $name = $req->query->get('name');
+            $users = $user->findFriendOfIdByName($id,$name);
+            return new JsonResponse($users);
+        }
+        return $this->render('message/list.html.twig');
+
     }
     /**
      * @Route("/chat", name="app_message")

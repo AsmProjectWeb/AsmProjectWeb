@@ -85,6 +85,32 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      ;
     }
 
+    /**
+    * @return User[] Returns an array of User objects
+    */
+    public function findFriendOfIdByName($id,$name): array
+    {
+        // SELECT cus.name, count(DISTINCT(c.id)), sum((cs.prize) * (1 - s.discount))
+        // FROM customer cus inner join sale s on cus.id=s.sale_cus_id
+        // inner join car c on s.car_id = c.id
+        // inner join carsup cs on cs.cars_id = c.id
+        // WHERE cus.id = :id
+
+        // SELECT u.username, u.avatar
+        // FROM Friend f left JOIN User u on f.FriendUserId = u.id 
+        // WHERE u.userId = :id
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "       
+        SELECT u.username, u.avatar 
+        FROM friend f left JOIN user u on f.friend_user_id_id = u.id 
+        WHERE user_id_id = :id 
+        HAVING u.username like :name
+        ";
+        $re = $conn->executeQuery($sql,['id'=>$id,'name'=>'%'.$name.'%']);
+        return $re->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */
