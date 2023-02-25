@@ -4,195 +4,196 @@
 {% endblock %}
 {% block body %}
 {% if app.user != null %}
-    <body>
-    <div class="profilecard">
-        <div class="image">
-            <img src="{{ asset('uploads/' ~ user.avatar) }}"alt="" class="profileimg">
-        </div>
-        <div class="textdata">
-            <span class="name">{{app.user.username}}</span>
-            <span class="job">{{app.user.status}}</span>
-        </div>
-        <div class="media-button">
-            <a href="https://www.facebook.com/losky.nguyen.9/" style="background: #4267b2" class="link">
-                <i class='bx bxl-facebook-square'></i>
-            </a>
-            <a href="https://github.com/Nguyen-Losky" style="background: black" class="link">
-                <i class='bx bxl-github'></i>
-            </a>
-            <a href="" style="background: #1da1f2 " class="link">
-                <i class='bx bxl-twitter'></i>
-            </a>
-            <a href="" style="background: #e1306c" class="link">
-                <i class='bx bxl-instagram'></i>
-            </a>
-        </div>
-        <div>
-
-        </div>
-        <div class="button">
-        {% if app.user.id == id %}
-            <button class="button1">Edit information</button>
-        {% else %}
-            <button class="button1">Add Friend</button>
-            <button class="button1">Message</button>
-        {% endif %}
-        </div>
-        <div class="analytic">
-            <div class="data">
-                <i class='bx bx-heart'></i>
-                <span class="number">1k friend</span>
+<body class="h-100">
+    <div class="contain-all">
+        <div class="profilecard">
+            <div class="image">
+                <img src="{{ asset('uploads/' ~ user.avatar) }}"alt="" class="profileimg">
             </div>
-            <div class="data">
-                <i class='bx bx-share'></i>
-                <span class="number">3k follow</span>
+            <div class="textdata">
+                <span class="name">{{app.user.username}}</span>
+                <span class="job">{{app.user.status}}</span>
             </div>
-        </div>
-    </div>
-    <div class="body-profile container">
-        <div class="box-1-profile-body row">
+            <div class="media-button">
+                <a href="https://www.facebook.com/losky.nguyen.9/" style="background: #4267b2" class="link">
+                    <i class='bx bxl-facebook-square'></i>
+                </a>
+                <a href="https://github.com/Nguyen-Losky" style="background: black" class="link">
+                    <i class='bx bxl-github'></i>
+                </a>
+                <a href="" style="background: #1da1f2 " class="link">
+                    <i class='bx bxl-twitter'></i>
+                </a>
+                <a href="" style="background: #e1306c" class="link">
+                    <i class='bx bxl-instagram'></i>
+                </a>
+            </div>
             <div>
-                <div class="information">
-                    <h3> &nbsp Introduction</h3>
-                    <div class="infor">
-                        <div>
-                            <i class="fa-solid fa-venus-mars"></i>
-                            {% if user.gender == 1 %}
-                            <h5> &nbsp Gender: Male </h5>   
-                            {% else %}
-                            <h5> &nbsp Gender: Female </h5>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="infor">
-                        <div>
-                            <i class="fa-solid fa-cake-candles"></i>
-                            <h5> &nbsp Birthday: {{user.birthday|date("Y-m-d")}}</h5>
-                        </div>
-                    </div>
-                    <div class="infor">
-                        <div>
-                            <i class="fa-solid fa-globe"></i>
-                            <h5> &nbsp Country: {{user.hometown}}</h5>
-                        </div>
-                    </div>
-                    <div class="infor">
-                        <div>
-                            <i class="fa-solid fa-briefcase"></i>
-                            <h5> &nbsp Job: {{user.job}}</h5>
-                        </div>
-                    </div>
+            </div>
+            <div class="button">
+            {% if app.user.id == id %}
+                <button class="button1">Edit information</button>
+            {% else %}
+                <button class="button1">Add Friend</button>
+                <button class="button1">Message</button>
+            {% endif %}
+            </div>
+            {# <div class="analytic">
+                <div class="data">
+                    <i class='bx bx-heart'></i>
+                    <span class="number">1k friend</span>
                 </div>
-                <div class="store-img">
-                    <h3> &nbsp Featured photo</h3>
-                    <div class="container-img">
-                    {% for p in post|slice(0, 6) %}
-                        <div>
-                            <img src="{{ asset('uploads/' ~ p.image) }}" alt="">
-                        </div>
-                    {% endfor %}
-                    </div>
+                <div class="data">
+                    <i class='bx bx-share'></i>
+                    <span class="number">3k follow</span>
                 </div>
-                <div class="store-friend">
-                    <h3> &nbsp Recent friends</h3>
-                    <div class="container-img">
-                    {% for u in post|slice(0, 6) %}
-                        <div>
-                            <a href="">
-                                <img src="{{ asset('uploads/' ~ u) }}" alt="">
-                                <p>alo</p>
-                            </a>
+            </div> #}
+        </div>
+        <div class="body-profile container">
+            <div class="box-1-profile-body row">
+                <div>
+                    <div class="information">
+                        <h3> &nbsp Introduction</h3>
+                        <div class="infor">
+                            <div>
+                                <i class="fa-solid fa-venus-mars"></i>
+                                {% if user.gender == 1 %}
+                                <h5> &nbsp Gender: Male </h5>
+                                {% else %}
+                                <h5> &nbsp Gender: Female </h5>
+                                {% endif %}
+                            </div>
                         </div>
-                    {% endfor %}
+                        <div class="infor">
+                            <div>
+                                <i class="fa-solid fa-cake-candles"></i>
+                                <h5> &nbsp Birthday: {{user.birthday|date("Y-m-d")}}</h5>
+                            </div>
+                        </div>
+                        <div class="infor">
+                            <div>
+                                <i class="fa-solid fa-globe"></i>
+                                <h5> &nbsp Country: {{user.hometown}}</h5>
+                            </div>
+                        </div>
+                        <div class="infor">
+                            <div>
+                                <i class="fa-solid fa-briefcase"></i>
+                                <h5> &nbsp Job: {{user.job}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="store-img">
+                        <h3> &nbsp Featured photo</h3>
+                        <div class="container-img">
+                        {% for p in post|slice(0, 6) %}
+                            <div>
+                                <img src="{{ asset('uploads/' ~ p.image) }}" alt="">
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                    <div class="store-friend">
+                        <h3> &nbsp Recent friends</h3>
+                        <div class="container-img">
+                        {% for u in post|slice(0, 6) %}
+                            <div>
+                                <a href="">
+                                    {# <img src="{{ asset('uploads/' ~ u) }}" alt=""> #}
+                                    <p>alo</p>
+                                </a>
+                            </div>
+                        {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="box-2-profile-body row">
-        {% for p in post %}
-            <div class="containerall">
-                <div class="middle">
-                    <div class="row box">
-                        <div class="box-header">
-                            <div class="box-avata">
-                                <div class="avata">
-                                    {% if p.avatar != null %}
-                                    <img src="{{asset('uploads/'~ p.avatar)}}" alt="" >
-                                    {% else %}
-                                    <img src="{{asset('images/defaultProfile.jpg')}}" alt="">
-                                    {% endif %}
-                                    <div class="sub-avata"></div>
+            <div class="box-2-profile-body row">
+            {% for p in post %}
+                <div class="containerall">
+                    <div class="middle">
+                        <div class="row box">
+                            <div class="box-header">
+                                <div class="box-avata">
+                                    <div class="avata">
+                                        {% if p.avatar != null %}
+                                        <img src="{{asset('uploads/'~ p.avatar)}}" alt="" >
+                                        {% else %}
+                                        <img src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                                        {% endif %}
+                                        <div class="sub-avata"></div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="box-title">
-                                <div class="u-tus">
-                                    <a href="">
-                                        <h5>{{p.username}}</h5>
-                                    </a>
+                                <div class="box-title">
+                                    <div class="u-tus">
+                                        <a href="">
+                                            <h5>{{p.username}}</h5>
+                                        </a>
+                                    </div>
+                                    <div class="u-title">
+                                        <a href=""><label for="">123</label></a>
+                                    </div>
                                 </div>
-                                <div class="u-title">
-                                    <a href=""><label for="">123</label></a>
-                                </div>
-                            </div>
-                            <div class="box-view">
-                                <span>
-                                    <i class="fa-solid fa-bars"></i>
-                                </span>
-                            </div>
-                            <div class="box-close">
-                                <div>
+                                <div class="box-view">
                                     <span>
-                                        <i class="fa-solid fa-xmark"></i>
+                                        <i class="fa-solid fa-bars"></i>
                                     </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="box-content">
-                            <p>{{p.content}}</p>
-                            <img src="{{ asset('uploads/' ~ p.image) }}" alt="">
-                        </div>
-                        <div class="box-footer">
-                            <div class="box-infor">
-                                <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
-                                <div class="infor-right">
-                                    <div class="countcomment">
-                                        <a href="">
-                                            <i class="fa-solid fa-comment"></i>&#160 0
-                                        </a>
-                                    </div>
-                                    <div class="countshare">
-                                        <a href="">
-                                            <i class="fa-solid fa-share-from-square"></i>&#160 0
-                                        </a>
+                                <div class="box-close">
+                                    <div>
+                                        <span>
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-action">
-                                <div class="sub-box-action" id="sub-box-action-1">
-                                    <a href="">
-                                        <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
-                                        <i class="icon-hide fa-solid fa-heart"></i>
-                                    </a>
-                                    <a href="" class=""></a>
+                            <div class="box-content">
+                                <p>{{p.content}}</p>
+                                <img src="{{ asset('uploads/' ~ p.image) }}" alt="">
+                            </div>
+                            <div class="box-footer">
+                                <div class="box-infor">
+                                    <div class="countview"><a href=""><i class="fa-solid fa-heart"></i>&#160 0</a></div>
+                                    <div class="infor-right">
+                                        <div class="countcomment">
+                                            <a href="">
+                                                <i class="fa-solid fa-comment"></i>&#160 0
+                                            </a>
+                                        </div>
+                                        <div class="countshare">
+                                            <a href="">
+                                                <i class="fa-solid fa-share-from-square"></i>&#160 0
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="sub-box-action">
-                                    <a href="">
-                                        <i class="icon-none fa-regular fa-comment"></i>
-                                        <i class="icon-hide fa-solid fa-comment"></i>
-                                    </a>
-                                </div>
-                                <div class="sub-box-action">
-                                    <a href="">
-                                        <i class="icon-none fa-regular fa-share-from-square"></i>
-                                        <i class="icon-hide fa-solid fa-share-from-square"></i>
-                                    </a>
+                                <div class="box-action">
+                                    <div class="sub-box-action" id="sub-box-action-1">
+                                        <a href="">
+                                            <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
+                                            <i class="icon-hide fa-solid fa-heart"></i>
+                                        </a>
+                                        <a href="" class=""></a>
+                                    </div>
+                                    <div class="sub-box-action">
+                                        <a href="">
+                                            <i class="icon-none fa-regular fa-comment"></i>
+                                            <i class="icon-hide fa-solid fa-comment"></i>
+                                        </a>
+                                    </div>
+                                    <div class="sub-box-action">
+                                        <a href="">
+                                            <i class="icon-none fa-regular fa-share-from-square"></i>
+                                            <i class="icon-hide fa-solid fa-share-from-square"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            {% endfor %}
             </div>
-        {% endfor %}
         </div>
     </div>
 </body>
@@ -219,6 +220,7 @@
     position: absolute;
 }
 .profilecard{
+    height:300px;
     width: 70%;
     background-color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -242,15 +244,17 @@
 .textdata{
     display: flex;
     flex-direction: column;
-    margin-left: 200px;
+    margin-left: 180px;
     color: #000;
-    margin-top: 100px;
+    margin-top: 60px;
 }
 .name{
     font-size: 25px;
     font-weight: 500;
 }
 .media-button{
+    bottom: 30px;
+    position: absolute;
     display: flex;
     align-items: center;
     margin-top: 15px;
