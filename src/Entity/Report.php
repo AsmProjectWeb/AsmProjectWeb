@@ -27,11 +27,6 @@ class Report
      */
     private $Reporter;
 
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $SendAt;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -61,15 +56,4 @@ class Report
         return $this;
     }
 
-    public function getSendAt(): ?\DateTimeImmutable
-    {
-        return $this->SendAt;
-    }
-
-    public function setSendAt(\DateTimeImmutable $SendAt): self
-    {
-        $this->SendAt = $SendAt;
-
-        return $this;
-    }
 }

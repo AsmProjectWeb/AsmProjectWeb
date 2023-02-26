@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Friend;
 use App\Entity\FriendRequest;
 use App\Entity\Post;
+use App\Entity\Report;
 use App\Entity\Typegoup;
 use App\Entity\User;
 use App\Form\LoginType;
@@ -22,6 +23,7 @@ use App\Repository\PostRepository;
 use App\Repository\ReportRepository;
 use App\Repository\TypegoupRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -273,7 +275,7 @@ class MainController extends AbstractController
     }
 
     /**
-    * @Route("/test", name="admin_page")
+    * @Route("/admin", name="admin_page")
     */
     public function admin(Request $request, PostRepository $postRepo,TypegoupRepository $typeRepo ): Response
     {
@@ -329,14 +331,24 @@ class MainController extends AbstractController
         $dlpost = $pRepo->RemovePost($id);
         return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
     }
-// /**
-//      * @Route("/report", name="report", methods={"GET"})
-//      */
-//     public function reportAction(Request $req): Response
-//     {
-//         $id = $req->query->get('id');
-//         return $this->json($id);
-//     }
+    /**
+     * @Route("/report", name="report", methods={"GET"})
+     */
+    public function reportAction(Request $req, ReportRepository $repRe, PostRepository $postRe): Response
+    {
+        $rep = new Report();
+        $pid = $req->query->get('id');
+        $post = $postRe->find($pid);
+        $rep->setPostid($post);
+
+        $user=$this->security->getUser();
+
+        $rep->setReporter($user);
+
+        $repRe->add($rep,true);
+
+        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+    }
     /**
      * @Route("/like", name="likepost", methods={"GET"})
      */
@@ -348,5 +360,16 @@ class MainController extends AbstractController
         $like = $liked->AddPostLiked($uid, $pid);
         return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
     }
-    
+    /**
+     * @Route("/unlike", name="unlikepost", methods={"GET"})
+     */
+    public function unLikeAction(Request $req, PostLikedRepository $liked): Response
+    {
+        $user = $this->security->getUser();
+        $uid = $user->getId();
+        $pid = $req->query->get('pid');
+        $like = $liked->UnPostLiked($uid, $pid);
+        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        // return $this->json($uid);
+    }
 }
