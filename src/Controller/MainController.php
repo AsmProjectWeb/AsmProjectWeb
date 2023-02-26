@@ -340,5 +340,17 @@ class MainController extends AbstractController
         $like = $liked->AddPostLiked($uid, $pid);
         return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
     }
+        /**
+     * @Route("/unlike", name="unlikepost", methods={"GET"})
+     */
+    public function unLikeAction(Request $req, PostLikedRepository $liked): Response
+    {
+        $user = $this->security->getUser();
+        $uid = $user->getId();
+        $pid = $req->query->get('pid');
+        $like = $liked->UnPostLiked($uid, $pid);
+        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        // return $this->json($uid);
+    }
     
 }
