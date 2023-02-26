@@ -11,11 +11,15 @@ use App\Form\LoginType;
 use App\Form\PostType;
 use App\Form\RegisterType;
 use App\Form\TypegoupType;
+use App\Repository\CommentRepository;
 use App\Repository\FriendRepository;
 use App\Repository\FriendRequestRepository;
 use App\Repository\GroupMembersRepository;
+use App\Repository\GroupPostRepository;
 use App\Repository\GroupsRepository;
+use App\Repository\PostLikedRepository;
 use App\Repository\PostRepository;
+use App\Repository\ReportRepository;
 use App\Repository\TypegoupRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -312,4 +316,29 @@ class MainController extends AbstractController
         return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
         // return $this->json($type);
     }
+    /**
+     * @Route("/deletepost", name="admin_delete_post")
+     */
+    public function deletePost(Request $req, PostRepository $pRepo, GroupPostRepository $gpRepo, CommentRepository $cRepo, PostLikedRepository $lRepo, ReportRepository $rRepo): Response
+    {
+        $id = $req->query->get('id');
+        $dlr = $rRepo->RemovePostReport($id);
+        $dlgp = $gpRepo->RemovePostGroupPost($id);
+        $dlc = $cRepo->RemovePostComment($id);
+        $dll = $lRepo->RemovePostLiked($id);
+        $dlpost = $pRepo->RemovePost($id);
+        return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/like", name="likepost", methods={"GET"})
+     */
+    public function likeAction(Request $req, PostLikedRepository $liked): Response
+    {
+        $user = $this->security->getUser();
+        $uid = $user->getId();
+        $pid = $req->query->get('pid');
+        $like = $liked->AddPostLiked($uid, $pid);
+        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+    }
+    
 }

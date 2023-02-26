@@ -51,22 +51,22 @@ class Post
     private $userberforeshare;
 
     /**
-     * @ORM\OneToMany(targetEntity=PostLiked::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=PostLiked::class, mappedBy="post",cascade={"remove"})
      */
     private $post;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post",cascade={"remove"})
      */
     private $IDpost;
 
     /**
-     * @ORM\OneToMany(targetEntity=GroupPost::class, mappedBy="PostId")
+     * @ORM\OneToMany(targetEntity=GroupPost::class, mappedBy="PostId",cascade={"remove"})
      */
     private $IdPost;
 
     /**
-     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="postid")
+     * @ORM\OneToMany(targetEntity=Report::class, mappedBy="postid",cascade={"remove"})
      */
     private $ReportPost;
 

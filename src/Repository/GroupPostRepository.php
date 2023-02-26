@@ -39,6 +39,18 @@ class GroupPostRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function RemovePostGroupPost($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='
+        DELETE FROM `group_post` WHERE group_post.post_id_id = :id';
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
+        return $re->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return GroupPost[] Returns an array of GroupPost objects
 //     */
