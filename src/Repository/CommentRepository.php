@@ -39,6 +39,18 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function RemovePostComment($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ='
+        DELETE FROM `comment` WHERE `comment`.`post_id` = :id';
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
+        return $re->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */

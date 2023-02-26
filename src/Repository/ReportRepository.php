@@ -47,7 +47,7 @@ class ReportRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql ='
-        DELETE FROM `post_liked` WHERE post_liked.post_id = :id';
+        DELETE FROM `report` WHERE report.postid_id = :id';
         $re = $conn->executeQuery($sql, ['id'=>$id]);
         return $re->fetchAllAssociative();
     }

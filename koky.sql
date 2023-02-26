@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2023 at 11:33 PM
+-- Generation Time: Feb 26, 2023 at 12:57 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -192,7 +192,8 @@ CREATE TABLE `group_members` (
 INSERT INTO `group_members` (`id`, `rolemember`, `user_id`, `groupid_id`) VALUES
 (1, 0, 1, 1),
 (2, 0, 3, 1),
-(3, 1, 2, 1);
+(3, 1, 2, 1),
+(4, 0, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -211,7 +212,8 @@ CREATE TABLE `group_post` (
 --
 
 INSERT INTO `group_post` (`id`, `post_id_id`, `group_id_id`) VALUES
-(3, 8, 1);
+(3, 8, 1),
+(4, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -280,7 +282,9 @@ INSERT INTO `post` (`id`, `userberforeshare_id`, `content`, `image`, `date`, `st
 (4, NULL, 'As a man or woman stranded, naked, freezing, and starving on the unforgiving shores of a mysterious island called ARK, use your skill and cunning to kill or tame and ride the plethora of leviathan dinosaurs and other primeval creatures roaming the land. Hunt, harvest resources, craft items, grow crops, research technologies, and build shelters to withstand the elements and store valuables, all while teaming up with (or preying upon) hundreds of other players to survive, dominate... and escape!', 'ark-poster-63f29897b0ac2.jpg', '2023-02-23 15:48:11', 0, 1),
 (6, NULL, 'Lost Island is a free DLC Expansion Map available on Steam, Xbox One, PS4 and PS5, Epic Games, and Stadia.\r\nThis DLC boasts 150 square kilometers of new biomes, new challenges, and mysterious ruins. Discover jungle valleys fed by giant waterfalls, build a treehouse high in the forest canopies, get down and dirty in vast mangrove swamps, dive deep underwater, brave treacherous snowy peaks, or spelunk uncharted cave systems in search of treasure…', 'Khoa-63f71f9dd862f.jpg', '2023-02-23 15:52:40', 0, 2),
 (7, 3, 'Hello wORL', NULL, '2023-02-21 22:27:24', 0, 3),
-(8, 3, 'Trong trường hợp này, chúng ta sử dụng GROUP BY để nhóm các bài đăng theo các trường chính xác, bao gồm cả post_user_id_id và post_content, và sau đó sử dụng hàm MAX để chọn bài đăng mới nhất cho mỗi nhóm.', NULL, '2023-02-25 16:06:27', 0, 3);
+(8, 3, 'Trong trường hợp này, chúng ta sử dụng GROUP BY để nhóm các bài đăng theo các trường chính xác, bao gồm cả post_user_id_id và post_content, và sau đó sử dụng hàm MAX để chọn bài đăng mới nhất cho mỗi nhóm.', NULL, '2023-02-25 16:06:27', 0, 3),
+(9, NULL, 'Group Post in user a', NULL, '2023-02-25 23:55:14', 1, 4),
+(10, NULL, 'abc', 'Honkai-Impact-3rd-63fa9980ef682.jpg', '2023-02-26 00:28:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -524,13 +528,13 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `group_members`
 --
 ALTER TABLE `group_members`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `group_post`
 --
 ALTER TABLE `group_post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `mess`
@@ -554,7 +558,7 @@ ALTER TABLE `participant`
 -- AUTO_INCREMENT for table `post`
 --
 ALTER TABLE `post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `post_liked`
