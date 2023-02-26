@@ -329,6 +329,14 @@ class MainController extends AbstractController
         $dlpost = $pRepo->RemovePost($id);
         return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
     }
+// /**
+//      * @Route("/report", name="report", methods={"GET"})
+//      */
+//     public function reportAction(Request $req): Response
+//     {
+//         $id = $req->query->get('id');
+//         return $this->json($id);
+//     }
     /**
      * @Route("/like", name="likepost", methods={"GET"})
      */
@@ -340,12 +348,5 @@ class MainController extends AbstractController
         $like = $liked->AddPostLiked($uid, $pid);
         return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
     }
-    /**
-     * @Route("/report", name="report", methods={"GET"})
-     */
-    public function reportAction(Request $req): Response
-    {
-        $id = $req->query->get('id');
-        return $this->json($id);
-    }
+    
 }

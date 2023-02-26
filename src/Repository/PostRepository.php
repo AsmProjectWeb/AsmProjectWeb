@@ -55,6 +55,28 @@ class PostRepository extends ServiceEntityRepository
     }
 
 
+//     /**
+//      * @return Post[] Returns an array of Customer objects
+//      */
+//     public function findPostsForUser($id): array
+//     {
+//         $conn = $this->getEntityManager()->getConnection();
+//         $sql = '       
+//         SELECT DISTINCT post.*, u.*, f.*, gm.*, g.*, gp.*, p.* FROM post 
+//         LEFT JOIN user u ON u.id = post.post_user_id_id 
+//         LEFT JOIN friend f on f.user_id_id = u.id 
+//         LEFT JOIN group_members gm on gm.user_id = u.id 
+//         LEFT JOIN groups g ON gm.groupid_id = g.id 
+//         LEFT JOIN group_post gp on gp.group_id_id=g.id 
+//         LEFT JOIN post_liked p on p.post_id = post.id
+//         WHERE post.post_user_id_id = u.id OR f.friend_user_id_id = (SELECT friend.friend_user_id_id FROM friend WHERE friend.user_id_id = u.id) and u.id= :id OR gp.group_id_id = (SELECT groups.id FROM groups WHERE gm.user_id=u.id and g.id = gm.groupid_id)
+// ';
+//         $re = $conn->executeQuery($sql, ['id' => $id]);
+//         return $re->fetchAllAssociative();
+
+
+//     }
+
     /**
      * @return Post[] Returns an array of Customer objects
      */
@@ -62,21 +84,31 @@ class PostRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '       
-        SELECT DISTINCT post.*, u.*, f.*, gm.*, g.*, gp.*, p.* FROM post 
-        LEFT JOIN user u ON u.id = post.post_user_id_id 
-        LEFT JOIN friend f on f.user_id_id = u.id 
-        LEFT JOIN group_members gm on gm.user_id = u.id 
-        LEFT JOIN groups g ON gm.groupid_id = g.id 
-        LEFT JOIN group_post gp on gp.group_id_id=g.id 
-        LEFT JOIN post_liked p on p.post_id = post.id
-        WHERE post.post_user_id_id = u.id OR f.friend_user_id_id = (SELECT friend.friend_user_id_id FROM friend WHERE friend.user_id_id = u.id) and u.id= :id OR gp.group_id_id = (SELECT groups.id FROM groups WHERE gm.user_id=u.id and g.id = gm.groupid_id)
+        SELECT p.*, u.*, pl.*,pl.user_id as userliked, p.id as idpost
+FROM post p
+LEFT JOIN user u ON p.post_user_id_id = u.id
+LEFT JOIN (
+  SELECT pl1.post_id, SUM(pl1.isliked) AS total_likes
+  FROM post_liked pl1
+  WHERE pl1.isliked = 0
+  GROUP BY pl1.post_id
+) pl1 ON p.id = pl1.post_id
+LEFT JOIN post_liked pl ON p.id = pl.post_id AND pl.user_id = :id
+WHERE p.post_user_id_id = :id OR p.post_user_id_id IN (
+  SELECT f.friend_user_id_id
+  FROM friend f
+  WHERE f.user_id_id = :id
+) OR p.id IN (
+  SELECT gp.post_id_id
+  FROM group_post gp
+  JOIN group_members gm ON gp.group_id_id = gm.groupid_id
+  WHERE gm.user_id = :id
+)
+ORDER BY p.date DESC;
 ';
         $re = $conn->executeQuery($sql, ['id' => $id]);
         return $re->fetchAllAssociative();
-
-
     }
-
 
     /**
      * @return Post[] Returns an array of Customer objects

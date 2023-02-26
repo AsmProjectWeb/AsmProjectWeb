@@ -198,11 +198,16 @@
                     </div>
                     <div class="box-action">
                         <div class="sub-box-action" id="sub-box-action-1">
-                            <a href="{{path('likepost',{'pid': p.post_id_id})}}">
+                            {% if app.user.id != p.userliked %}                        
+                            <a href="{{path('likepost',{'pid': p.idpost })}}">
                                 <i class="icon-none fa-regular fa-heart" id="icon-none"></i>
                                 <i class="icon-hide fa-solid fa-heart"></i>
                             </a>
-                            <a href="" class=""></a>
+                            {% else %}
+                            <a href="{{path('unlikepost',{'pid': p.idpost })}}" style="color:#8ABE53">
+                                <i class=" fa-solid fa-heart"></i>
+                            </a>
+                            {% endif %}                              
                         </div>
                         <div class="sub-box-action">
                             <a href="">
