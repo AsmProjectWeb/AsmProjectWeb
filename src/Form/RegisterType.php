@@ -30,9 +30,9 @@ class RegisterType extends AbstractType
             //     'first_options' => ['label' => 'Password'],
             //     'second_options' => ['label' => 'Confirm Password']
             // ])
-            ->add('password',PasswordType::class,['required'=>true,])
+            ->add('password',PasswordType::class,['required'=>true,'attr'=>['pattern'=>"(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", 'title'=>"Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"]])
             ->add('email', EmailType::class,['required'=>true,])
-            ->add('phone',NumberType::class,['required'=>true,])
+            ->add('phone',TextType::class,['required'=>true,'attr'=>['pattern'=>'[0]{1}[0-9]{9}','title'=>"Must start at 0 and go with 10 number after that"]])
             ->add('gender',ChoiceType::class,[
                 'choices' => [
                     'Male' => 'male',
