@@ -75,6 +75,19 @@ class PostLikedRepository extends ServiceEntityRepository
         $re = $conn->executeQuery($sql, ['uid'=>$id,'pid'=>$pid]);
         return $re->fetchAllAssociative();
     }
+
+        /**
+     * @return Post[] Returns an array of Customer objects
+     */
+    public function countLike($id): int
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql ="
+        SELECT COUNT(*) as `like` FROM post_liked WHERE post_liked.post_id = :id ";
+        $re = $conn->executeQuery($sql, ['id'=>$id]);
+        $a = $re->fetchAllAssociative();
+        return $a[0]['like'];
+    }
 //    /**
 //     * @return PostLiked[] Returns an array of PostLiked objects
 //     */

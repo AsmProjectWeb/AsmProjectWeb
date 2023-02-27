@@ -332,13 +332,15 @@ class MainController extends AbstractController
     /**
      * @Route("/like", name="likepost", methods={"GET"})
      */
-    public function likeAction(Request $req, PostLikedRepository $liked): Response
+    public function likeAction(Request $req, PostLikedRepository $liked, PostLikedRepository $plikeRepo): Response
     {
         $user = $this->security->getUser();
         $uid = $user->getId();
         $pid = $req->query->get('pid');
+        $countline = $plikeRepo->countLike($pid);
         $like = $liked->AddPostLiked($uid, $pid);
-        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        // return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        return $this->json($countline);
     }
         /**
      * @Route("/unlike", name="unlikepost", methods={"GET"})
