@@ -156,7 +156,7 @@
                                 </li>
                                 {% endif %}
                                 <li>
-                                    <a class="dropdown-item" href="">Report</a>
+                                    <a class="dropdown-item" href="{{path('report',{'id':p.idpost})}}">Report</a>
                                 </li>
                                 {% if app.user.id == p.post_user_id_id %}
                                 <li>
@@ -246,7 +246,7 @@
                         </li>
                     {% endfor %}               
                         <li>
-                            <a href="">New Chat</a>
+                            <a href="{{path('app_list')}}">New Chat</a>
                         </li>
                     </ul>
                 </div>
