@@ -359,8 +359,8 @@ class MainController extends AbstractController
         $pid = $req->query->get('pid');
         $countline = $plikeRepo->countLike($pid);
         $like = $liked->AddPostLiked($uid, $pid);
-        // return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
-        return $this->json($countline);
+        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        // return $this->json($countline);
     }
     /**
      * @Route("/unlike", name="unlikepost", methods={"GET"})

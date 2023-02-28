@@ -46,7 +46,7 @@
                         <button class="btn btn-success rounded-3 disable" href="#" style="text-decoration:none" disabled>Waiting</button> 
                     {% endif %}
                 {% endif %}
-                <button class="button1">Message</button>
+                <a class="button1" href="{{path('app_message',{'to':id})}}" style="text-decoration:none">Message</a> 
             {% endif %}
             </div>
             {# <div class="analytic">
