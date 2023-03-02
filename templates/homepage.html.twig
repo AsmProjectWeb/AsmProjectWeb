@@ -6,7 +6,7 @@
 {% if app.user != null %}
 <body>
     <div class="containerall">
-        {# <div class="left d-none d-lg-block z-2">
+        <div class="left d-none d-lg-block z-2">
             <div>
                 <div class="group-action-left-1">
                     <ul>
@@ -67,13 +67,13 @@
                             <div>
                                 <i class="fa-solid fa-people-group">&#160</i>
                             </div>
-                            <div>
+                            {# <div>
                                 <h6>Group</h6>
-                            </div>
+                            </div> #}
                         </li>
                     </ul>
                 </div>
-                <div class="group-action-left-3">
+                {# <div class="group-action-left-3">
                     <ul>
                     {% for g in group|slice(0,3) %}
                         <li>
@@ -92,8 +92,8 @@
                         </li>
                     {% endfor %}
                     </ul>
-                </div>
-                <div class="left-footer">
+                </div> #}
+                <div class="left-footer d-flex flex-column h-100">
                     <a href=""><li>Privacy &#160 </li></a>
                     <a href=""><li>koky's policy &#160</li></a>
                     <a href=""><li>Advertisement &#160</li></a>
@@ -101,7 +101,7 @@
                     <a href=""><li>Copyright by KOKY (©) &#160</li></a>
                 </div>
             </div>
-        </div> #}
+        </div>
         <div class="middle mx-auto">
             <div class="d-flex rounded" style="width: 500px; height: 50px; background-color: #8ABE53;     margin-top: 15px;">
                 <div class="p-1">
@@ -367,13 +367,6 @@
                             <a href="{{path('app_list')}}">New Chat</a>
                         </li>
                     </ul>
-                </div>
-                <div class="left-footer">
-                    <a href=""><li>Privacy &#160 </li></a>
-                    <a href=""><li>koky's policy &#160</li></a>
-                    <a href=""><li>Advertisement &#160</li></a>
-                    <a href=""><li>Term &#160</li></a>
-                    <a href=""><li>Copyright by KOKY (©) &#160</li></a>
                 </div>
             </div>
         </div>
@@ -680,7 +673,7 @@ body{
     background-color: #eee7e7;
 }
 .left , .right {
-    width: 20%;
+    width: 30%;
     height: 300px;
     margin-top: 20px;
 }
@@ -693,8 +686,8 @@ body{
     width: inherit;
     height: 198px;
     background-color: #fff;
-    border-right: #8ABE53 solid 1px;
-    box-shadow: #8ABE53 2px 2px; 
+    box-shadow: #8ABE53 2px 2px 2px; 
+    border-radius: 12px;
 }
 .group-action-left-1{
     height:100px;
@@ -841,7 +834,7 @@ body{
 }
 .right{
     height: auto;
-    border-left: #8ABE53 solid 1px;
+    /* border-left: #8ABE53 solid 1px; */
     border-radius: 12px;
     /* box-shadow: #8ABE53 2px 2px; */
 }
