@@ -6,7 +6,7 @@
 {% if app.user != null %}
 <body>
     <div class="containerall">
-        <div class="left d-none d-lg-block z-2">
+        {# <div class="left d-none d-lg-block z-2">
             <div>
                 <div class="group-action-left-1">
                     <ul>
@@ -101,7 +101,7 @@
                     <a href=""><li>Copyright by KOKY (©) &#160</li></a>
                 </div>
             </div>
-        </div>
+        </div> #}
         <div class="middle mx-auto">
             <div class="d-flex rounded" style="width: 500px; height: 50px; background-color: #8ABE53;     margin-top: 15px;">
                 <div class="p-1">
@@ -213,7 +213,7 @@
                             </a>
                             {% endif %}                              
                         </div>
-                        <div class="sub-box-action">
+                        {# <div class="sub-box-action">
                             <a href="">
                                 <i class="icon-none fa-regular fa-comment"></i>
                                 <i class="icon-hide fa-solid fa-comment"></i>
@@ -224,14 +224,132 @@
                                 <i class="icon-none fa-regular fa-share-from-square"></i>
                                 <i class="icon-hide fa-solid fa-share-from-square"></i>
                             </a>
-                        </div>
+                        </div> #}
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
         <div class="right d-none d-lg-block">
-            <div> 
+            <div>
+                {# <div class="left d-none d-lg-block z-2">
+            <div>
+                <div class="group-action-left-1">
+                    <ul>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-house">&#160</i>
+                            </div>
+                            <div>
+                                <h6>Home</h6>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="sub-avatar">
+                                {% if app.user.avatar is not empty %}
+                                    <img class="sub-avatar" src="{{asset('uploads/'~app.user.avatar)}}" alt="">
+                                {% else %}
+                                    <img class="sub-avatar" src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                                {% endif %}
+                            </div>
+                            <div>
+                                <h6>Name</h6>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="group-action-left-2">
+                    <ul>
+                        <li>
+                            <div class="btn-group dropend w-100">
+                                <button type="button" class="none  d-flex flex-row w-100" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div>
+                                        <i class="fa-solid fa-user-group">&#160</i>
+                                    </div>
+                                    <div>
+                                        <h6>Friend Request</h6>
+                                    </div>
+                                </button>
+
+                                <ul class="dropdown-menu" style="width:400px;">
+
+                                {% for request in friendRe %}
+                                    <li class="bg-white m-0 d-flex flex-row">
+                                        <a class="dropdown-item col p-0 ps-3 shadow overflow-hidden" href="#">
+                                            <img class="sub-avatar rounded-circle me-3" src="{{asset('/uploads/' ~ (request.avatar != null ? request.avatar : 'defaultProfile.jpg'))}}" alt="">
+                                            {{request.name}}
+                                        </a>
+                                        <a class="btn btn-success shadow" href="{{path('acceptfriendrequest',{'id':request.reqid})}}">&#10004</a>
+                                        <a class="btn btn-danger shadow" href="{{path('denyfriendrequest',{'id':request.reqid})}}">&#10006</a>
+                                    </li>                                    
+                                {% endfor %}
+
+                                </ul>
+                            </div>
+
+
+                        </li>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-people-group">&#160</i>
+                            </div>
+                            <div>
+                                <h6>Group</h6>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="group-action-left-3">
+                    <ul>
+                    {% for g in group|slice(0,3) %}
+                        <li>
+                            <div class="sub-avatar">
+                            {% if g.group_avatar is null %}
+                            <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
+                            {% else %}
+                            <img src="{{ asset('uploads/' ~ g.group_avatar)}}" alt="">
+                            {% endif %}
+                            </div>
+                            <div>
+                                <a href="{{path('profile_group',{'id': g.id})}}" style="text-decoration: none; color: black">
+                                    <h6>{{g.group_name}}</h6>
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                <div class="left-footer">
+                    <a href=""><li>Privacy &#160 </li></a>
+                    <a href=""><li>koky's policy &#160</li></a>
+                    <a href=""><li>Advertisement &#160</li></a>
+                    <a href=""><li>Term &#160</li></a>
+                    <a href=""><li>Copyright by KOKY (©) &#160</li></a>
+                </div>
+            </div>
+        </div> #}
+                <div class="list-friend">
+                    <ul>
+                        <li>
+                            <div>
+                                <i class="fa-solid fa-house">&#160</i>
+                                <a>Home</a>
+                            </div>
+                            <div>
+                            </div>
+                        </li>
+                        <li>
+                                {% if app.user.avatar is not empty %}
+                                    <img class="sub-avatar" src="{{asset('uploads/'~app.user.avatar)}}" alt="">
+                                {% else %}
+                                    <img class="sub-avatar" src="{{asset('images/defaultProfile.jpg')}}" alt="">
+                                {% endif %}
+                                 <a href="{{path('profile',{'id': app.user.id})}}">{{app.user.username}}</a>                                
+                            <div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <h5>&#160 Recent contact</h5>
                 <div class="list-friend">
                     <ul>
@@ -245,10 +363,17 @@
                         <a href="{{path('profile',{'id': f.id})}}">{{f.username}}</a>
                         </li>
                     {% endfor %}               
-                        <li>
+                        <li class="last">
                             <a href="{{path('app_list')}}">New Chat</a>
                         </li>
                     </ul>
+                </div>
+                <div class="left-footer">
+                    <a href=""><li>Privacy &#160 </li></a>
+                    <a href=""><li>koky's policy &#160</li></a>
+                    <a href=""><li>Advertisement &#160</li></a>
+                    <a href=""><li>Term &#160</li></a>
+                    <a href=""><li>Copyright by KOKY (©) &#160</li></a>
                 </div>
             </div>
         </div>
@@ -752,7 +877,7 @@ body{
 .right ul li:last-child:hover{
     background-color: #b6e683;
 }
-.right ul li:last-child{
+.last{
     background-color: #8ABE53;
     list-style: none;
     list-style-type: none;
