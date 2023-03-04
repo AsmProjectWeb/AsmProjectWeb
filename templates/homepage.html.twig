@@ -131,7 +131,7 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {% if app.user.id == p.post_user_id_id %}
                                 <li>
-                                    <a class="dropdown-item" href="">Edit</a>
+                                    <a class="dropdown-item" href="{{path('editPost',{'id':p.idpost})}}">Edit</a>
                                 </li>
                                 {% endif %}
                                 <li>
@@ -228,7 +228,7 @@
             </div>
         </div>
     </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -279,14 +279,15 @@
         </div>
     </div>
     <script>
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
+
+        var myModal = document.getElementById('myModal');
+        var myInput = document.getElementById('myInput');
 
         myModal.addEventListener('shown.bs.modal', function () {
             myInput.focus()
         })
     </script>
-    <style>
+<style>
 .btn-success:hover {
     background-color: #97cc5f !important;
 }

@@ -47,53 +47,6 @@ class MainController extends AbstractController
         ]);
     }
 
-    // /**
-    //  * @Route("/login", name="login")
-    //  */
-    // public function loginAction(Request $request): Response
-    // {
-    //     $form = $this->createForm(LoginType::class);
-
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $data = $form->getData();
-    //         return $this->json($data);
-    //         // Do something with the form data
-    //     }
-
-    //     return $this->render('Tlogin.html.twig', [
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
-
-    // /**
-    //  * @Route("/register", name="register")
-    //  */
-    // public function registerAction(Request $request): Response
-    // {
-    //     $form = $this->createForm(RegisterType::class);
-
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $data = $form->getData();
-    //         return $this->json($data);
-    //         // Do something with the form data
-    //     }
-
-    //     return $this->render('Tregister.html.twig', [
-    //         'form' => $form->createView(),
-    //     ]);
-    // }
-
-    // /**
-    //  * @Route("/page", name="page")
-    //  */
-    // public function page(): Response
-    // {
-    //     return $this->render('homepage.html.twig', []);
-    // }
 
     private $security;
     private PostRepository $repo;
@@ -106,34 +59,28 @@ class MainController extends AbstractController
     /**
      * @Route("/page", name="page")
      */
-    public function page(Request $req,GroupsRepository $grepo, SluggerInterface $slugger, UserRepository $userRepository, PostRepository $post, FriendRepository $frepo, FriendRequestRepository $frieReRepo): Response
+    public function page(Request $req, GroupsRepository $grepo, SluggerInterface $slugger, PostRepository $post, FriendRepository $frepo, FriendRequestRepository $frieReRepo): Response
     {
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
         $user=$this->security->getUser();
-        $userid = $user->getId();
-        // return $this->json($p);
-        // if($req->request->get('button-post'))
-        // {
-            // return $this->json($p);
-            $form->handleRequest($req);
-            if($form->isSubmitted() && $form->isValid()){
-    
-                // return $this->json($p);
-    
-                if($p->getDate()===null){
-                    $p->setDate(new \DateTime());
-                }
-                $imgFile = $form->get('image')->getData();
-                if ($imgFile) {
-                    $newFilename = $this->uploadImage($imgFile,$slugger);
-                    $p->setImage($newFilename);
-                }
-                $p->setPostUserID($userid);
-                $this->repo->add($p,true);
-                return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+
+
+        $form->handleRequest($req);
+        if($form->isSubmitted() && $form->isValid()){
+
+            if($p->getDate()===null){
+                $p->setDate(new \DateTime());
             }
-        // }
+            $imgFile = $form->get('image')->getData();
+            if ($imgFile) {
+                $newFilename = $this->uploadImage($imgFile,$slugger);
+                $p->setImage($newFilename);
+            }
+            $this->repo->add($p,true);
+            return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        }
+
         $user=$this->security->getUser();
         $userid = $user->getId();
 
@@ -157,7 +104,34 @@ class MainController extends AbstractController
             'group'=>$group,
             'friendRe'=>$friendRequest,
         ]);
-        // return $this->json($friendRequest);
+
+    }
+
+    /**
+     * @Route("/editpost/{id}", name="editPost")
+     */
+    public function editPostAction(Request $req, PostRepository $post, Post $p, SluggerInterface $slugger): Response
+    {
+        $form = $this -> createForm(PostType::class, $p);
+        $user=$this->security->getUser();
+
+        $form->handleRequest($req);
+        if($form->isSubmitted() && $form->isValid()){
+
+            if($p->getDate()===null){
+                $p->setDate(new \DateTime());
+            }
+            $imgFile = $form->get('image')->getData();
+            if ($imgFile) {
+                $newFilename = $this->uploadImage($imgFile,$slugger);
+                $p->setImage($newFilename);
+            }
+            
+            $this->repo->add($p,true);
+            return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('editpost.html.twig', ['form' => $form->createView(),]);
     }
 
     public function uploadImage($imgFile, SluggerInterface $slugger): ?string{
@@ -182,12 +156,12 @@ class MainController extends AbstractController
     {
         return $this->render('header.html.twig', []);
     }
+
     /**
      * @Route("/profile", name="profile", methods={"GET"})
      */
     public function profileAction(Request $request, FriendRepository $friendRepo, PostRepository $postRepo, UserRepository $userRepo, FriendRequestRepository $frieRe): Response
     {
-        // $id = $request->get('id');
         $user=$this->security->getUser();
         $userid = $user->getId();
 
@@ -274,7 +248,6 @@ class MainController extends AbstractController
             'user'=>$userGroup,
             'post'=>$post,
         ]);
-        // return $this->json($ava);
     }
 
     /**
@@ -289,7 +262,6 @@ class MainController extends AbstractController
             'post'=>$post,
             'type'=>$type,
         ]);
-        // return $this->json($post);
     }
     /**
      * @Route("/newtype", name="newtype")

@@ -23,7 +23,7 @@ class PostType extends AbstractType
     {
         $builder
             ->add('PostUserID',EntityType::class,['class' => User::class,'choice_label' => 'username'])
-            ->add('userbeforeshare',HiddenType::class,['mapped'=>false,'required' => false])
+
             ->add('content', TextareaType::class, [
                 'label' => 'Write something',
                 'attr' => [
@@ -38,15 +38,7 @@ class PostType extends AbstractType
                 'data' => new \DateTime(),
                 'mapped' => false,
             ])
-            // ->add('status',ChoiceType::class,[
-            //     'choices' => [
-            //         'Public' => 1,
-            //         'Private' => 2,
-            //         'Only Me' => 3,
-            //     ],
-            //     'data' => 1,
-            //     'required' => true,
-            // ])
+
             ->add('POST',SubmitType::class);
         ;
     }
