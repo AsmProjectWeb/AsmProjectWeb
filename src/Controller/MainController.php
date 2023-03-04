@@ -110,6 +110,8 @@ class MainController extends AbstractController
     {
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
+        $user=$this->security->getUser();
+        $userid = $user->getId();
         // return $this->json($p);
         // if($req->request->get('button-post'))
         // {
@@ -127,6 +129,7 @@ class MainController extends AbstractController
                     $newFilename = $this->uploadImage($imgFile,$slugger);
                     $p->setImage($newFilename);
                 }
+                $p->setPostUserID($userid);
                 $this->repo->add($p,true);
                 return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
             }

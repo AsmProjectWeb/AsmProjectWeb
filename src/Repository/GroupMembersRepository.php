@@ -47,7 +47,7 @@ class GroupMembersRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
         $sql = '       
-        SELECT u.id, u.username, u.avatar, u.email, u.phone, u.birthday, u.hometown, u.gender, u.job, u.status, gm.rolemember
+        SELECT u.id, u.username, u.avatar, u.email, u.phone, u.birthday, u.hometown, u.gender, u.job, gm.rolemember
         FROM user u
         JOIN group_members gm ON u.id = gm.user_id
         WHERE gm.groupid_id = :gid AND u.id = :uid;

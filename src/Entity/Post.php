@@ -35,11 +35,6 @@ class Post
     private $date;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $status;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="UserPost")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -119,17 +114,6 @@ class Post
         return $this;
     }
 
-    public function getStatus(): ?int
-    {
-        return $this->status;
-    }
-
-    public function setStatus(int $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 
     public function getPostUserID(): ?User
     {

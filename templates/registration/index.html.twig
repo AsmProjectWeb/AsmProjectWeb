@@ -4,7 +4,7 @@
 	<div class="box">
 		{# <form autocomplete="off"> #}
 		{{ form_start(form,{'attr':{'autocomplete':'off'}}) }}
-			<h2>Sign in</h2>
+			<h2>Register</h2>
 			<div class="box-img">
 				<img class="img" src="{{asset('images/koky-high-resolution-logo-color-on-transparent-background.png')}}" alt="">
 			</div>
@@ -50,7 +50,7 @@
             </div>
 			<div class="links">
 				<a href="#">Forgot Password ?</a>
-				<a href="{{path('app_login')}}">Signup</a>
+				<a href="{{path('app_login')}}">Sign In</a>
 			</div>
 			<input type="submit" value="Register">
 		{{ form_end(form) }}
