@@ -38,7 +38,6 @@ class PostType extends AbstractType
                 'data' => new \DateTime(),
                 'mapped' => false,
             ])
-
             ->add('POST',SubmitType::class);
         ;
     }

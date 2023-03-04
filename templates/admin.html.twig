@@ -6,152 +6,9 @@
 {% if app.user != null %}
 <body>
     <div class="containerall">
-        {# <div class="left d-none d-lg-block stick-left vh-100">
-            <div class="h-100">
-                <div class="group-action-left-1">
-                    <ul>
-                        <li>
-                            <div>
-                                <i class="fa-solid fa-house">&#160</i>
-                            </div>
-                            <div>
-                                <h6>Home</h6>
-                                
-                            </div>
-                            <div class="btn-group dropend w-100">
-                                <button type="button" class="none  d-flex flex-row w-100" data-bs-toggle="dropdown" aria-expanded="false" style="border: none !important">
-                                    <div>
-                                        <i class="fa-solid fa-add">&#160</i>
-                                    </div>
-                                    <div>
-                                        <h6>Add new type</h6>
-                                    </div>
-                                </button>
-                                <ul class="dropdown-menu" style="width:400px">
-                                    <li class="bg-white m-0 d-flex flex-row">
-                                         <a class="dropdown-item col p-0 shadow overflow-hidden" href="#">Name</a>
-                                        <a class="btn btn-success shadow" href="#">&#10004</a>
-                                        <a class="btn btn-danger shadow" href="#">&#10006</a>
-                                        <form action="{{path('newtype')}}" class="d-flex" method="GET">
-                                            <input type="text" name="newtype" style="width:370px">
-                                            <button type="submit" style="border: none; width: 30px;">&#10004</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <i class="fa-solid fa-edit">&#160</i>
-                            </div>
-                            <div>
-                                <h6>Type</h6>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="group-action-left-2">
-                    <ul>
-                    {% for t in type %}
-                        <li>
-                            <form action="{{path('Edit_type')}}" class="d-flex">
-                                <div>
-                                    <input type="hidden" name="idedittype" value="{{t.id}}">
-                                    <input type="text" readonly name="edittype" onclick="removeReadonly(this)" value="{{t.TypeGround}}" style="border: none; width: 100%">
-                                </div>
-                                <div>
-                                    <button type="submit" style="width:50px;border: none;border-radius: 12px    ">&#10004</button>
-                                </div>
-                            </form>
-                                <div>
-                                    <a href="{{path('Delete_type',{'id': t.id})}}" name="deleteid" style=" width:40px; border-radius: 12px">&#10006</a>
-                                </div>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div> #}
+
         <div class="middle mx-auto">
-            {# <div class="friend">
-                <div class="fs-3 fw-bold">
-                    Everyone
-                </div>
-                <hr class="mt-2 mb-2">
-                <div class="box">
-                {% for user in dataUser %}
-                    <div class="box-header box-header-tag">
-                        <div class="box-avata">
-                            <div class="avata">
-                                {% if user.avatar is not empty %}
-                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~user.avatar)}}" alt="">
-                                {% else %}
-                                    <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
-                                {% endif %}                            
-                                <div class="sub-avata"></div>
-                            </div>
-                        </div>
-                        <div class="box-title box-title-tag">
-                            <div class="u-tus">
-                                <a href="">
-                                    <h5>{{user.name}}</h5>
-                                </a>
-                            </div>
-                            <div class="u-title">
-                                    <label for="">{{user.hometown}}</label>
-                            </div>
-                        </div>
-                        <div class="right-title">
-                            <div class="icon">
-                                <i class="fa-sharp fa-solid fa-user-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-success m-2">Show more</button>
-                </div>
-            </div> #}
-            {# <div class="group">
-                <div class="fs-3 fw-bold">
-                    Group
-                </div>
-                <hr class="mt-2 mb-2">
-                <div class="box">
-                {% for group in dataGroup %}
-                    <div class="box-header box-header-tag">
-                        <div class="box-avata">
-                            <div class="avata">
-                                {% if group.avatar is not empty %}
-                                    <img class="img rounded-circle img-icon" src="{{asset('uploads/'~group.avatar)}}" alt="">
-                                {% else %}
-                                    <img class="img rounded-circle img-icon" src="{{asset('images/defaultProfile.jpg')}}" alt="">
-                                {% endif %} 
-                            </div>
-                        </div>
-                        <div class="box-title box-title-tag">
-                            <div class="u-tus">
-                                <a href="">
-                                    <h5>{{group.name}}</h5>
-                                </a>
-                            </div>
-                            <div class="u-title">
-                                    <label for="">Created at {{group.create.format('d-m-Y')}}</label>
-                            </div>
-                        </div>
-                        <div class="right-title">
-                            <div class="icon">
-                                <i class="fa-solid fa-user-group"></i>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-success m-2">Show more</button>
-                </div>
-            </div> #}
+
             <div class="post">
 
                 <div class="fs-3 fw-bold">
@@ -190,22 +47,7 @@
                     </div>
                     <div class="box-footer">
                         <div class="box-infor">
-                            {# <div class="countview">
-                                <a href="">
-                                    <i class="fa-solid fa-heart"></i>&#160 0</a>
-                            </div>
-                            <div class="infor-right">
-                                <div class="countcomment">
-                                    <a href="">
-                                        <i class="fa-solid fa-comment"></i>&#160 0
-                                    </a>
-                                </div>
-                                <div class="countshare">
-                                    <a href="">
-                                        <i class="fa-solid fa-share-from-square"></i>
-                                        &#160 0
-                                    </a>
-                                </div> #}
+
                             </div>
                         </div>
                         <div class="box-action">

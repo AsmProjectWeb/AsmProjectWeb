@@ -139,7 +139,7 @@
                                 </li>
                                 {% if app.user.id == p.post_user_id_id %}
                                 <li>
-                                    <a class="dropdown-item" href="">Delete</a>
+                                    <a class="dropdown-item" href="{{path('user_delete_post',{'id': p.idpost})}}">Delete</a>
                                 </li>
                                 {% endif %}
                              </ul>
@@ -231,7 +231,6 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-
                 {{ form_start(form,{'attr': {'class': 'container border rounded form-up'}}) }}
                     <div class="post-header border-bottom text-center">
                         <h2>Make post</h2>
@@ -239,7 +238,6 @@
                     <div class="post-body">
                         <div class="d-flex mt-1" style="height: 80px;">
                             <div class="">
-
                                 {% if app.user.avatar is not empty %}
                                 <img class="rounded-circle border-dark" src="{{asset('uploads/'~app.user.avatar)}}" alt="" style="width: 60px; height: 60px;"> &nbsp &nbsp
                                 {% else %}
@@ -255,7 +253,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-
                             {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         {{ form_widget(form.date, {'attr': {'hidden': 'hidden', 'value': form.vars.value.date|date('Y-m-d H:i:s')}}) }}
@@ -263,17 +260,12 @@
                             <label class="input-group-text" for="inputGroupFile01">
                                 <i class="fa-solid fa-image"></i>
                             </label>
-                            {# <input type="file" class="form-control" id="inputGroupFile01"> #}
                             {{ form_widget(form.image, {'attr': {'class': 'form-control', 'id': 'inputGroupFile01'}}) }}
                         </div>
                     </div>
                     <div class="col-12 d-flex">
-                        {# <button type="submit" class="btn btn-success mb-2 post-button">
-                            Post
-                        </button> #}
                         {{ form_widget(form.POST, {'attr': {'class': 'btn btn-success mb-2 post-button'}}) }}
                     </div>
-                {# </form> #}
                 {{ form_end(form) }}
             </div>
         </div>

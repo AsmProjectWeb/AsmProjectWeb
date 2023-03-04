@@ -54,29 +54,6 @@ class PostRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-
-//     /**
-//      * @return Post[] Returns an array of Customer objects
-//      */
-//     public function findPostsForUser($id): array
-//     {
-//         $conn = $this->getEntityManager()->getConnection();
-//         $sql = '       
-//         SELECT DISTINCT post.*, u.*, f.*, gm.*, g.*, gp.*, p.* FROM post 
-//         LEFT JOIN user u ON u.id = post.post_user_id_id 
-//         LEFT JOIN friend f on f.user_id_id = u.id 
-//         LEFT JOIN group_members gm on gm.user_id = u.id 
-//         LEFT JOIN groups g ON gm.groupid_id = g.id 
-//         LEFT JOIN group_post gp on gp.group_id_id=g.id 
-//         LEFT JOIN post_liked p on p.post_id = post.id
-//         WHERE post.post_user_id_id = u.id OR f.friend_user_id_id = (SELECT friend.friend_user_id_id FROM friend WHERE friend.user_id_id = u.id) and u.id= :id OR gp.group_id_id = (SELECT groups.id FROM groups WHERE gm.user_id=u.id and g.id = gm.groupid_id)
-// ';
-//         $re = $conn->executeQuery($sql, ['id' => $id]);
-//         return $re->fetchAllAssociative();
-
-
-//     }
-
     /**
      * @return Post[] Returns an array of Customer objects
      */

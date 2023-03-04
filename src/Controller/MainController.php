@@ -64,11 +64,8 @@ class MainController extends AbstractController
         $p = new Post();
         $form = $this -> createForm(PostType::class, $p);
         $user=$this->security->getUser();
-
-
         $form->handleRequest($req);
         if($form->isSubmitted() && $form->isValid()){
-
             if($p->getDate()===null){
                 $p->setDate(new \DateTime());
             }
@@ -80,7 +77,6 @@ class MainController extends AbstractController
             $this->repo->add($p,true);
             return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
         }
-
         $user=$this->security->getUser();
         $userid = $user->getId();
 
@@ -104,7 +100,6 @@ class MainController extends AbstractController
             'group'=>$group,
             'friendRe'=>$friendRequest,
         ]);
-
     }
 
     /**
@@ -126,7 +121,7 @@ class MainController extends AbstractController
                 $newFilename = $this->uploadImage($imgFile,$slugger);
                 $p->setImage($newFilename);
             }
-            
+
             $this->repo->add($p,true);
             return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
         }
@@ -296,16 +291,27 @@ class MainController extends AbstractController
     /**
      * @Route("/deletepost", name="admin_delete_post")
      */
-    public function deletePost(Request $req, PostRepository $pRepo, GroupPostRepository $gpRepo, CommentRepository $cRepo, PostLikedRepository $lRepo, ReportRepository $rRepo): Response
+    public function deletePost(Request $req, PostRepository $pRepo, PostLikedRepository $lRepo, ReportRepository $rRepo): Response
     {
         $id = $req->query->get('id');
         $dlr = $rRepo->RemovePostReport($id);
-        $dlgp = $gpRepo->RemovePostGroupPost($id);
-        $dlc = $cRepo->RemovePostComment($id);
         $dll = $lRepo->RemovePostLiked($id);
         $dlpost = $pRepo->RemovePost($id);
         return $this->redirectToRoute('admin_page', [], Response::HTTP_SEE_OTHER);
     }
+
+    /**
+     * @Route("/userdeletepost", name="user_delete_post")
+     */
+    public function userDeletePost(Request $req, PostRepository $pRepo, PostLikedRepository $lRepo, ReportRepository $rRepo): Response
+    {
+        $id = $req->query->get('id');
+        $dlr = $rRepo->RemovePostReport($id);
+        $dll = $lRepo->RemovePostLiked($id);
+        $dlpost = $pRepo->RemovePost($id);
+        return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
+    }
+
     /**
      * @Route("/report", name="report", methods={"GET"})
      */
@@ -335,7 +341,6 @@ class MainController extends AbstractController
         $countline = $plikeRepo->countLike($pid);
         $like = $liked->AddPostLiked($uid, $pid);
         return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
-        // return $this->json($countline);
     }
     /**
      * @Route("/unlike", name="unlikepost", methods={"GET"})
@@ -347,6 +352,5 @@ class MainController extends AbstractController
         $pid = $req->query->get('pid');
         $like = $liked->UnPostLiked($uid, $pid);
         return $this->redirectToRoute('page', [], Response::HTTP_SEE_OTHER);
-        // return $this->json($uid);
     }
 }
