@@ -41,11 +41,6 @@ class Post
     private $Post_UserID;
 
     /**
-     * @ORM\ManyToOne(targetEntity=user::class, inversedBy="userbeforeshare")
-     */
-    private $userberforeshare;
-
-    /**
      * @ORM\OneToMany(targetEntity=PostLiked::class, mappedBy="post",cascade={"remove"})
      */
     private $post;
@@ -123,18 +118,6 @@ class Post
     public function setPostUserID(?User $Post_UserID): self
     {
         $this->Post_UserID = $Post_UserID;
-
-        return $this;
-    }
-
-    public function getUserberforeshare(): ?user
-    {
-        return $this->userberforeshare;
-    }
-
-    public function setUserberforeshare(?user $userberforeshare=null): self
-    {
-        $this->userberforeshare = $userberforeshare;
 
         return $this;
     }

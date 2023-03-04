@@ -67,32 +67,11 @@
                             <div>
                                 <i class="fa-solid fa-people-group">&#160</i>
                             </div>
-                            {# <div>
-                                <h6>Group</h6>
-                            </div> #}
+
                         </li>
                     </ul>
                 </div>
-                {# <div class="group-action-left-3">
-                    <ul>
-                    {% for g in group|slice(0,3) %}
-                        <li>
-                            <div class="sub-avatar">
-                            {% if g.group_avatar is null %}
-                            <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
-                            {% else %}
-                            <img src="{{ asset('uploads/' ~ g.group_avatar)}}" alt="">
-                            {% endif %}
-                            </div>
-                            <div>
-                                <a href="{{path('profile_group',{'id': g.id})}}" style="text-decoration: none; color: black">
-                                    <h6>{{g.group_name}}</h6>
-                                </a>
-                            </div>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div> #}
+
                 <div class="left-footer d-flex flex-column h-100">
                     <a href=""><li>Privacy &#160 </li></a>
                     <a href=""><li>koky's policy &#160</li></a>
@@ -182,23 +161,7 @@
                 </div>
                 <div class="box-footer">
                     <div class="box-infor">
-                        {# <div class="countview">
-                            <a href="">
-                                <i class="fa-solid fa-heart"></i>&#160
-                            </a>
-                        </div>
-                        <div class="infor-right">
-                            <div class="countcomment">
-                                <a href="">
-                                    <i class="fa-solid fa-comment"></i>&#160 0
-                                </a>
-                            </div>
-                            <div class="countshare">
-                                <a href="">
-                                    <i class="fa-solid fa-share-from-square"></i> &#160 0
-                                </a>
-                            </div>
-                        </div> #}
+
                     </div>
                     <div class="box-action">
                         <div class="sub-box-action" id="sub-box-action-1">
@@ -213,18 +176,7 @@
                             </a>
                             {% endif %}                              
                         </div>
-                        {# <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-comment"></i>
-                                <i class="icon-hide fa-solid fa-comment"></i>
-                            </a>
-                        </div>
-                        <div class="sub-box-action">
-                            <a href="">
-                                <i class="icon-none fa-regular fa-share-from-square"></i>
-                                <i class="icon-hide fa-solid fa-share-from-square"></i>
-                            </a>
-                        </div> #}
+
                     </div>
                 </div>
             </div>
@@ -232,102 +184,7 @@
         </div>
         <div class="right d-none d-lg-block">
             <div>
-                {# <div class="left d-none d-lg-block z-2">
-            <div>
-                <div class="group-action-left-1">
-                    <ul>
-                        <li>
-                            <div>
-                                <i class="fa-solid fa-house">&#160</i>
-                            </div>
-                            <div>
-                                <h6>Home</h6>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="sub-avatar">
-                                {% if app.user.avatar is not empty %}
-                                    <img class="sub-avatar" src="{{asset('uploads/'~app.user.avatar)}}" alt="">
-                                {% else %}
-                                    <img class="sub-avatar" src="{{asset('images/defaultProfile.jpg')}}" alt="">
-                                {% endif %}
-                            </div>
-                            <div>
-                                <h6>Name</h6>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="group-action-left-2">
-                    <ul>
-                        <li>
-                            <div class="btn-group dropend w-100">
-                                <button type="button" class="none  d-flex flex-row w-100" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div>
-                                        <i class="fa-solid fa-user-group">&#160</i>
-                                    </div>
-                                    <div>
-                                        <h6>Friend Request</h6>
-                                    </div>
-                                </button>
 
-                                <ul class="dropdown-menu" style="width:400px;">
-
-                                {% for request in friendRe %}
-                                    <li class="bg-white m-0 d-flex flex-row">
-                                        <a class="dropdown-item col p-0 ps-3 shadow overflow-hidden" href="#">
-                                            <img class="sub-avatar rounded-circle me-3" src="{{asset('/uploads/' ~ (request.avatar != null ? request.avatar : 'defaultProfile.jpg'))}}" alt="">
-                                            {{request.name}}
-                                        </a>
-                                        <a class="btn btn-success shadow" href="{{path('acceptfriendrequest',{'id':request.reqid})}}">&#10004</a>
-                                        <a class="btn btn-danger shadow" href="{{path('denyfriendrequest',{'id':request.reqid})}}">&#10006</a>
-                                    </li>                                    
-                                {% endfor %}
-
-                                </ul>
-                            </div>
-
-
-                        </li>
-                        <li>
-                            <div>
-                                <i class="fa-solid fa-people-group">&#160</i>
-                            </div>
-                            <div>
-                                <h6>Group</h6>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="group-action-left-3">
-                    <ul>
-                    {% for g in group|slice(0,3) %}
-                        <li>
-                            <div class="sub-avatar">
-                            {% if g.group_avatar is null %}
-                            <img src="{{ asset('images/defaultProfile.jpg')}}" alt="">
-                            {% else %}
-                            <img src="{{ asset('uploads/' ~ g.group_avatar)}}" alt="">
-                            {% endif %}
-                            </div>
-                            <div>
-                                <a href="{{path('profile_group',{'id': g.id})}}" style="text-decoration: none; color: black">
-                                    <h6>{{g.group_name}}</h6>
-                                </a>
-                            </div>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                </div>
-                <div class="left-footer">
-                    <a href=""><li>Privacy &#160 </li></a>
-                    <a href=""><li>koky's policy &#160</li></a>
-                    <a href=""><li>Advertisement &#160</li></a>
-                    <a href=""><li>Term &#160</li></a>
-                    <a href=""><li>Copyright by KOKY (©) &#160</li></a>
-                </div>
-            </div>
-        </div> #}
                 <div class="list-friend">
                     <ul>
                         <li>
@@ -374,7 +231,7 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                {# <form class="container border rounded form-up"> #}
+
                 {{ form_start(form,{'attr': {'class': 'container border rounded form-up'}}) }}
                     <div class="post-header border-bottom text-center">
                         <h2>Make post</h2>
@@ -382,8 +239,7 @@
                     <div class="post-body">
                         <div class="d-flex mt-1" style="height: 80px;">
                             <div class="">
-                                {# <img src="ark.jfif" class="rounded-circle border-dark" alt=""
-                                    style="width: 60px; height: 60px;">&nbsp &nbsp #}
+
                                 {% if app.user.avatar is not empty %}
                                 <img class="rounded-circle border-dark" src="{{asset('uploads/'~app.user.avatar)}}" alt="" style="width: 60px; height: 60px;"> &nbsp &nbsp
                                 {% else %}
@@ -392,22 +248,14 @@
                             </div>
                             <div>
                                 <div>
-                                    <h5>Name</h5>
+                                    <h5>{{app.user.username}}</h5>
                                     {{ form_widget(form.PostUserID, {'attr': {'hidden': 'hidden', 'value': app.user.id}}) }}
                                 </div>
                                 
-                                <div>
-                                    {# {{ form_widget(form.status, {'attr': {'class': 'form-select bg-light select-opnion','aria-label': 'Default select example'}}) }} #}
-                                    {# <select class="form-select bg-light select-opnion" aria-label="Default select example">
-                                        <option value="1"selected>Public</option>
-                                        <option value="2">Private</option>
-                                        <option value="3">Only Me</option>
-                                    </select> #}
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            {# <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> #}
+
                             {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
                         </div>
                         {{ form_widget(form.date, {'attr': {'hidden': 'hidden', 'value': form.vars.value.date|date('Y-m-d H:i:s')}}) }}

@@ -88,11 +88,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $Creator;
 
     /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="userberforeshare")
-     */
-    private $userbeforeshare;
-
-    /**
      * @ORM\OneToMany(targetEntity=PostLiked::class, mappedBy="user")
      */
     private $postuser;
@@ -423,28 +418,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserbeforeshare(): Collection
     {
         return $this->userbeforeshare;
-    }
-
-    public function addUserbeforeshare(Post $userbeforeshare): self
-    {
-        if (!$this->userbeforeshare->contains($userbeforeshare)) {
-            $this->userbeforeshare[] = $userbeforeshare;
-            $userbeforeshare->setUserberforeshare($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserbeforeshare(Post $userbeforeshare): self
-    {
-        if ($this->userbeforeshare->removeElement($userbeforeshare)) {
-            // set the owning side to null (unless already changed)
-            if ($userbeforeshare->getUserberforeshare() === $this) {
-                $userbeforeshare->setUserberforeshare(null);
-            }
-        }
-
-        return $this;
     }
 
     /**
